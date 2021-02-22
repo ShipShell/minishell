@@ -14,7 +14,7 @@
 
 #### 브랜치 이름
 
-> - main : 진행 중에는 학습하며 공유할 마크다운 문서를 공유, 팀 별로 최종 과제 완료시에 Pull Request
+> - master : 진행 중에는 학습하며 공유할 마크다운 문서를 공유, 팀 별로 최종 과제 완료시에 Pull Request
 >   - markdown_f00 : README.md 업데이트 및 루트 디렉토리에 추가할 공유 문서 업데이트 시 생성 브랜치.
 > - team1 : 1팀의 의 develop branch
 >   - team1_f00 : 1팀의 feature branch (넘버링은 issue NO. 와 동일하게)
