@@ -10,7 +10,7 @@ t_list *g_env;
 typedef struct  s_data
 {
 	char	*cmd;
-	t_list	*input;
+	t_list	*arg;
 	int		redirect_num;
 	int		token;
 }               t_data;
@@ -20,5 +20,7 @@ typedef struct	s_env
 	char	*key;
 	char	*value;
 }				t_env;
+
+int	ft_cd(t_data *data);
 
 #endif

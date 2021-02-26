@@ -95,5 +95,5 @@ t_list				*ft_lstmap(t_list *lst,
 void				*(*f)(void *), void (*del)(void *));
 
 // ft_ printf
-
+int					ft_printf(const char *str, ...);
 #endif

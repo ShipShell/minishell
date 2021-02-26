@@ -1,4 +1,5 @@
 #include "exec.h"
+#include <errno.h>
 
 // current_dir을 PWD에 넣어준다.
 int	put_env_pwd(char *current_dir, t_list *pwd_lst)
@@ -17,7 +18,7 @@ int	put_env_pwd(char *current_dir, t_list *pwd_lst)
 }
 
 // 환경변수에서 PWD를 바꿔준다.
-int change_env_pwd(const char *pwd)
+int change_env_pwd(char *pwd)
 {
 	t_list	*temp_env;
 	char	*tmp;
@@ -59,13 +60,16 @@ int	check_home()
 	return (0);
 }
 
-int	check_input(t_data *data)
+int	check_arg(t_data *data)
 {
-	char	*input;
+	char	*arg;
+	char	*buff;
 
-	input = ((char *)data->input->content);
-	if (!ft_strncmp(input, "~", 3))
-	
+	arg = ((char *)data->arg->content);
+	// 에러 처리를 여기서 해야한다.
+	chdir(arg);
+	change_env_pwd(getcwd(buff, 1000));
+	return (0);
 }
 
 // 현재 위치를 chdir을 이용해서 이동시킨다.
@@ -74,9 +78,9 @@ int	check_input(t_data *data)
 int	ft_cd(t_data *data)
 {
 	// 인자가 없을 때 HOME을 참조
-	if (data->input->content == 0)
+	if (data->arg->content == 0)
 		check_home();
 	else
-		check_input(data);
+		check_arg(data);
 	return (0);
 }
