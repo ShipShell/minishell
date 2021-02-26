@@ -1,6 +1,6 @@
 NAME = minishell
-CFLAG = #-Wall -Wextra -Werror  -fsanitize=address
-SRC_NAME = main
+CFLAG = #-g3 -fsanitize=address #-Wall -Wextra -Werror
+SRC_NAME = *
 SRC = $(addprefix src/,$(addsuffix .c, $(SRC_NAME)))
 SRCDIR = ./src
 INCLUDE = -I ./include -I ./libft/include
@@ -20,7 +20,6 @@ re : fclean all
 bonus : all
 
 run : all
-	export PATH=$(PATH):$(PWD)
 	./minishell
 
 $(NAME) : $(SRC) $(LIBFT_DIR)/$(LIBFT)

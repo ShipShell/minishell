@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/02/26 15:01:52 by kilee            ###   ########.fr       */
+/*   Created: 2021/02/26 14:52:31 by kilee             #+#    #+#             */
+/*   Updated: 2021/02/26 15:31:31 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "tester.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include "libft.h"
-# include "get_next_line.h"
-# include "libftprintf.h"
-# include "command.h"
-# include "utils.h"
-# include "tester.h"
+void	test_parse_cmd_from_input(t_cmd *cmds)
+{
+	while (cmds)
+	{
+		int i = -1;
+		printf("CMD%d: { ", i + 1);
+		while(cmds->command[++i])
+			printf("\"%s\" ", cmds->command[i]);
+		printf("}\n");
+		cmds = cmds->next;
+	}
+}
 
-# define BUFFER_MAX 4096
-
-int		prompt_show(void);
-
-#endif
+void	test_init_g_env(t_env *envs)
+{
+	while(envs)
+	{
+		printf("key:%s = value:%s\n", envs->key, envs->value);
+		envs = envs->next;
+	}
+}
