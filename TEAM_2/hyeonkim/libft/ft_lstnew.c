@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 17:17:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/10/12 20:08:59 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/02/26 15:56:02 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*ret;
 
-	if (!(ret = (t_list *)malloc(sizeof(ret))))
+	if (!(ret = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
 	ret->next = NULL;
 	ret->content = content;
