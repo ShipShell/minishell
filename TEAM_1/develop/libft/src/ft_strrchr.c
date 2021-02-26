@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 16:49:10 by kihoonlee         #+#    #+#             */
-/*   Updated: 2021/02/24 17:25:04 by kihoonlee        ###   ########.fr       */
+/*   Created: 2020/10/03 21:20:09 by kihoonlee         #+#    #+#             */
+/*   Updated: 2020/10/03 21:20:10 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	int i;
 
-/*
-** Define BUFFER_SIZE when doesn't define during compile
-*/
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-/*
-** Define OPEN_MAX when can't include <limits.h>
-*/
-# ifndef OPEN_MAX
-#  define OPEN_MAX 12800
-# endif
-
-int			get_next_line(int fd, char **line);
-
-#endif
+	i = 0;
+	while (s[i])
+		++i;
+	if (c == '\0')
+		return ((char *)&s[i]);
+	while (i >= 0)
+	{
+		if (s[i] == c)
+			return ((char *)&s[i]);
+		--i;
+	}
+	return (NULL);
+}

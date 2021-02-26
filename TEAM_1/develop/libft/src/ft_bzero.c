@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 16:49:10 by kihoonlee         #+#    #+#             */
-/*   Updated: 2021/02/24 17:25:04 by kihoonlee        ###   ########.fr       */
+/*   Created: 2020/09/28 13:53:24 by kihoonlee         #+#    #+#             */
+/*   Updated: 2020/10/03 20:31:54 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*s_new;
 
-/*
-** Define BUFFER_SIZE when doesn't define during compile
-*/
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-/*
-** Define OPEN_MAX when can't include <limits.h>
-*/
-# ifndef OPEN_MAX
-#  define OPEN_MAX 12800
-# endif
-
-int			get_next_line(int fd, char **line);
-
-#endif
+	i = 0;
+	s_new = (char *)s;
+	while (i < n)
+	{
+		s_new[i] = 0;
+		++i;
+	}
+}

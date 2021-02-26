@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 16:49:10 by kihoonlee         #+#    #+#             */
-/*   Updated: 2021/02/24 17:25:04 by kihoonlee        ###   ########.fr       */
+/*   Created: 2020/10/03 20:44:40 by kihoonlee         #+#    #+#             */
+/*   Updated: 2020/10/03 20:44:57 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t		i;
+	size_t		len;
 
-/*
-** Define BUFFER_SIZE when doesn't define during compile
-*/
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-/*
-** Define OPEN_MAX when can't include <limits.h>
-*/
-# ifndef OPEN_MAX
-#  define OPEN_MAX 12800
-# endif
-
-int			get_next_line(int fd, char **line);
-
-#endif
+	i = 0;
+	len = 0;
+	if (!src)
+		return (0);
+	while (src[len])
+		++len;
+	if (dstsize == 0 || !dst)
+		return (len);
+	while (i < dstsize - 1 && src[i])
+	{
+		dst[i] = src[i];
+		++i;
+	}
+	dst[i] = '\0';
+	return (len);
+}

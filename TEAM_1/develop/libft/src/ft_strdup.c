@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 16:49:10 by kihoonlee         #+#    #+#             */
-/*   Updated: 2021/02/24 17:25:04 by kihoonlee        ###   ########.fr       */
+/*   Created: 2020/10/03 20:41:17 by kihoonlee         #+#    #+#             */
+/*   Updated: 2020/10/03 20:41:18 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
+char	*ft_strdup(const char *s1)
+{
+	int		len;
+	int		i;
+	char	*dupl;
 
-/*
-** Define BUFFER_SIZE when doesn't define during compile
-*/
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-/*
-** Define OPEN_MAX when can't include <limits.h>
-*/
-# ifndef OPEN_MAX
-#  define OPEN_MAX 12800
-# endif
-
-int			get_next_line(int fd, char **line);
-
-#endif
+	len = 0;
+	while (s1[len])
+		++len;
+	dupl = (char *)malloc(sizeof(char) * len + 1);
+	if (dupl == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		dupl[i] = s1[i];
+		++i;
+	}
+	dupl[i] = '\0';
+	return (dupl);
+}
