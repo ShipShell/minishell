@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:32:39 by kilee             #+#    #+#             */
-/*   Updated: 2020/11/06 16:53:00 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/02/26 14:18:12 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 int					ft_lstsize(t_list *lst);
 int					ft_toupper(int c);
 char				*ft_strndup(const char *s, size_t n);
-char				**ft_split(char const *s, char c);
+void				ft_free_arr(char **s, int i);
+char				**ft_split(char const *s, const char *set);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 char				*ft_strrchr(const char *s, int c);
 int					ft_isalpha(int c);

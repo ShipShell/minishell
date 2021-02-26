@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/02/26 15:01:52 by kilee            ###   ########.fr       */
+/*   Created: 2021/02/26 11:27:20 by kilee             #+#    #+#             */
+/*   Updated: 2021/02/26 11:28:32 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef COMMAND_H
+# define COMMAND_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include "libft.h"
-# include "get_next_line.h"
-# include "libftprintf.h"
-# include "command.h"
-# include "utils.h"
-# include "tester.h"
+typedef struct		s_cmd
+{
+	char			**command;
+	struct s_cmd	*next;
+}					t_cmd;
 
-# define BUFFER_MAX 4096
-
-int		prompt_show(void);
+typedef struct		s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
 #endif
