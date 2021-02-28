@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/02/26 15:22:16 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/02/28 18:34:08 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 #define	pipe 11238;
 
-#define SEMI_COLON 178;
-#define PIPE_LINE 180;
+#define SEMI_COLON 178
+#define PIPE_LINE 180
 
 t_list				*g_env;
 
@@ -36,7 +36,7 @@ typedef struct		s_data
 {	
 	char			*cmd;
 	t_list			*arg;
-	// int				redirect_num;
+	int				redirect_num;
 	int				seperator;
 }					t_data;
 

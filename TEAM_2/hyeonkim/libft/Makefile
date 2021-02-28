@@ -6,7 +6,7 @@
 #    By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/15 11:28:33 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/01/13 15:13:07 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/02/28 16:43:34 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,6 @@ clean :
 fclean : clean
 		@rm -f $(NAME)
 
-re : fclean all
+re : fclean all bonus
 
 .PHONY : all clean fclean re bonus

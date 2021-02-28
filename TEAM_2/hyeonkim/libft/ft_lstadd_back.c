@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 18:05:46 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/10/12 20:46:16 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/02/28 16:48:50 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void		ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;
 
-	if (!lst || !new)
-		return ;
-	tmp = ft_lstlast(*lst);
-	if (!tmp)
-	{
+	tmp = *lst;
+	if (!(*lst))
 		*lst = new;
-		return ;
+	else
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	tmp->next = new;
 }
