@@ -19,6 +19,8 @@ void	remove_env(t_env *env, char *key)
 			if (env->val)
 				free(env->val);
 			free(env);
+			printf("bef : %s=%s\n", bef->key, bef->val);
+			printf("next : %s=%s\n", next->key, next->val);
 			break;
 		}
 		bef = env;

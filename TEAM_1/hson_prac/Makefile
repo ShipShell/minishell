@@ -35,6 +35,7 @@ SRCS = exec_cd.c \
 		exec_env.c \
 		exec_exit.c \
 		exec_pwd.c \
+		exec_unset.c \
 		error.c \
 		main.c \
 

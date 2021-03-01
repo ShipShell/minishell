@@ -39,6 +39,9 @@ int		exec_exit(t_cmd *cmd);
 void	print_val(t_cmd *cmd, int i, int cnt);
 int		exec_echo(t_cmd *cmd, t_env *env);
 
+void	remove_env(t_env *env, char *key);
+int		exec_unset(t_cmd *cmd, t_env *env);
+
 int		num_arg_error(t_cmd *cmd, int err_num);
 int		too_many_arg_error(t_cmd *cmd, int err_num);
 
