@@ -1,60 +1,40 @@
-#include <stdio.h>
-#include <unistd.h>
-#include "./libft/libft.h"
-#include "./gnl/get_next_line.h"
+#include "minishell.h"
 
-void    print_prompt(void)
+void	ft_putstr_fd(char *s, int fd)
 {
-    write(1, "shell$>", 6);
+	write(fd, s, ft_strlen(s));
 }
 
-void    sig_handler(int signo, int *i)
+int		prompt_show(void)
 {
-    if (signo == 2)
-    {
-        printf("\b\b  \b\b\n");
-        print_prompt();
-        return ;
-    }
-    if (signo == 3)
-        printf("\b\b  \b\bSIGQUIT 발생\n");
-        print_prompt();
-    return ;
+	char	*stdin_buf;
+	int		input_byte;
+
+	ft_putstr_fd("shipshell$ ", 1);
+	get_next_line(0, &stdin_buf);
+	// if (ft_strncmp(stdin_buf, "exit", 4) == 0)
+	// 	exit(0);
+	ft_putstr_fd(stdin_buf, 1);
+	write(1, "\n", 1);
+	return (0);
 }
 
-int     main(int ac, char **av, char **env)
+void	prompt_loop(void)
 {
-    char    *line;
-    int     i;
-    signal(SIGQUIT, (void *)sig_handler);
-    signal(SIGINT, (void *)sig_handler);
-    while (1)
-    {
-        print_prompt();
-        while(1)
-        {
-            if (get_next_line(1, &line) == 1)
-            {
-                write(1, line, sizeof(line));
-                write(1, "\n", 1);
-                free(line);
-                break ;
-            }
-        }
-    }
+	while(1)
+		prompt_show();
 }
 
+void	handle_sigint(int signo)
+{
+	printf("\b\b  \b\b\n");
+	ft_putstr_fd("shipshell$ ", 1);
+		return ;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+int		main(int argc, char *argv[], char *envp[])
+{
+	signal(SIGINT, handle_sigint);
+	prompt_loop();
+	return (0);
+}

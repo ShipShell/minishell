@@ -36,6 +36,9 @@ int		chk_arg_cnt(t_cmd *cmd);
 int		chk_arg_digit(char *val);
 int		exec_exit(t_cmd *cmd);
 
+void	print_val(t_cmd *cmd, int i, int cnt);
+int		exec_echo(t_cmd *cmd, t_env *env);
+
 int		num_arg_error(t_cmd *cmd, int err_num);
 int		too_many_arg_error(t_cmd *cmd, int err_num);
 
