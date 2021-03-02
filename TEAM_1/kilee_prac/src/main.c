@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/02/26 15:32:18 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/02 20:13:29 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 
 t_env	*g_env;
 t_cmd	*g_cmd;
-
-void	parse_cmd_from_input(char **stdin_buf)
-{
-	char	**tokens;
-
-	tokens = ft_split(*stdin_buf, " ");
-	add_back_new_cmd(&g_cmd, new_cmd(tokens));
-}
 
 int		show_prompt_title(void)
 {
@@ -38,13 +30,15 @@ int		init_prompt(void)
 {
 	char	*stdin_buffer;
 	int		input_byte;
+	t_list	*tokens;
 
 	show_prompt_title();
 	get_prompt_input(&stdin_buffer);
-	parse_cmd_from_input(&stdin_buffer);
+	// parse_cmd_from_input(&stdin_buffer);
+	tokens = make_string_to_token_list(stdin_buffer);
 	if (ft_strncmp(stdin_buffer, "exit", 4) == 0)
 	{
-		test_parse_cmd_from_input(g_cmd);
+		// test_parse_cmd_from_input(g_cmd);
 		exit (0);
 	}
 	free(stdin_buffer);

@@ -1,5 +1,5 @@
 NAME = minishell
-CFLAG = #-g3 -fsanitize=address #-Wall -Wextra -Werror
+CFLAG = -g3 -fsanitize=address #-Wall -Wextra -Werror
 SRC_NAME = *
 SRC = $(addprefix src/,$(addsuffix .c, $(SRC_NAME)))
 SRCDIR = ./src

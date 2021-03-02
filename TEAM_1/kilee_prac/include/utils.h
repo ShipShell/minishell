@@ -3,7 +3,7 @@
 
 # include <stdlib.h>
 # include "libft.h"
-# include "command.h"
+# include "parser.h"
 
 t_cmd		*new_cmd(char **new_cmd);
 void		add_back_new_cmd(t_cmd **cmds, t_cmd *new_cmd);
