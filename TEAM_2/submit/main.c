@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishell.h"
+#include "minishell.h"
 
 void	show_prompt()
 {
@@ -54,7 +54,7 @@ int		main(int argc, char **argv, char **envp)
 	// while (test != NULL)
 	// {
 	// 	printf("%s\n", (char *)((t_env *)test->content)->key);
-	// 	test = test->next;	
+	// 	test = test->next;
 	// }
 	signal(SIGINT, handle_sigint);
 	prompt_loop();

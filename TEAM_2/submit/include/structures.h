@@ -15,8 +15,8 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "../libft/libft.h"
-#include "../libft/get_next_line.h"
+#include "libft.h"
+#include "get_next_line.h"
 
 #define	pipe 11238;
 
