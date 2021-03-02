@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prac.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 09:00:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/02/28 17:10:03 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/02 19:10:29 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void	show_prompt()
 int		wait_cmd(void)
 {
 	char	*stdin_buf;
-	t_list	*cmd_list;
 
-	cmd_list = NULL;
 	show_prompt();
 	get_next_line(0, &stdin_buf);
 	if (ft_strncmp(stdin_buf, "exit", 4) == 0)
 		exit(0);
-	seperate_cmdline(stdin_buf, cmd_list);
+	parse_cmd_line(stdin_buf);
 	free(stdin_buf);
 	return (0);
 }

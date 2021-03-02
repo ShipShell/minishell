@@ -11,7 +11,7 @@ t_env	*set_env(char *envp);
 void	set_env_list(char **envp);
 int		command_len(char *stdin_buf);
 t_list	*sep_to_single_command(char *stdin_buf);
-void	seperate_cmdline(char *stdin_buf, t_list *cmd_list);
+void	parse_cmd_line(char *stdin_buf);
 t_data	*sep_to_token(char *single_cmd);
 
 /*
