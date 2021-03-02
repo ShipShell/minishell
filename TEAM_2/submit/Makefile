@@ -3,9 +3,11 @@ CFLAG = -Wall -Wextra -Werror
 
 all : 
 	make re -C ./libdir
-	$(CC) -L libdir -lft -I ./libdir -I ./include ./exec_src/*.c ./parsing_src/*.c main.c
+	$(CC) -g3 -fsanitize=address -L libdir -lft -I ./libdir -I ./include ./exec_src/*.c ./parsing_src/*.c main.c
 run : all
 	./a.out
+test : 
+	gcc test.c -Llibft -lft
 clean :
 	rm -rf *.o
 fclean : clean

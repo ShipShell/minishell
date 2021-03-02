@@ -3,24 +3,13 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include "structures.h"
 # include "libft.h"
 
-t_list *g_env;
-
-typedef struct  s_data
-{
-	char	*cmd;
-	t_list	*arg;
-	int		redirect_num;
-	int		token;
-}               t_data;
-
-typedef struct	s_env
-{
-	char	*key;
-	char	*value;
-}				t_env;
-
-int	ft_cd(t_data *data);
+int	ft_cd(t_cmd *cmd);
+int	env(t_cmd *cmd);
+int	ft_echo(t_cmd *cmd);
+int	ft_pwd(t_cmd *cmd);
+int	ft_unset(t_cmd *cmd);
 
 #endif

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "exec.h"
 
 void			seperate_cmdline(char *stdin_buf, t_list *cmd_list)
 {
@@ -76,6 +77,23 @@ static void		test_data(t_data *cmd_set)
 
 // 자른 스트링을 다시 토큰으로 자르기
 
+int	check_exec(t_data *data)
+{
+	if (!ft_strcmp(data->cmd, "env"))
+		ft_env(data);
+	else if (!ft_strcmp(data->cmd, "cd"))
+		ft_cd(data);
+	else if (!ft_strcmp(data->cmd, "echo"))
+		ft_echo(data);
+	else if (!ft_strcmp(data->cmd, "pwd"))
+		ft_pwd(data);
+	else if (!ft_strcmp(data->cmd, "unset"))
+		ft_unset(data);
+	else
+		return (-1);
+	return (0);
+}
+
 t_data			*sep_to_token(char *single_cmd)
 {
 	int		idx;
@@ -92,6 +110,7 @@ t_data			*sep_to_token(char *single_cmd)
 	while (token[++idx])
 		ft_lstadd_back(&arg, ft_lstnew(token[idx]));
 	cmd_set->arg = arg;
-	test_data(cmd_set);
+	check_exec(cmd_set);
+	// test_data(cmd_set);
 	return (cmd_set);
 }

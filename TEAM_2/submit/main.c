@@ -51,11 +51,6 @@ int		main(int argc, char **argv, char **envp)
 	t_list	*test;
 	
 	test = g_env;
-	// while (test != NULL)
-	// {
-	// 	printf("%s\n", (char *)((t_env *)test->content)->key);
-	// 	test = test->next;
-	// }
 	signal(SIGINT, handle_sigint);
 	prompt_loop();
 	return (0);

@@ -22,6 +22,7 @@
 
 #define SEMI_COLON 178
 #define PIPE_LINE 180
+#define MAX_BUFF 500
 
 t_list				*g_env;
 
@@ -31,20 +32,10 @@ typedef struct		s_env
 	char			*value;
 }					t_env;
 
-
-typedef struct		s_data
-{	
-	char			*cmd;
-	t_list			*arg;
-	int				redirect_num;
-	int				seperator;
-}					t_data;
-
-// typedef struct	s_env
-// {
-// 	char		*key;
-// 	char		*value;
-// 	void		*next;
-// }				t_env;
+typedef struct		s_cmd
+{
+	char **token;
+	int flag;
+}					t_cmd;
 
 #endif
