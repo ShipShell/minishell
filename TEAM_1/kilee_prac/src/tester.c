@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 14:52:31 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/02 19:46:41 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/03 17:49:13 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	test_parse_cmd_from_input(t_cmd *cmds)
+void	test_parse_cmd_from_input(void)
 {
-	while (cmds)
+	while (g_cmd)
 	{
-		int i = -1;
-		printf("CMD%d: { ", i + 1);
-		while(cmds->command[++i])
-			printf("`%s`, ", cmds->command[i]);
-		printf("}\n");
-		cmds = cmds->next;
+		int i = 0;
+		printf("CMDs%d: {%s} \n", i, g_cmd->cmd_str);
+		++i;
+		g_cmd = g_cmd->next;
 	}
 }
 
@@ -43,3 +41,20 @@ void	test_make_string_to_token_list(t_list *tokens)
 	}
 }
 
+void	test_change_quoting(void)
+{
+	// const char	*str = "\'echo\' \"   hi  \" \\a\\b\\c";
+	const char *str = "echo \" Hello ; echo 123 \\;   \" | cat -e";
+	t_quoting	quoting;
+	int			i;
+
+	i = -1;
+	init_quoting(&quoting);
+	printf("QUOTE : 1: CLOSED / 2: SINGLE_OPEN / 3: DOUBLE_OPEN\n");
+	printf("ESCAPE : 1: ON / 2: OFF\n");
+	while(str[++i])
+	{
+		change_quoting(&quoting, str[i]);
+		printf("%d)[%c]quote:%d, escape:%d\n", i, str[i], quoting.quotes, quoting.escape);
+	}
+}
