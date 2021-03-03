@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/02/26 15:01:52 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/02 19:41:50 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "libftprintf.h"
-# include "command.h"
 # include "utils.h"
 # include "tester.h"
+# include "parser.h"
 
 # define BUFFER_MAX 4096
 
+extern t_env	*g_env;
+extern t_cmd	*g_cmd;
 int		prompt_show(void);
 
 #endif
