@@ -1,5 +1,4 @@
 #include "exec.h"
-#include "structures.h"
 
 int	del_env(t_list *before, t_list *env_list)
 {

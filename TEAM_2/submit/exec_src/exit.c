@@ -1,4 +1,3 @@
-#include "structures.h"
 #include "exec.h"
 
 int	put_not_number_err(t_cmd *cmd)
