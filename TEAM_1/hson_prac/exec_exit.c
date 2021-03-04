@@ -5,9 +5,9 @@ int		chk_arg_cnt(t_cmd *cmd)
 	int i;
 
 	i = 0;
-	if (cmd->str)
+	if (cmd->command)
 	{
-		while (cmd->str[i])
+		while (cmd->command[i])
 			i++;
 		return (i);
 	}
@@ -37,9 +37,9 @@ int		exec_exit(t_cmd *cmd)
 	int	isdigit;
 
 	cnt_arg = chk_arg_cnt(cmd);
-	isdigit = chk_arg_digit(cmd->str[1]);
+	isdigit = chk_arg_digit(cmd->command[1]);
 	printf("cnt_arg : %d and isdigit : %d\n", cnt_arg, isdigit);
-	if (cmd->str[1])
+	if (cmd->command[1])
 	{
 		if (isdigit == 0)
 		{
@@ -51,8 +51,8 @@ int		exec_exit(t_cmd *cmd)
 			ft_putstr("exit\n");
 			return (too_many_arg_error(cmd, 1));
 		}
-		printf("exit number : %d\n", ft_atoi(cmd->str[1]));
-		exit(ft_atoi(cmd->str[1]));
+		printf("exit number : %d\n", ft_atoi(cmd->command[1]));
+		exit(ft_atoi(cmd->command[1]));
 	}
 	exit(0);
 	return (EXIT_SUCCESS);

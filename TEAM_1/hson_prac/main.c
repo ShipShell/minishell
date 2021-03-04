@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-t_env		*g_env;
-
 t_env		*new_env(char *key, char *value)
 {
 	t_env	*new;
@@ -31,65 +29,39 @@ void		add_back_new_env(t_env **envs, t_env *new_env)
 
 int main(int ac, char *av[], char **env)
 {
-	t_env	*lst_env;
-	t_env	test_env;
 	t_cmd	*cmd;
 	int		ret;
 
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	// cmd->str = (char **)malloc(sizeof(char *) * 4);
-	// cmd->str[0] = "echo";
-	// cmd->str[1] = "h";
-	// cmd->str[2] = "i";
-	// cmd->str[3] = NULL;
+	g_cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	g_cmd->command = (char **)malloc(sizeof(char *) * 3);
+	g_cmd->command[0] = "unset";
+	g_cmd->command[1] = "PWD";
+	//g_cmd->command[2] = "3";
+	g_cmd->command[2] = NULL;
+	g_cmd->ispath = 0;
+	g_cmd->next = 0;
+
+	cmd = g_cmd;
 
 	// cmd->next = (t_cmd *)malloc(sizeof(t_cmd));
 	// cmd = cmd->next;
-	cmd->str = (char **)malloc(sizeof(char *) * 3);
-	cmd->str[0] = "unset";
-	cmd->str[1] = "a";
-	cmd->str[2] = NULL;
+	// cmd->command = (char **)malloc(sizeof(char *) * 4);
+	// cmd->command[0] = "exit";
+	// cmd->command[1] = "1";
+	// cmd->command[2] = "2";
+	// cmd->command[3] = NULL;
 
-	// cmd->next = (t_cmd *)malloc(sizeof(t_cmd));
-	// cmd = cmd->next;
-	// cmd->str = (char **)malloc(sizeof(char *) * 3);
-	// cmd->str[0] = "pwd";
-	// cmd->str[1] = NULL;
+	add_back_new_env(&g_env, new_env("PWD", "/Users/hson/Desktop"));
+	add_back_new_env(&g_env, new_env("HOME", "/Users/hson"));
+	add_back_new_env(&g_env, new_env("myname", "hson"));
+	add_back_new_env(&g_env, new_env("b", "\"hihi\""));
+	add_back_new_env(&g_env, new_env("a", "b"));
 
-	cmd->next = 0;
+	//printf("cmd : %s %s\nenv key&val : %s=%s\n\n", cmd->command[0], cmd->command[1], lst_env->key, lst_env->val);
 
-	add_back_new_env(&lst_env, new_env("PWD", "/Users/hson/Desktop"));
-	add_back_new_env(&lst_env, new_env("HOME", "/Users/hson"));
-	add_back_new_env(&lst_env, new_env("a", "b"));
-	add_back_new_env(&lst_env, new_env("myname", "hson"));
-
-	// lst_env = (t_env *)malloc(sizeof(t_env));
-	// lst_env->key = "PWD";
-	// lst_env->val = "/Users/hson/Desktop";
-	// printf("env[0] key&val : %s=%s\n\n", lst_env->key, lst_env->val);
-
-	// lst_env->next = (t_env *)malloc(sizeof(t_env));
-	// lst_env = lst_env->next;
-	// lst_env->key = "HOME";
-	// lst_env->val = "/Users/hson";
-	// printf("env[1] key&val : %s=%s\n\n", lst_env->key, lst_env->val);
-
-	// lst_env->next = (t_env *)malloc(sizeof(t_env));
-	// lst_env = lst_env->next;
-	// lst_env->key = "a";
-	// lst_env->val = "b";
-	// printf("env[2] key&val : %s=%s\n\n", lst_env->key, lst_env->val);
-
-	// lst_env->next = (t_env *)malloc(sizeof(t_env));
-	// lst_env = lst_env->next;
-	// lst_env->key = "myname";
-	// lst_env->val = "hson";
-	// printf("env[3] key&val : %s=%s\n\n", lst_env->key, lst_env->val);
-
-	// lst_env->next = 0;
-	//printf("cmd : %s %s\nenv key&val : %s=%s\n\n", cmd->str[0], cmd->str[1], lst_env->key, lst_env->val);
-
-
+	exec_command();
+	printf("\nexec_%s success\n", g_cmd->command[0]);
+	printf("excode : %d \n", g_exit_code);
 
 	// ret = exec_cd(cmd, lst_env);
 	// if (ret == 0)
@@ -113,15 +85,29 @@ int main(int ac, char *av[], char **env)
 	// if (ret == 0)
 	// 	printf("\n%d : exec_echo success\n", ret);
 
-	ret = exec_unset(cmd, lst_env);
-	if (ret == 0)
-		printf("\n%d : exec_unset success\n", ret);
+	// ret = exec_unset(cmd, lst_env);
+	// if (ret == 0)
+	// 	printf("\n%d : exec_unset success\n", ret);
+	
+	// ret = exec_export(cmd);
+	// if (ret == 0)
+	// 	printf("\n%d : exec_export success\n", ret);
 
-	free(cmd->str);
+	free(cmd->command);
 	free(cmd);
-	free(lst_env);
+	free(g_env);
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
 
 // int main()
 // {

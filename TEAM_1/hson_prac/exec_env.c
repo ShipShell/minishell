@@ -1,7 +1,10 @@
 #include "minishell.h"
 
-int		exec_env(t_cmd *cmd, t_env *env)
+int		exec_env(t_cmd *cmd)
 {
+	t_env	*env;
+
+	env = g_env;
 	(void)cmd;
 	while (env)
 	{
