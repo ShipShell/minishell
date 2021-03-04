@@ -22,10 +22,10 @@ int main()
 // 		printf("부모: %d\n", i);
 // 	}
 // split에서 나누는거 확인하는 테스트
-	char **dpch;
+	// char **dpch;
 
-	dpch = ft_split("test", '=');
-	printf("1:%s\n2:%s\n", dpch[0], dpch[1]);
-
+	// dpch = ft_split("test", '=');
+	// printf("1:%s\n2:%s\n", dpch[0], dpch[1]);
+	write(2, "hello", 5);
 	return (0);
 }

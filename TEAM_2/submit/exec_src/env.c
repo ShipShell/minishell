@@ -20,15 +20,6 @@
 // 	return (0); // 끝까지 가면 0 리턴.
 // }
 
-// err부분은 나중에 처리해줘야함.
-int	print_arg_err(t_cmd *cmd)
-{
-	ft_putstr_fd("env: ", 1);
-	ft_putstr_fd(cmd->token[1], 1);
-	ft_putstr_fd(": No such file or directory\n", 1);
-	return (0);
-}
-
 // t_cmd *cmd가 굳이 필요할까는 짜면서 생각.
 int ft_env(t_cmd *cmd)
 {
@@ -40,7 +31,7 @@ int ft_env(t_cmd *cmd)
 	// 인자가 환경변수에 있는지 확인.
 	if (cmd->token[++i])
 	{
-		print_arg_err(cmd);
+		g_exit_code = 127;
 		return (-1);
 	}
 	while (env_list)

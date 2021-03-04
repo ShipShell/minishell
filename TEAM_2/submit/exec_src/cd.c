@@ -1,12 +1,4 @@
 #include "exec.h"
-#include <errno.h>
-
-// exit으로 끝내야할 듯.
-int	call_no_home_err()
-{
-	ft_putstr_fd("bash: cd: HOME not set\n", 1);
-	return (-1);
-}
 
 // current_dir을 PWD에 넣어준다.
 int	put_env_pwd(char *current_dir, t_list *pwd_lst)
@@ -52,7 +44,7 @@ int	check_home()
 	temp_env = g_env;
 	while (temp_env)
 	{
-		if (!ft_strncmp(((t_env *)temp_env->content)->key, "HOME", 4))
+		if (!ft_strcmp(((t_env *)temp_env->content)->key, "HOME"))
 		{
 			pwd = ((t_env *)temp_env->content)->value;
 			chdir(pwd);
@@ -85,9 +77,10 @@ int	check_arg(t_cmd *cmd)
 // 실패나 문제가 있을시 -1리턴.
 int	ft_cd(t_cmd *cmd)
 {
+	int	result;
 	// 인자가 없을 때 HOME을 참조
 	if (cmd->token[1] == 0)
-		return(check_home());
+		result = check_home();
 	else
 		return(check_arg(cmd));
 }

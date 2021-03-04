@@ -25,6 +25,7 @@
 #define MAX_BUFF 500
 
 t_list				*g_env;
+int					g_exit_code;
 
 typedef struct		s_env
 {
@@ -34,8 +35,8 @@ typedef struct		s_env
 
 typedef struct		s_cmd
 {
-	char **token;
-	int flag;
+	char	**token;
+	int		flag;
 }					t_cmd;
 
 #endif
