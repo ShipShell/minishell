@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:35:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/04 16:59:19 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/04 17:48:11 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,53 @@ static char		**split_single_cmd(char *str)
 	return (token);
 }
 
+static int		check_flag(t_cmd *tokenized)
+{
+	int			i;
+
+	i = 0;
+	while (tokenized->token[i] && tokenized->token[i + 1])
+		++i;
+	if (tokenized->token[i] == NULL)
+		return (0);
+	else if (ft_strncmp(tokenized->token[i], ";", 1) == 0)
+	{
+		free(tokenized->token[i]);
+		tokenized->token[i] = NULL;
+		return (SEMICOLON);
+	}
+	else if (ft_strncmp(tokenized->token[i], "|", 1) == 0)
+	{
+		free(tokenized->token[i]);
+		tokenized->token[i] = NULL;
+		return (PIPELINE);
+	}
+	else
+		return (0);
+	
+}
+
+// static char		*to_str(int flag)
+// {
+// 	if (flag == PIPELINE)
+// 		return ("PIPELINE");
+// 	else if (flag == SEMICOLON)
+// 		return ("SEMICOLON");
+// 	else
+// 		return ("NULL");
+// }
+
 static t_cmd	*tokenize_single_cmd(char *str)
 {
 	t_cmd		*tokenized;
+	int			i = -1;
 
 	tokenized = (t_cmd *)malloc(sizeof(t_cmd));
 	tokenized->token = split_single_cmd(str);	
-	
+	tokenized->flag = check_flag(tokenized);
+	// while (tokenized->token[++i])
+	// 	printf("token[%d] : %s\n", i, tokenized->token[i]);
+	// printf("%s\n\n", to_str(tokenized->flag));
 	return (tokenized);
 }
 
