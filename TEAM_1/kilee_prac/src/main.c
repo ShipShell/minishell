@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/03 17:33:39 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/04 17:14:54 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,20 @@ int		init_prompt(void)
 	int		input_byte;
 	t_list	*tokens;
 
-	delete_cmd_list(&g_cmd, delete_data_in_cmd);
+	// delete_cmd_list(&g_cmd, delete_data_in_cmd);
 	show_prompt_title();
 	get_prompt_input(&stdin_buffer);
+	// parse_cmd_from_input(stdin_buffer);
+	// parse_and_split_from_input(stdin_buffer);
 	parse_cmd_from_input(stdin_buffer);
-	// tokens = make_string_to_token_list(stdin_buffer);
+	test_parse_cmd_from_input();
+	make_cmd_str_to_tokens();
+	test_make_cmd_str_to_tokens();
 	if (ft_strncmp(stdin_buffer, "exit", 4) == 0)
 	{
 		// test_parse_cmd_from_input(g_cmd);
 		exit (0);
 	}
-	test_parse_cmd_from_input();
 	free(stdin_buffer);
 	return (0);
 }

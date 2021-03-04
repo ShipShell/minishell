@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 14:52:31 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/03 17:49:13 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/04 17:26:28 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	test_parse_cmd_from_input(void)
 {
-	while (g_cmd)
+	t_cmd *current_cmd;
+
+	current_cmd = g_cmd;
+	while (current_cmd)
 	{
 		int i = 0;
-		printf("CMDs%d: {%s} \n", i, g_cmd->cmd_str);
+		printf("CMDs%d: {%s} \n", i, current_cmd->cmd_str);
 		++i;
-		g_cmd = g_cmd->next;
+		current_cmd = current_cmd->next;
 	}
 }
 
@@ -32,12 +35,21 @@ void	test_init_g_env(t_env *envs)
 	}
 }
 
-void	test_make_string_to_token_list(t_list *tokens)
+void	test_make_cmd_str_to_tokens(void)
 {
-	while (tokens)
+	t_cmd *current_cmd;
+
+	current_cmd = g_cmd;
+	while (current_cmd)
 	{
-		printf("token: [%s]\n", tokens->content);
-		tokens = tokens->next;
+		printf("CMD : {");
+		while (*current_cmd->command)
+		{
+			printf("[%s], ", *current_cmd->command);
+			current_cmd->command++;
+		}
+		printf("}\n");
+		current_cmd = current_cmd->next;
 	}
 }
 
