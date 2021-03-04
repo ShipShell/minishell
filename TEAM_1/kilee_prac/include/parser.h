@@ -39,14 +39,24 @@ typedef struct		s_quoting
 	t_quotes	quotes;
 }					t_quoting;
 
+void	parse_and_split_from_input(char *stdin_buf);
+
+//step1
 void	parse_cmd_from_input(char *stdin_buf);
-t_list	*make_string_to_token_list(char *stdin_buf);
-void	make_quotes_in_token_to_literal(t_list **tokens);
-t_cmd	*make_token_list_to_cmd_list(t_list **tokens);
+void	skip_seperator_at_first(char **ptr);
 int		count_cmd_length(char *ptr);
-void	change_quoting(t_quoting *quoting, char	c); // quoting의 맴버인 quote 상태를 현재 문자와 비교하여 변경.
 void	init_quoting(t_quoting *quoting);
+t_bool	need_to_cut_command(t_quoting *quoting, char c);
+void	change_quoting(t_quoting *quoting, char	c);
 void	change_escape_status(t_quoting *quoting, char c);
 void	change_quotes_status(t_quoting *quoting, char c);
+
+//step2
+void	make_cmd_str_to_tokens(void);
+void	malloc_commands_room(t_cmd *cmd);
+int		count_amount_of_tokens(char	*cmd_str);
+t_bool	need_to_cut_token(t_quoting *quoting, char c);
+int		count_token_length(char *ptr);
+
 
 #endif

@@ -1,104 +1,12 @@
 #include "minishell.h"
 
-//STEP1 STR to token
-t_bool	need_to_cut_token(char *ptr, char *opend_quote, t_bool *escape_on)
+void	parse_and_split_from_input(char *stdin_buf)
 {
-	if (ft_strchr(" \t", *ptr) && *opend_quote == CLOSED && *escape_on == FALSE)
-		return (TRUE);
-	return (FALSE);
+	parse_cmd_from_input(stdin_buf);
+	make_cmd_str_to_tokens();
 }
-
-void	set_quote_status(char *ptr, char *opend_quote)
-{
-	if (*ptr == '\'' || *ptr == '\"')
-	{
-		if (*opend_quote == '\0')
-			*opend_quote = *ptr;
-		else if (*ptr == *opend_quote)
-			*opend_quote = CLOSED;
-	}
-}
-
-void	set_escape_status(char *ptr, char *opend_quote, t_bool *escape_on)
-{
-	if (*ptr == '\\' && *opend_quote == CLOSED)
-		*escape_on = (*escape_on == TRUE) ? FALSE : TRUE;
-}
-
-int		count_token_length(char *ptr)
-{
-	t_bool	escape_on;
-	char	opend_quote;
-	int		len;
-
-	escape_on = FALSE;
-	opend_quote = CLOSED;
-	len = 0;
-	while (ptr[len])
-	{
-		set_quote_status(&ptr[len], &opend_quote);
-		set_escape_status(&ptr[len], &opend_quote, &escape_on);
-		if (need_to_cut_token(&ptr[len], &opend_quote, &escape_on))
-			return (len);
-		++len;
-	}
-	return (len);
-}
-
-void	skip_seperator_at_first(char **ptr)
-{
-	while (**ptr && ft_strchr(" \t|;", **ptr) != 0)
-		(*ptr)++;
-}
-
-t_list	*make_string_to_token_list(char *stdin_buf)
-{
-	int		len;
-	char	opend_quote;
-	t_list	*token;
-	char	*token_str;
-
-	len = 0;
-	opend_quote = CLOSED;
-	token = NULL;
-	while (*stdin_buf)
-	{
-		skip_seperator_at_first(&stdin_buf);
-		len = count_token_length(stdin_buf);
-		token_str = ft_strndup(stdin_buf, len);
-		ft_lstadd_back(&token, ft_lstnew(token_str));
-		stdin_buf += len;
-	}
-	test_make_string_to_token_list(token);
-	return (token);
-}
-
-//STEP2 토큰 내의 special 치환,
-//1. 앞에서부터 문자 체크, single_quote 오픈 / double_quote 오픈 체크
-//2. escape on off 체크, $ 만나면 변수 치환 체크
-//3. i 쭉쭉가다가, 특수 케이스 만나거나 토큰 종료되면 join
-//4. | 나 ; 만나면 토큰 새로 만들기.
-// move
-void	make_quotes_in_token_to_literal(t_list **tokens)
-{
-
-}
-
-t_cmd	*make_token_list_to_cmd_list(t_list **tokens);
 
 //STEP1. cmd_str ; | 기준으로 쪼개기
-
-t_bool	need_to_cut_command(t_quoting *quoting, char c)
-{
-	if ((c == ';' || c == '|') && quoting->escape == OFF
-		&& quoting->quotes == CLOSED)
-	{
-		// printf("escape:%d quotes %d, c : %c\n", quoting->escape, quoting->quotes, c);
-		return (TRUE);
-	}
-	return (FALSE);
-}
-
 void	parse_cmd_from_input(char *stdin_buf)
 {
 	int		len;
@@ -115,6 +23,12 @@ void	parse_cmd_from_input(char *stdin_buf)
 	}
 }
 
+void	skip_seperator_at_first(char **ptr)
+{
+	while (**ptr && ft_strchr(" \t", **ptr) != 0)
+		(*ptr)++;
+}
+
 int		count_cmd_length(char *ptr)
 {
 	t_quoting	quoting;
@@ -123,15 +37,30 @@ int		count_cmd_length(char *ptr)
 
 	init_quoting(&quoting);
 	len = 0;
-	while (ptr[len])
+	while (*ptr)
 	{
-		need_to_cut = need_to_cut_command(&quoting, ptr[len]);
-		change_quoting(&quoting, ptr[len]);
+		++len;
+		need_to_cut = need_to_cut_command(&quoting, *ptr);
+		change_quoting(&quoting, *ptr);
 		if (need_to_cut)
 			return (len);
-		++len;
+		ptr++;
 	}
 	return (len);
+}
+
+void	init_quoting(t_quoting *quoting)
+{
+	quoting->quotes = CLOSED;
+	quoting->escape = OFF;
+}
+
+t_bool	need_to_cut_command(t_quoting *quoting, char c)
+{
+	if ((c == ';' || c == '|') && quoting->escape == OFF
+		&& quoting->quotes == CLOSED)
+		return (TRUE);
+	return (FALSE);
 }
 
 //Quoting structure 상태 변화 함수.
@@ -174,8 +103,91 @@ void	change_quotes_status(t_quoting *quoting, char c)
 	}
 }
 
-void	init_quoting(t_quoting *quoting)
+
+//STEP2 char *cmd_str -> char **cmd 토큰화 단계
+void	make_cmd_str_to_tokens(void)
 {
-	quoting->quotes = CLOSED;
-	quoting->escape = OFF;
+	int			len;
+	t_cmd		*current_cmd;
+	char		*current_ptr;
+	int			i;
+
+	current_cmd = g_cmd;
+	while (current_cmd)
+	{
+		malloc_commands_room(current_cmd);
+		current_ptr = current_cmd->cmd_str;
+		i = 0;
+		len = 0;
+		while(*current_ptr)
+		{
+			skip_seperator_at_first(&current_ptr);
+			len = count_token_length(current_ptr);
+			current_cmd->command[i++] = ft_strndup(current_ptr, len);
+			current_ptr += len;
+		}
+		current_cmd = current_cmd->next;
+	}
+}
+
+void	malloc_commands_room(t_cmd *cmd)
+{
+	int	token_amount;
+
+	token_amount = count_amount_of_tokens(cmd->cmd_str);
+	cmd->command = (char **)malloc(sizeof(char *) * (token_amount + 1));
+	if (cmd->command == NULL)
+		exit(EXIT_FAILURE);
+	(cmd->command)[token_amount] = NULL;
+}
+
+int		count_amount_of_tokens(char	*cmd_str)
+{
+	int			amount;
+	int			len;
+
+	len = 0;
+	amount = 0;
+	while(*cmd_str)
+	{
+		skip_seperator_at_first(&cmd_str);
+		len = count_token_length(cmd_str);
+		cmd_str += len;
+		++amount;
+	}
+	printf("amount:%d\n", amount);
+	return (amount);
+}
+
+t_bool	need_to_cut_token(t_quoting *quoting, char c)
+{
+	if (ft_strchr(" \t;|", c) && quoting->escape == OFF
+		&& quoting->quotes == CLOSED)
+		return (TRUE);
+	return (FALSE);
+}
+
+int		count_token_length(char *ptr)
+{
+	t_quoting	quoting;
+	int			len;
+	t_bool		need_to_cut;
+
+	init_quoting(&quoting);
+	len = 0;
+	if (*ptr == '|' || *ptr == ';')
+		return (1);
+	while (ptr[len])
+	{
+		need_to_cut = need_to_cut_token(&quoting, ptr[len]);
+		change_quoting(&quoting, ptr[len]);
+		if (need_to_cut)
+		{
+			if (len == 0 && ft_strchr("|;", ptr[len]))
+				++len;
+			return (len);
+		}
+		++len;
+	}
+	return (len);
 }
