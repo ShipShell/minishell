@@ -1,10 +1,12 @@
 #include "minishell.h"
 
-void	remove_env(t_env *env, char *key)
+void	remove_env(char *key)
 {
+	t_env *env;
 	t_env *bef;
 	t_env *next;
 
+	env = g_env;
 	bef = 0;
 	while (env)
 	{
@@ -14,13 +16,13 @@ void	remove_env(t_env *env, char *key)
 			if (bef)
 				bef->next = next;
 			else
-				env = next;
+				g_env = next;
 			free(env->key);
 			if (env->val)
 				free(env->val);
 			free(env);
-			printf("bef : %s=%s\n", bef->key, bef->val);
-			printf("next : %s=%s\n", next->key, next->val);
+			// printf("bef : %s=%s\n", bef->key, bef->val);
+			// printf("next : %s=%s\n", next->key, next->val);
 			break;
 		}
 		bef = env;
@@ -28,14 +30,16 @@ void	remove_env(t_env *env, char *key)
 	}
 }
 
-int		exec_unset(t_cmd *cmd, t_env *env)
+int		exec_unset(t_cmd *cmd)
 {
-	int	i;
+	t_env	*env;
+	int		i;
 
+	env = g_env;
 	i = 1;
-	while (cmd->str[i])
+	while (cmd->command[i])
 	{
-		remove_env(env, cmd->str[i]);
+		remove_env(cmd->command[i]);
 		i++;
 	}
 	return (0);

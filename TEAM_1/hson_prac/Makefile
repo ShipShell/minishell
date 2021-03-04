@@ -3,7 +3,7 @@
 NAME = minishell
 
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = #-g3 -fsanitize=address #-Wall -Wextra -Werror
 LIBS_FLAGS = -Llibft -lft
 INCLUDE = -I./ -I./libft
 
@@ -30,14 +30,17 @@ INCLUDE = -I./ -I./libft
 			bmp.c
 #SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NAME))
 
-SRCS = exec_cd.c \
+SRCS = exec_command.c \
+		exec_cd.c \
 		exec_echo.c \
 		exec_env.c \
 		exec_exit.c \
+		exec_export.c \
+		exec_not_builtin.c \
 		exec_pwd.c \
 		exec_unset.c \
 		error.c \
-		main.c \
+		main.c
 
 #OBJS_DIR = ./obj/
 #OBJS_NAME = $(SRCS_NAME:.c=.o)
