@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 06:51:00 by kihoonlee         #+#    #+#             */
-/*   Updated: 2021/02/26 14:31:31 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/03 17:10:16 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char			*ft_strndup(const char *s, size_t n)
 
 void			ft_free_arr(char **s, int i)
 {
-	while (i--)
-		free(s[i]);
+	while (i)
+		free(s[--i]);
 	free(s);
 }
 
