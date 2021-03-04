@@ -26,6 +26,20 @@ int		no_command_error(t_cmd *cmd, int err_num)
 	ft_putstr("minishell: ");
 	ft_putstr(cmd->command[0]);
 	ft_putstr(": command not found\n");
+	return (err_num);	
+}
+
+//no such file or directory
+int		no_file_error(t_cmd *cmd, int err_num)
+{
+	ft_putstr("minishell: ");
+	ft_putstr(cmd->command[0]);
+	if (cmd->command[1])
+	{
+		ft_putstr(": ");
+		ft_putstr(cmd->command[1]);
+	}
+	ft_putstr(": No such file or directory\n");
 	return (err_num);
 }
 

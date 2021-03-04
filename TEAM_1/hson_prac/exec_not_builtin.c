@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+void	chk_is_cmd_path(t_cmd *cmd)
+{
+	if (!ft_strncmp(cmd->command[0], "/", 1) ||
+		!ft_strncmp(cmd->command[0], "./", 2))
+		cmd->ispath = 1;
+}
+
 char	**get_path_env()
 {
 	t_env 	*env;
@@ -35,14 +42,14 @@ void	free_arr(char **arr)
 char	**make_env_char()
 {
 	t_env	*env;
-	char	**ret;
+	char	**res;
 	char	*tmp;
 	int		size;
 	int		i;
 
 	env = g_env;
 	size = chk_arg_cnt_env(env);
-	ret = (char **)malloc(sizeof(char *) * (size + 1));
+	res = (char **)malloc(sizeof(char *) * (size + 1));
 	i = 0;
 	while (env)
 	{
@@ -52,13 +59,13 @@ char	**make_env_char()
 			continue;
 		}
 		tmp = ft_strjoin(env->key,"=");
-		ret[i] = ft_strjoin(tmp, env->val);
+		res[i] = ft_strjoin(tmp, env->val);
 		free(tmp);
 		i++;
 		env = env->next;
 	}
-	ret[i] = 0;
-	return (ret);
+	res[i] = 0;
+	return (res);
 }
 
 void	exec_not_builtin_sub(t_cmd *cmd, char **path)
@@ -69,7 +76,7 @@ void	exec_not_builtin_sub(t_cmd *cmd, char **path)
 	int		i;
 
 	i = -1;
-	while (path[++i])
+	while (path && path[++i])
 	{
 		tmp = ft_strjoin(path[i], "/");
 		path_arg = ft_strjoin(tmp, cmd->command[0]);
@@ -85,9 +92,20 @@ void	exec_not_builtin(t_cmd *cmd)
 {
 	char	**path;
 
-	path = get_path_env();
-	exec_not_builtin_sub(cmd, path);
-	free_arr(path);
-	// command not found
-	exit(no_command_error(cmd, 127));
+	printf("ispath : %d\n", cmd->ispath);
+	chk_is_cmd_path(cmd);
+	if (cmd->ispath == 0)
+	{
+		printf("no path\n");
+		path = get_path_env();
+		exec_not_builtin_sub(cmd, path);
+		free_arr(path);
+		exit(no_command_error(cmd, 127));
+	}
+	else
+	{
+		printf("has path\n");;
+		execve(cmd->command[0], cmd->command, make_env_char());
+		exit(no_file_error(cmd, 127));
+	}
 }

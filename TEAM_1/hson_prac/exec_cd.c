@@ -59,7 +59,7 @@ int		exec_cd(t_cmd *cmd)
 	}
 	printf("\nbefore getcwd : %s\n", getcwd(cwd, PATH_MAX));
 	if (chdir(val) == -1)
-		return (-1);
+		return (no_file_error(cmd, 1));
 	else
 	{
 		printf("after getcwd : %s\n", getcwd(cwd, PATH_MAX));

@@ -35,9 +35,10 @@ int main(int ac, char *av[], char **env)
 	g_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	g_cmd->command = (char **)malloc(sizeof(char *) * 3);
 	g_cmd->command[0] = "unset";
-	g_cmd->command[1] = "a";
+	g_cmd->command[1] = "PWD";
 	//g_cmd->command[2] = "3";
 	g_cmd->command[2] = NULL;
+	g_cmd->ispath = 0;
 	g_cmd->next = 0;
 
 	cmd = g_cmd;

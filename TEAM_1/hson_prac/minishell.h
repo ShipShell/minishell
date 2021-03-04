@@ -17,6 +17,7 @@
 typedef struct	s_cmd
 {
 	char 			**command;
+	int				ispath;
 	struct s_cmd 	*next;
 }				t_cmd;
 
@@ -63,6 +64,7 @@ void	print_export();
 void	put_env(char *str);
 int		exec_export(t_cmd *cmd);
 
+void	chk_is_cmd_path(t_cmd *cmd);
 char	**get_path_env();
 void	free_arr(char **arr);
 char	**make_env_char();
@@ -72,6 +74,7 @@ void	exec_not_builtin(t_cmd *cmd);
 int		num_arg_error(t_cmd *cmd, int err_num);
 int		too_many_arg_error(t_cmd *cmd, int err_num);
 int		no_command_error(t_cmd *cmd, int err_num);
+int		no_file_error(t_cmd *cmd, int err_num);
 int		not_valid_idt(t_cmd *cmd, char *arg, int err_num);
 void	ft_error(void);
 
