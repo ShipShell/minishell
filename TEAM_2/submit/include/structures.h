@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/03 17:53:23 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/04 15:19:58 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 #define	pipe 11238;
 
-#define SEMI_COLON 178
-#define PIPE_LINE 180
+#define SEMICOLON 178
+#define PIPELINE 180
 
 #define ON 1
 #define OFF 2
@@ -60,6 +60,7 @@ typedef struct		s_cmd
 	// int				seperator;
 	char			**token;
 	int				flag;
+	// int				exit_code;
 }					t_cmd;
 
 // typedef struct	s_env

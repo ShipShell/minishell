@@ -3,113 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/03 17:58:17 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:35:36 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static int		ft_isspace(char c)
-// {
-// 	if (c == ' ' || c == '\t')
-// 		return (1);
-// 	else
-// 		return (0);
-// }
-
-// static t_list	*string_to_prime_token(char *stdin_buf)
-// {
-// 	t_list		*prime;
-// 	char		*check_tokenizable;
-// 	//공백만으로 stdin을 자를 수 없어서 따옴표로 묶인 공백이나 특수문자를 먼저 판별해야 함.
-
-// 	prime = NULL;
-// 	check_tokenizable = check_quoted(stdin_buf);
-// 	return (prime);
-// }
-
-//t_quoting 멤버의 상태를 결정
-//void			change_quoting(t_quoting *quoting, char c)
-//{
-//	
-//
-//}
-
-void			init_quoting(t_quoting *quoting)
+static int		get_command_len(char *str)
 {
-	quoting->escape = OFF;
-	quoting->quotes = CLOSED;
-}
-
-void			change_escape(char c, t_quoting *quoting)
-{
-	if (c == BACKSLASH)
-	{
-		if (quoting->quotes != SINGLE_OPEN && quoting->escape == ON)
-			quoting->escape = OFF;
-		else if (quoting->quotes != SINGLE_OPEN && quoting->escape == OFF)
-			quoting->escape = ON;
-	}
-	else
-	{
-		if (quoting->quotes != SINGLE_OPEN && quoting->escape == ON)
-			quoting->escape = OFF;
-	}
-}
-
-void			change_quoting(char c, t_quoting *quoting)
-{
-	if (c == SINGLE_QUOTE)
-	{
-		if (quoting->quotes == SINGLE_OPEN)
-			quoting->quotes = CLOSED;
-		else if (quoting->quotes == CLOSED)
-		{
-			if (quoting->escape == OFF)
-				quoting->quotes = SINGLE_OPEN;
-		}
-	}
-	else if (c == DOUBLE_QUOTE)
-	{
-		if (quoting->escape == OFF)
-		{
-			if (quoting->quotes == CLOSED)
-				quoting->quotes = DOUBLE_OPEN;
-			else if (quoting->quotes == DOUBLE_OPEN)
-				quoting->quotes = CLOSED;
-		}
-	}
-	change_escape(c, quoting);
-}
-
-static char		*tester(int i)
-{
-	if (i == 1)
-		return ("ON");
-	else if (i == 2)
-		return ("OFF");
-	else if (i == 3)
-		return ("CLOSED");
-	else if (i == 4)
-		return ("SINGLE_OPEN");
-	else if (i == 5)
-		return ("DOUBLE_OPEN");
-}
-
-void			parse_cmd_line(char *str)
-{
+	int			cmd_len;
 	t_quoting	quoting;
-	int			i;
 
-	i = -1;
 	init_quoting(&quoting);
-	while (str[++i])
+	cmd_len = 0;
+	while (*str)
 	{
-		change_quoting(str[i], &quoting);
-		
-		printf(" %c ) quotes : %s / escape : %s \n", str[i], tester(quoting.quotes), tester(quoting.escape));
+		++cmd_len;
+		change_quoting(*str, &quoting);
+		if (ft_strchr(";|", *str)
+			&& quoting.quotes == CLOSED && quoting.old_escape == OFF)
+			break ;
+		str++;
 	}
+	return (cmd_len);
+}
+
+static t_list	*sep_to_single_cmd(char *stdin_buf)
+{
+	t_list		*single_cmd_list;
+	char		*single_cmd;
+	int			single_cmd_len;
+
+	single_cmd_list = NULL;
+	while (*stdin_buf != '\0')
+	{
+		single_cmd_len = get_command_len(stdin_buf);
+		single_cmd = ft_strndup(stdin_buf, single_cmd_len);
+		ft_lstadd_back(&single_cmd_list, ft_lstnew(single_cmd));
+		stdin_buf = stdin_buf + single_cmd_len;
+	}
+	return (single_cmd_list);
+}
+
+t_list			*parse_cmd_line(char *str)
+{
+	t_list		*tokenized_single_cmd_list;
+	t_list		*single_cmd_list;
+
+	single_cmd_list = sep_to_single_cmd(str); //gnl로 받은 커맨드 라인을 ;|를 기준으로 잘라준 리스트
+	tokenized_single_cmd_list = tokenize(single_cmd_list); //single_cmd_list를 받아서 토큰화 해주기!
+	return (tokenized_single_cmd_list);
 }
