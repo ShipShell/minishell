@@ -46,13 +46,6 @@ typedef struct		s_env
 	char			*value;
 }					t_env;
 
-<<<<<<< HEAD
-typedef struct		s_cmd
-{
-	char	**token;
-	int		flag;
-}					t_cmd;
-=======
 typedef struct		s_quoting
 {
 	t_quotes		quotes;
@@ -77,6 +70,5 @@ typedef struct		s_cmd
 // 	char		*value;
 // 	void		*next;
 // }				t_env;
->>>>>>> e0178d46adc99863f2cddde372c0c85fe6069a5c
 
 #endif
