@@ -76,7 +76,11 @@ SRCNAME = ft_memset.c \
 		ft_get_data_length.c \
 		ft_parse_sub.c \
 		ft_precision.c \
-		ft_star.c
+		ft_star.c \
+		ft_putstr.c \
+		ft_strcmp.c \
+		ft_putchar.c
+
 SRCS = $(addprefix $(SRCDIR)/, $(SRCNAME))
 OBJECTS = $(addprefix $(OBJDIR)/, $(SRCNAME:.c=.o))
 

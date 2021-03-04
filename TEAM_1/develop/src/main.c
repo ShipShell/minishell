@@ -3,44 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/02/26 11:04:55 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/04 18:17:07 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# include "minishell.h"
 
-int		prompt_show(void)
+t_env	*g_env;
+t_cmd	*g_cmd;
+int		g_exit_code;
+
+int		show_prompt_title(void)
 {
-	char	*stdin_buf;
-	int		input_byte;
-
 	ft_putstr_fd("shipshell$ ", 1);
-	get_next_line(0, &stdin_buf);
-	if (ft_strncmp(stdin_buf, "exit", 4) == 0)
-		exit(0);
-	ft_putstr_fd(stdin_buf, 1);
 	return (0);
 }
 
-void	prompt_loop(void)
+void	get_prompt_input(char **stdin_buffer)
 {
-	while(1)
-		prompt_show();
+	get_next_line(0, stdin_buffer);
+}
+
+int		init_prompt(void)
+{
+	char	*stdin_buffer;
+	int		input_byte;
+	t_list	*tokens;
+
+	// delete_cmd_list(&g_cmd, delete_data_in_cmd);
+	show_prompt_title();
+	get_prompt_input(&stdin_buffer);
+	// parse_cmd_from_input(stdin_buffer);
+	// parse_and_split_from_input(stdin_buffer);
+	parse_cmd_from_input(stdin_buffer);
+	test_parse_cmd_from_input();
+	make_cmd_str_to_tokens();
+	test_make_cmd_str_to_tokens();
+	if (ft_strncmp(stdin_buffer, "exit", 4) == 0)
+	{
+		// test_parse_cmd_from_input(g_cmd);
+		exit (0);
+	}
+	free(stdin_buffer);
+	return (0);
+}
+
+void	loop_prompt(void)
+{
+	while (1)
+		init_prompt();
+}
+void	erase_signal_ascii(void)
+{
+	ft_printf("\b\b  \b\b\n");
 }
 
 void	handle_sigint(int signo)
 {
-	ft_printf("\b\b  \b\b\n");
-	ft_putstr_fd("shipshell$ ", 1);
-		return ;
+	erase_signal_ascii();
+	show_prompt_title();
+	return ;
+}
+
+void	make_envp_to_t_env(char *envpi)
+{
+	char	**key_value;
+
+	key_value = ft_split(envpi, "=");
+	add_back_new_env(&g_env, new_env(key_value[0], key_value[1]));
+	ft_free_arr(key_value, 2);
+}
+
+void	init_g_env(char *envp[])
+{
+	int	i;
+
+	i = -1;
+	while (envp[++i])
+		make_envp_to_t_env(envp[i]);
 }
 
 int		main(int argc, char *argv[], char *envp[])
 {
+	init_g_env(envp);
+	test_init_g_env(g_env);
 	signal(SIGINT, handle_sigint);
-	prompt_loop();
+	loop_prompt();
 	return (0);
 }

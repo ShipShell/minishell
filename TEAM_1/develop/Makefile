@@ -1,6 +1,20 @@
 NAME = minishell
-CFLAG = #-Wall -Wextra -Werror  -fsanitize=address
-SRC_NAME = main
+CFLAG = -g3 -fsanitize=address #-Wall -Wextra -Werror
+SRC_NAME = main \
+		parsing/parser \
+		tester/tester \
+		utils/utils \
+		error/error \
+		exec/exec_cd \
+		exec/exec_command \
+		exec/exec_echo \
+		exec/exec_env \
+		exec/exec_exit \
+		exec/exec_export \
+		exec/exec_pwd \
+		exec/exec_unset \
+		exec/exec_not_builtin
+
 SRC = $(addprefix src/,$(addsuffix .c, $(SRC_NAME)))
 SRCDIR = ./src
 INCLUDE = -I ./include -I ./libft/include
@@ -20,8 +34,10 @@ re : fclean all
 bonus : all
 
 run : all
-	export PATH=$(PATH):$(PWD)
 	./minishell
+test :
+	gcc -o tester $(CFLAGS) src/utils.c src/parser.c src/tester.c src/unit_tester.c -I ./include -I ./libft/include -L./libft -lft
+	./tester
 
 $(NAME) : $(SRC) $(LIBFT_DIR)/$(LIBFT)
 	gcc $(CFLAG) -o $@ $(SRC) -L $(LIBFT_DIR) -lft $(INCLUDE)

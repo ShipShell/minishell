@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 21:21:05 by kihoonlee         #+#    #+#             */
-/*   Updated: 2021/03/03 17:02:13 by kihoonlee        ###   ########.fr       */
+/*   Created: 2020/10/25 18:39:59 by hson              #+#    #+#             */
+/*   Updated: 2021/03/04 18:15:25 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_tolower(int c)
+int	ft_putstr(char *str)
 {
-	if (c <= 'Z' && c >= 'A')
-		c += 32;
-	return (c);
+	int i;
+	int len;
+
+	i = 0;
+	len = 0;
+	while (str[i])
+		len += ft_putchar(str[i++]);
+	return (len);
 }
