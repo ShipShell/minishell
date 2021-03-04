@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/02/28 18:34:08 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/04 15:19:58 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,25 @@
 
 #define	pipe 11238;
 
-#define SEMI_COLON 178
-#define PIPE_LINE 180
-#define MAX_BUFF 500
+#define SEMICOLON 178
+#define PIPELINE 180
+
+#define ON 1
+#define OFF 2
+
+#define CLOSED 3
+#define	SINGLE_OPEN 4
+#define DOUBLE_OPEN 5
+
+#define BACKSLASH 92
+#define SINGLE_QUOTE 39
+#define DOUBLE_QUOTE 34
 
 t_list				*g_env;
 int					g_exit_code;
+
+typedef int			t_bool;
+typedef int			t_quotes;
 
 typedef struct		s_env
 {
@@ -33,10 +46,37 @@ typedef struct		s_env
 	char			*value;
 }					t_env;
 
+<<<<<<< HEAD
 typedef struct		s_cmd
 {
 	char	**token;
 	int		flag;
 }					t_cmd;
+=======
+typedef struct		s_quoting
+{
+	t_quotes		quotes;
+	t_bool			escape;
+	t_bool			old_escape;
+}					t_quoting;
+
+typedef struct		s_cmd
+{	
+	// char			*cmd;
+	// t_list			*arg;
+	// int				redirect_num;
+	// int				seperator;
+	char			**token;
+	int				flag;
+	// int				exit_code;
+}					t_cmd;
+
+// typedef struct	s_env
+// {
+// 	char		*key;
+// 	char		*value;
+// 	void		*next;
+// }				t_env;
+>>>>>>> e0178d46adc99863f2cddde372c0c85fe6069a5c
 
 #endif
