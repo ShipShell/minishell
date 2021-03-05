@@ -172,6 +172,17 @@ int main()
 - 자식에서 종료코드를 부모에게 넘기는거. not_built_in에서
 - strerr 공부
 
+1. 에러 고치고
+
+   - [x] export
+
+   - [x] not_built_in
+
+   - [x] exit
+
+2. 에러 처리하고.
+
 ### 궁금한 점
 
 - not_built_in에서 에러 발생시 에러 처리 뭐뭐 했는지..
+

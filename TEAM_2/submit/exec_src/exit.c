@@ -24,6 +24,11 @@ int	ft_exit(t_cmd *cmd)
 		exit(0);
 	else if (cmd->token[1][0] < '0' || cmd->token[1][0] > '9')
 		return (put_not_number_err(cmd));
-	else if (!cmd->token[2][0])
+	else if (cmd->token[2])
 		return (put_too_many_err());
+	else if (cmd->token[1] && cmd->token[2] == 0)
+	{
+		g_exit_code = atoi(cmd->token[1]);
+		exit(g_exit_code);
+	}
 }

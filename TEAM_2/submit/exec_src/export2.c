@@ -1,44 +1,55 @@
 #include "exec.h"
 
-static char	**equal_split(char *str)
+t_env *is_same_env(char *str)
+{
+	t_list	*env;
+
+	env = g_env;
+	while (env)
+	{
+		if (!ft_strcmp(((t_env *)env->content)->key, str))
+			return ((t_env *)env->content);
+		env = env->next;
+	}
+	return (0);
+}
+
+static int	equal_split(char *str, char **env_key_value)
 {
 	char	**result;
 	int		i;
 
 	i = -1;
-	while (str[++i])
+	while (str[++i] != '\0')
 	{
 		if (str[i] == '=')
 			break;
 	}
-	result = (char **)malloc(sizeof(char *) * 2);
-	if (result == 0)
-		return (0);
-	result[0] = (char *)malloc(sizeof(char) * i);
-	if (result[0] == 0)
-		return (0);
-	ft_strlcpy(result[0], str, i);
-	result[0][i] = '\0';
-	result[1] = (char *)malloc(sizeof(char) * (ft_strlen(str) - i - 1));
-	if (result[1] == 0)
-		return (0);
-	ft_strlcpy(result[1], &(str[i + 1]), ft_strlen(str) - i - 1);
-	result[1][ft_strlen(str) - i - 1] = '\0';
-	return (result);
+	env_key_value[0] = ft_strndup(str, i);
+	env_key_value[1] = ft_strndup(&(str[i + 1]), ft_strlen(str) - i);
+	return (0);
 }
 
 static int	add_env(char **env_key_value)
 {
 	t_env	*env;
 
+	env = is_same_env(env_key_value[0]);
+	if (env)
+	{
+		free(env->value);
+		env->value = env_key_value[1];
+		return (0);
+	}
 	env = (t_env *)malloc(sizeof(t_env) * 1);
 	if (!env)
-		return (-1);
+		exit(1);
 	env->key = env_key_value[0];
 	env->value = env_key_value[1];
 	ft_lstadd_back(&g_env, ft_lstnew(env));
 	return (0);
 }
+
 static int	is_err_char(char c)
 {
 	if (c == '=' || (c >= '0' && c <= '9') || c == '^' ||
@@ -48,11 +59,13 @@ static int	is_err_char(char c)
 	return (0);
 }
 
+
 static int	check_equal_place(char *str)
 {
-	char	**env_key_value;
+	char	*env_key_value[2];
 	int		i;
 
+	// 에러 처리하자..
 	if (is_err_char(str[0]))
 		return (-1);
 	else
@@ -61,15 +74,14 @@ static int	check_equal_place(char *str)
 		while (str[++i])
 		{
 			if (str[i] == '=')
-				break;
+			{
+				equal_split(str, env_key_value);// =을 기준으로 나누는 함수.
+				break ;
+			}
 		}
-		env_key_value = equal_split(str);
-		if (env_key_value == 0)
-			return (-1);
-		// = 이 있는지 없는지 확인하기.
 		if (str[i] == 0)
 		{
-			free(env_key_value[1]);
+			env_key_value[0] = strdup(str);
 			env_key_value[1] = 0;
 		}
 		add_env(env_key_value);
@@ -82,7 +94,7 @@ int	cycle_arg(t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	while (cmd->token[++i])
+	while (cmd->token[++i])	
 		check_equal_place(cmd->token[i]);
 	return (0);
 }

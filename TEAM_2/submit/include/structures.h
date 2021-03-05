@@ -18,6 +18,8 @@
 #include "libft.h"
 #include "get_next_line.h"
 
+#define	MAX_BUFF 1000
+
 #define	pipe 11238;
 
 #define SEMICOLON 178

@@ -5,11 +5,17 @@ int	put_env_pwd(char *current_dir, t_list *pwd_lst)
 {
 	char	*pwd;
 	int		len;
+	int		i;
 
 	len = ft_strlen(current_dir);
 	pwd = (char *)malloc(sizeof(char) * (len + 1));
 	if (pwd == 0)
 		return (-1);
+	i = -1;
+	while (current_dir[++i])
+		pwd[i] = current_dir[i];
+	pwd[i] = 0;
+	free(((t_env *)pwd_lst->content)->value);
 	((t_env *)pwd_lst->content)->value = pwd;
 
 	return (0);
@@ -19,12 +25,11 @@ int	put_env_pwd(char *current_dir, t_list *pwd_lst)
 int change_env_pwd(char *pwd)
 {
 	t_list	*temp_env;
-	char	*tmp;
 
 	temp_env = g_env;
 	while (temp_env)
 	{
-		if (!ft_strncmp(((t_env *)temp_env->content)->key, "PWD", 3))
+		if (!ft_strcmp(((t_env *)temp_env->content)->key, "PWD"))
 		{
 			put_env_pwd(pwd, temp_env);
 			break ;
@@ -60,15 +65,18 @@ int	check_home()
 
 int	check_arg(t_cmd *cmd)
 {
-	char	*buff;
+	char	buff[MAX_BUFF];
+	int		temp;
+
 
 	// 에러 처리를 여기서 해야한다.
-	if (chdir(cmd->token[1]) == -1);
+	temp = chdir(cmd->token[1]);
+	if (temp == -1)
 	{
-		ft_putstr_fd("bash: 1: command not found\n", 1);
+		ft_putstr_fd("shipshell: 1: command not found\n", 1);
 		return (-1);
 	}
-	change_env_pwd(getcwd(buff, 1000));
+	change_env_pwd(getcwd(buff, MAX_BUFF));
 	return (0);
 }
 

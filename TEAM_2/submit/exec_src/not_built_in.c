@@ -26,9 +26,10 @@ static char	**connect_env_key_value()
 	result = (char **)malloc(sizeof(char *) * (ft_lstsize(g_env) + 1));
 	result[ft_lstsize(g_env)] = 0;
 	i = -1;
+	env = g_env;
 	if (result == 0)
 		return (0);
-	while (((t_env *)env->content)->key)
+	while (env)
 	{
 		if (((t_env *)env->content)->value)
 			temp = ft_strjoin(((t_env *)env->content)->key, "=");
@@ -36,6 +37,7 @@ static char	**connect_env_key_value()
 			temp = ft_strdup(((t_env *)env->content)->key);
 		result[++i] = ft_strjoin(temp, ((t_env *)env->content)->value);
 		free(temp);
+		env = env->next;
 	}
 	return (result);
 }
@@ -71,8 +73,9 @@ int	cycle_path(t_cmd *cmd, char **path)
 		free(temp);
 		free(path_and_cmd);
 	}
-	free_dptr(env);
-	print_command_not_found_err(cmd);
+	ft_free_dptr(env);
+	ft_putstr_fd("shipshell: ", 2);
+	print_command_not_found_err(cmd, 0);
 	exit(127);
 	return (0);
 }
@@ -86,7 +89,7 @@ int	single_path(t_cmd *cmd)
 		return (-1);
 	if (execve(cmd->token[0], cmd->token, env) == -1)
 		print_strerror();
-	free_dptr(env);
+	ft_free_dptr(env);
 	// free해주고 끝
 	ft_putstr_fd("shipshell: ", 1);
 	print_no_such_file_err(cmd, 0);

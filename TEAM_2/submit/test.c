@@ -26,6 +26,24 @@ int main()
 
 	// dpch = ft_split("test", '=');
 	// printf("1:%s\n2:%s\n", dpch[0], dpch[1]);
-	write(2, "hello", 5);
+	// char	*str = "test";
+	// char	**dstr;
+	// int		i;
+	
+
+	// dstr = ft_split(str, '=');
+	// i = -1;
+	// while (dstr[++i])
+	// 	printf("%d:%s\n", i, dstr[i]);
+
+	// char *tttt[5];
+	// int	i;
+
+	// i = -1;
+	// tttt[0] = "hello";
+	// // test[0] = 0;
+	
+	// while (tttt[++i])
+	// 	printf("%d: %s\n", i, tttt[i]);
 	return (0);
 }
