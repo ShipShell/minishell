@@ -19,13 +19,17 @@ typedef int t_quotes;
 # define SINGLE_OPEN 2
 # define DOUBLE_OPEN 3
 
+# define SUB_LITERAL 1
+# define SUB_SKIP 2
+# define SUB_SPECIAL 3
+
 typedef struct		s_cmd
 {
 	char			*cmd_str;
 	char			**command;
-	int				ispath;
-	int				ispipe;
-	int				isredir;
+	t_bool			ispath;
+	t_bool			ispipe;
+	t_bool			isredir;
 	struct s_cmd	*next;
 }					t_cmd;
 
@@ -61,5 +65,16 @@ int		count_amount_of_tokens(char	*cmd_str);
 t_bool	need_to_cut_token(t_quoting *quoting, char c);
 int		count_token_length(char *ptr);
 
+//substitute.c
+void	substitute_command(t_cmd *cmd);
+char	*substitute_token(char *token);
+int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting);
+void	push_exit_code_to_buffer(char **buffer);
+int		check_substitute_action(t_quoting *quoting, char c);
+int		substitute_special_char(char **buffer, char *token);
+void	push_value_to_buffer(char *value, char **buffer);
+char	*find_value_match_with(char *key);
+t_bool	is_pipe_or_semicolon(char *token);
+void	change_flag(t_cmd *cmd, char **token);
 
 #endif

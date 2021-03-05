@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 06:51:00 by kihoonlee         #+#    #+#             */
-/*   Updated: 2021/03/03 17:10:16 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/05 14:45:45 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,6 @@ static size_t	ft_word_amount(char const *s, const char *set)
 			s++;
 	}
 	return (amount);
-}
-
-char			*ft_strndup(const char *s, size_t n)
-{
-	size_t	i;
-	char	*result;
-
-	if (!(result = (char *)malloc(sizeof(char) * (n + 1))))
-		return (0);
-	i = 0;
-	while (i < n)
-	{
-		result[i] = s[i];
-		i++;
-	}
-	result[i] = 0;
-	return (result);
 }
 
 void			ft_free_arr(char **s, int i)

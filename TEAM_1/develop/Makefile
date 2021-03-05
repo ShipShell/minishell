@@ -1,7 +1,8 @@
 NAME = minishell
-CFLAG = #-g3 -fsanitize=address #-Wall -Wextra -Werror
+CFLAG = -g3 -fsanitize=address #-Wall -Wextra -Werror
 SRC_NAME = main \
 		parsing/parser \
+		parsing/substitute \
 		tester/tester \
 		utils/utils \
 		error/error \
@@ -25,7 +26,7 @@ MAKE = make
 all : $(NAME)
 
 clean :
-
+	rm -rf minishell.dSYM
 fclean : clean
 	rm -rf $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
