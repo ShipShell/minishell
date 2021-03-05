@@ -7,13 +7,13 @@
 
 t_list *g_env;
 
-typedef struct  s_data
+typedef struct	s_data
 {
 	char	*cmd;
 	t_list	*arg;
 	int		redirect_num;
 	int		token;
-}               t_data;
+}				t_data;
 
 typedef struct	s_env
 {

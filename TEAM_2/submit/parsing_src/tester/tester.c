@@ -96,3 +96,18 @@ void			test_tokenize_single_cmd(char *str)
 // 		++i;
 // 	}
 // 	printf("\n");
+
+// tokenize.c 파일의 static t_cmd	*tokenize_single_cmd(char *str) 함수 위에서 
+static char		*to_str(int flag)
+{
+	if (flag == PIPELINE)
+		return ("PIPELINE");
+	else if (flag == SEMICOLON)
+		return ("SEMICOLON");
+	else
+		return ("NULL");
+}
+// tokenize.c 파일의 static t_cmd	*tokenize_single_cmd(char *str) 함수 안에서
+// while (tokenized->token[++i])
+// 	printf("token[%d] : %s\n", i, tokenized->token[i]);
+// printf("%s\n\n", to_str(tokenized->flag));

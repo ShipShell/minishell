@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:55:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/04 12:55:34 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:43:43 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void			change_quoting(char c, t_quoting *quoting)
 void			change_escape(char c, t_quoting *quoting)
 {
 	if (quoting->quotes != SINGLE_OPEN && quoting->escape == ON)
-		{
-			quoting->old_escape = quoting->escape;
-			quoting->escape = OFF;
-		}
+	{
+		quoting->old_escape = quoting->escape;
+		quoting->escape = OFF;
+	}
 	else
 	{
 		if (c == BACKSLASH)

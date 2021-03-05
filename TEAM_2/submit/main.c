@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 09:00:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/04 17:37:06 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:27:52 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		wait_cmd(void)
 	if (ft_strncmp(stdin_buf, "exit", 4) == 0)
 		exit(0);
 	tokenized_single_cmd_list = parse_cmd_line(stdin_buf);
+	// substitute_token(tokenized_single_cmd_list);
 	// tokenized_single_cmd_list 가 t_cmd(**command 랑 flag, exit_code가 담긴)의 연결리스트임!
 	free(stdin_buf);
 	return (0);
