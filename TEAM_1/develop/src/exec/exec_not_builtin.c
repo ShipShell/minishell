@@ -93,11 +93,11 @@ void	exec_not_builtin(t_cmd *cmd)
 {
 	char	**path;
 
-	printf("ispath : %d\n", cmd->ispath);
+	// printf("ispath : %d\n", cmd->ispath);
 	chk_is_cmd_path(cmd);
 	if (cmd->ispath == 0)
 	{
-		printf("no path\n");
+		// printf("no path\n");
 		path = get_path_env();
 		exec_not_builtin_sub(cmd, path);
 		free_arr(path);
@@ -105,7 +105,7 @@ void	exec_not_builtin(t_cmd *cmd)
 	}
 	else
 	{
-		printf("has path\n");;
+		// printf("has path\n");;
 		execve(cmd->command[0], cmd->command, make_env_char());
 		exit(no_file_error(cmd, 127));
 	}

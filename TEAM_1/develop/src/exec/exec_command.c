@@ -58,7 +58,7 @@ void	exec_command(void)
 	t_cmd	*cmd;
 
 	cmd = g_cmd;
-	//printf("exec_command cmd : %s\n", cmd->command[0]);
+	// printf("exec_command cmd : %s\n", cmd->command[0]);
 	while (cmd)
 	{
 		if (is_built_in(cmd->command[0]) == 1)

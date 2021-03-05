@@ -157,13 +157,12 @@ int		count_amount_of_tokens(char	*cmd_str)
 		cmd_str += len;
 		++amount;
 	}
-	printf("amount:%d\n", amount);
 	return (amount);
 }
 
 t_bool	need_to_cut_token(t_quoting *quoting, char c)
 {
-	if (ft_strchr(" \t;|", c) && quoting->escape == OFF
+	if (ft_strchr(" \t;|><", c) && quoting->escape == OFF
 		&& quoting->quotes == CLOSED)
 		return (TRUE);
 	return (FALSE);
@@ -177,15 +176,15 @@ int		count_token_length(char *ptr)
 
 	init_quoting(&quoting);
 	len = 0;
-	if (*ptr == '|' || *ptr == ';')
-		return (1);
+	// if (*ptr == '|' || *ptr == ';')
+	// 	return (1);
 	while (ptr[len])
 	{
 		need_to_cut = need_to_cut_token(&quoting, ptr[len]);
 		change_quoting(&quoting, ptr[len]);
 		if (need_to_cut)
 		{
-			if (len == 0 && ft_strchr("|;", ptr[len]))
+			if (len == 0 && ft_strchr("|;><", ptr[len]))
 				++len;
 			return (len);
 		}
