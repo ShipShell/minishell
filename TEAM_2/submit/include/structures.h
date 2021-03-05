@@ -42,6 +42,9 @@ int					g_exit_code;
 typedef int			t_bool;
 typedef int			t_quotes;
 
+typedef int			t_bool;
+typedef int			t_quotes;
+
 typedef struct		s_env
 {
 	char			*key;
