@@ -94,7 +94,7 @@ void	put_env(char *str)
 			break;
 		i++;
 	}
-	printf("i = %d\n", i);
+	//printf("i = %d\n", i);
 	key = (char *)malloc(sizeof(char) * (i + 1));
 	ft_strlcpy(key, str, i + 1);
 	j = 0;
@@ -106,7 +106,7 @@ void	put_env(char *str)
 	}
 	else
 		val = 0;
-	printf("%s : %s\n", key, val);
+	//printf("%s : %s\n", key, val);
 	lst_change_add_env(key, val);
 }
 

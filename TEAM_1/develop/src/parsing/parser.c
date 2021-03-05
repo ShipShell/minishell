@@ -124,8 +124,10 @@ void	make_cmd_str_to_tokens(void)
 			skip_seperator_at_first(&current_ptr);
 			len = count_token_length(current_ptr);
 			current_cmd->command[i++] = ft_strndup(current_ptr, len);
+			//printf("cmd[%d] : %s\n", i - 1, g_cmd->command[i - 1]);
 			current_ptr += len;
 		}
+		current_cmd->ispath = 0;
 		current_cmd = current_cmd->next;
 	}
 }
