@@ -38,7 +38,7 @@ int		exec_exit(t_cmd *cmd)
 
 	cnt_arg = chk_arg_cnt(cmd);
 	isdigit = chk_arg_digit(cmd->command[1]);
-	printf("cnt_arg : %d and isdigit : %d\n", cnt_arg, isdigit);
+	//printf("cnt_arg : %d and isdigit : %d\n", cnt_arg, isdigit);
 	if (cmd->command[1])
 	{
 		if (isdigit == 0)

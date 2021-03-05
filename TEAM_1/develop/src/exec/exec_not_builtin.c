@@ -14,6 +14,7 @@ char	**get_path_env()
 	char	*env_path;
 
 	env = g_env;
+	env_path = 0;
 	while (env)
 	{
 		if (ft_strcmp(env->key, "PATH") == 0)

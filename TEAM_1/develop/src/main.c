@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/04 18:17:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/05 09:57:38 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ int		init_prompt(void)
 	// parse_cmd_from_input(stdin_buffer);
 	// parse_and_split_from_input(stdin_buffer);
 	parse_cmd_from_input(stdin_buffer);
-	test_parse_cmd_from_input();
+	//test_parse_cmd_from_input();
 	make_cmd_str_to_tokens();
-	test_make_cmd_str_to_tokens();
+	//test_make_cmd_str_to_tokens();
 	if (ft_strncmp(stdin_buffer, "exit", 4) == 0)
 	{
 		// test_parse_cmd_from_input(g_cmd);
 		exit (0);
 	}
+	//printf("here\n");
+	//printf("cmd %s : %s\n", g_cmd->command[0], g_cmd->command[1]);
 	free(stdin_buffer);
 	return (0);
 }
@@ -54,7 +56,10 @@ int		init_prompt(void)
 void	loop_prompt(void)
 {
 	while (1)
+	{
 		init_prompt();
+		exec_command();
+	}
 }
 void	erase_signal_ascii(void)
 {

@@ -18,7 +18,7 @@ void	remove_env(char *key)
 			else
 			{
 				g_env = next;
-				printf("1st env %s : %s\n", g_env->key, g_env->val);
+				//printf("1st env %s : %s\n", g_env->key, g_env->val);
 			}
 			free(env->key);
 			if (env->val)
