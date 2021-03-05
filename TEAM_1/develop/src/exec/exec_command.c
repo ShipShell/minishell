@@ -61,6 +61,11 @@ void	exec_command(void)
 	// printf("exec_command cmd : %s\n", cmd->command[0]);
 	while (cmd)
 	{
+		if (cmd->ispipe == 1)
+		{
+			cmd = piping(cmd);
+			continue;
+		}
 		if (is_built_in(cmd->command[0]) == 1)
 			g_exit_code = exec_builtin(cmd);
 		else
