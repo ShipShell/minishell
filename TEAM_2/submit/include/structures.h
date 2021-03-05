@@ -18,6 +18,8 @@
 #include "libft.h"
 #include "get_next_line.h"
 
+#define	MAX_BUFF 1000
+
 #define	pipe 11238;
 
 #define SEMICOLON 178
@@ -35,6 +37,10 @@
 #define DOUBLE_QUOTE 34
 
 t_list				*g_env;
+int					g_exit_code;
+
+typedef int			t_bool;
+typedef int			t_quotes;
 
 typedef int			t_bool;
 typedef int			t_quotes;

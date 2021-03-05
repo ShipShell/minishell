@@ -4,6 +4,7 @@
 #include "structures.h"
 #include "libft.h"  
 #include "tester.h"
+#include "exec.h"
 
 void	prompt_show(void);
 void	prompt_loop(void);
