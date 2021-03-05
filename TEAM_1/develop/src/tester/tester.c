@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 14:52:31 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/04 18:09:13 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/05 10:54:35 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,16 @@ void	test_init_g_env(t_env *envs)
 
 void	test_make_cmd_str_to_tokens(void)
 {
-	t_cmd *current_cmd;
+	t_cmd	*current_cmd;
+	int		i;
 
 	current_cmd = g_cmd;
 	while (current_cmd)
 	{
 		printf("CMD : {");
-		while (*current_cmd->command)
-		{
-			printf("[%s], ", *current_cmd->command);
-			current_cmd->command++;
-		}
+		i = 0;
+		while (current_cmd->command[i])
+			printf("[%s], ", current_cmd->command[i++]);
 		printf("}\n");
 		current_cmd = current_cmd->next;
 	}

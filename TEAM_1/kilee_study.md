@@ -122,3 +122,6 @@ SHELL : 현재 사용중인 쉘 경로 저장 (init할 때 이 변수에 minishe
 
 ![image-20210223163845423](img/image-20210223163845423.png)
 
+## 치환 TEST CASE
+
+`echo "\\\$? $HOME ~" ~ \$? $? | cat -e` 

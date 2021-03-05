@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/05 09:57:38 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/05 11:50:00 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,17 @@ int		init_prompt(void)
 	int		input_byte;
 	t_list	*tokens;
 
-	// delete_cmd_list(&g_cmd, delete_data_in_cmd);
+	delete_cmd_list(&g_cmd, delete_data_in_cmd);
 	show_prompt_title();
 	get_prompt_input(&stdin_buffer);
-	// parse_cmd_from_input(stdin_buffer);
-	// parse_and_split_from_input(stdin_buffer);
-	parse_cmd_from_input(stdin_buffer);
-	//test_parse_cmd_from_input();
-	make_cmd_str_to_tokens();
-	//test_make_cmd_str_to_tokens();
-	if (ft_strncmp(stdin_buffer, "exit", 4) == 0)
-	{
-		// test_parse_cmd_from_input(g_cmd);
-		exit (0);
-	}
+	parse_and_split_from_input(stdin_buffer);
+	// test_parse_cmd_from_input();
+	// test_make_cmd_str_to_tokens();
+	// if (ft_strncmp(stdin_buffer, "exit", 4) == 0)
+	// {
+	// 	// test_parse_cmd_from_input(g_cmd);
+	// 	exit (0);
+	// }
 	//printf("here\n");
 	//printf("cmd %s : %s\n", g_cmd->command[0], g_cmd->command[1]);
 	free(stdin_buffer);
@@ -94,7 +91,7 @@ void	init_g_env(char *envp[])
 int		main(int argc, char *argv[], char *envp[])
 {
 	init_g_env(envp);
-	test_init_g_env(g_env);
+	// test_init_g_env(g_env);
 	signal(SIGINT, handle_sigint);
 	loop_prompt();
 	return (0);
