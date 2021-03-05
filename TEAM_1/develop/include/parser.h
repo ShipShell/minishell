@@ -24,6 +24,8 @@ typedef struct		s_cmd
 	char			*cmd_str;
 	char			**command;
 	int				ispath;
+	int				ispipe;
+	int				isredir;
 	struct s_cmd	*next;
 }					t_cmd;
 
