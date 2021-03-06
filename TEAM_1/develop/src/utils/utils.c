@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonheewon <sonheewon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/05 16:22:24 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/06 19:18:40 by sonheewon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ t_env		*new_env(char *key, char *value)
 	if (!(new = (t_env *)malloc(sizeof(t_env) * 1)))
 		return (NULL);
 	new->key = ft_strdup(key);
-	new->val = ft_strdup(value);
+	if (value)
+		new->val = ft_strdup(value);
+	else
+		new->val = NULL;
 	new->next = NULL;
 	return (new);
 }
