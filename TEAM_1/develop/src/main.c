@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/05 11:50:00 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/05 16:50:50 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,6 @@ int		init_prompt(void)
 	show_prompt_title();
 	get_prompt_input(&stdin_buffer);
 	parse_and_split_from_input(stdin_buffer);
-	// test_parse_cmd_from_input();
-	// test_make_cmd_str_to_tokens();
-	// if (ft_strncmp(stdin_buffer, "exit", 4) == 0)
-	// {
-	// 	// test_parse_cmd_from_input(g_cmd);
-	// 	exit (0);
-	// }
-	//printf("here\n");
-	//printf("cmd %s : %s\n", g_cmd->command[0], g_cmd->command[1]);
 	free(stdin_buffer);
 	return (0);
 }
@@ -56,6 +47,8 @@ void	loop_prompt(void)
 	{
 		init_prompt();
 		exec_command();
+		// test_make_cmd_str_to_tokens();
+
 	}
 }
 void	erase_signal_ascii(void)

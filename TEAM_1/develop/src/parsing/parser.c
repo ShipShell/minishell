@@ -17,6 +17,8 @@ void	parse_cmd_from_input(char *stdin_buf)
 	{
 		skip_seperator_at_first(&stdin_buf);
 		len = count_cmd_length(stdin_buf);
+		if (len == 0)
+			break;
 		cmd_str = ft_strndup(stdin_buf, len);
 		add_back_new_cmd(&g_cmd, new_cmd(cmd_str));
 		stdin_buf += len;
