@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sonheewon <sonheewon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/04 19:07:25 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/06 17:28:38 by sonheewon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 extern t_env	*g_env;
 extern t_cmd	*g_cmd;
 extern int		g_exit_code;
+// pipe를 위해 임시로!!
+extern int		g_pipe;
 
 int		prompt_show(void);
 

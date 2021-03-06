@@ -39,4 +39,12 @@ char	**make_env_char();
 void	exec_not_builtin_sub(t_cmd *cmd, char **path);
 void	exec_not_builtin(t_cmd *cmd);
 
+int		count_pipes(void);
+int		make_pipes(int fds[], int cnt);
+void	close_fds(int fds[], int pipe_count);
+void	dup_fds(int fds[], int i, int pipe_count);
+// void	wait_parent1(int fds[], pid_t pid, int cnt);
+void	wait_parent(int fds[], pid_t pid[], int cnt);
+t_cmd	*piping(t_cmd *cmd);
+
 #endif

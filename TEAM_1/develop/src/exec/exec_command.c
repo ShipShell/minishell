@@ -62,11 +62,11 @@ void	exec_command(void)
 	while (cmd)
 	{
 		substitute_command(cmd);
-		// if (cmd->ispipe == 1)
-		// {
-		// 	cmd = piping(cmd);
-		// 	continue;
-		// }
+		if (cmd->ispipe == 1)
+		{
+			cmd = piping(cmd);
+			continue;
+		}
 		if (is_built_in(cmd->command[0]) == 1)
 			g_exit_code = exec_builtin(cmd);
 		else
