@@ -88,7 +88,7 @@ int	single_path(t_cmd *cmd)
 	if (env == 0)
 		return (-1);
 	if (execve(cmd->token[0], cmd->token, env) == -1)
-		print_strerror();
+		print_strerror(cmd->token[0]);
 	ft_free_dptr(env);
 	// free해주고 끝
 	ft_putstr_fd("shipshell: ", 1);
@@ -119,4 +119,5 @@ int	ft_not_built_in(t_cmd *cmd)
 		if (WIFEXITED(status))
 			g_exit_code = WEXITSTATUS(status);
 	}
+	return (0);
 }

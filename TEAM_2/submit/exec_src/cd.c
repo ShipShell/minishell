@@ -15,9 +15,26 @@ int	put_env_pwd(char *current_dir, t_list *pwd_lst)
 	while (current_dir[++i])
 		pwd[i] = current_dir[i];
 	pwd[i] = 0;
-	free(((t_env *)pwd_lst->content)->value);
 	((t_env *)pwd_lst->content)->value = pwd;
 
+	return (0);
+}
+
+int	put_env_oldpwd(t_list *pwd_lst)
+{
+	t_list	*oldpwd;
+
+	oldpwd = g_env;
+	while (oldpwd)
+	{
+		if (!ft_strcmp(((t_env *)oldpwd->content)->key, "OLDPWD"))
+		{
+			free(((t_env *)oldpwd->content)->value);
+			((t_env *)oldpwd->content)->value = ((t_env *)pwd_lst->content)->value;
+			break ;
+		}
+		oldpwd = oldpwd->next;
+	}
 	return (0);
 }
 
@@ -31,6 +48,7 @@ int change_env_pwd(char *pwd)
 	{
 		if (!ft_strcmp(((t_env *)temp_env->content)->key, "PWD"))
 		{
+			put_env_oldpwd(temp_env);
 			put_env_pwd(pwd, temp_env);
 			break ;
 		}
@@ -73,7 +91,9 @@ int	check_arg(t_cmd *cmd)
 	temp = chdir(cmd->token[1]);
 	if (temp == -1)
 	{
-		ft_putstr_fd("shipshell: 1: command not found\n", 1);
+		g_exit_code = 1;
+		ft_putstr_fd("shipshell: cd: ", 1);
+		print_no_such_file_err(cmd, 1);
 		return (-1);
 	}
 	change_env_pwd(getcwd(buff, MAX_BUFF));
@@ -90,5 +110,6 @@ int	ft_cd(t_cmd *cmd)
 	if (cmd->token[1] == 0)
 		result = check_home();
 	else
-		return(check_arg(cmd));
+		return (check_arg(cmd));
+	return (0);
 }

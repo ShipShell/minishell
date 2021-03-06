@@ -14,10 +14,21 @@ int	print_command_not_found_err(t_cmd *cmd, int index)
 	return (0);
 }
 
-int	print_strerror()
+int	print_not_a_valid_identifier(char *str, int index)
+{
+	ft_putchar_fd('\'', 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\': not a valisd identifier\n", 2);
+	return (0);
+}
+
+int	print_strerror(char *str)
 {
 	g_exit_code = errno;
+	ft_putstr_fd("shipshell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
-	exit(errno);
+	ft_putstr_fd("\n", 2);
 	return (0);
 }

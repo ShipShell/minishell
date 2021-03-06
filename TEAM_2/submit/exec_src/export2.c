@@ -50,12 +50,20 @@ static int	add_env(char **env_key_value)
 	return (0);
 }
 
-static int	is_err_char(char c)
+static int	is_err_char(char *str)
 {
+	char	c;
+
+	c = str[0];
 	if (c == '=' || (c >= '0' && c <= '9') || c == '^' ||
 		c == '!' || c == '@' || c == '$' || c == '%' ||
 		c == '*')
+	{
+		ft_putstr_fd("shipshell: export: ", 2);
+		print_not_a_valid_identifier(str, 1);
 		return (1);
+	}
+	g_exit_code = 1;
 	return (0);
 }
 
@@ -66,7 +74,7 @@ static int	check_equal_place(char *str)
 	int		i;
 
 	// 에러 처리하자..
-	if (is_err_char(str[0]))
+	if (is_err_char(str))
 		return (-1);
 	else
 	{
@@ -75,7 +83,7 @@ static int	check_equal_place(char *str)
 		{
 			if (str[i] == '=')
 			{
-				equal_split(str, env_key_value);// =을 기준으로 나누는 함수.
+				equal_split(str, env_key_value);
 				break ;
 			}
 		}

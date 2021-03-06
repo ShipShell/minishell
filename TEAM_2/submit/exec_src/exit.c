@@ -2,7 +2,7 @@
 
 int	put_not_number_err(t_cmd *cmd)
 {
-	ft_putstr_fd("bash: exit: ", 1);
+	ft_putstr_fd("shipshell: exit: ", 1);
 	ft_putstr_fd(cmd->token[1], 1);
 	ft_putstr_fd(": numeric argument required\n", 1);
 	exit(255);
@@ -11,9 +11,9 @@ int	put_not_number_err(t_cmd *cmd)
 
 int put_too_many_err()
 {
-	ft_putstr_fd("exit\nbash: exit: ", 1);
-	ft_putstr_fd("bash: exit: too many arguments", 1);
-	exit(127);
+	ft_putstr_fd("exit\nshipshell: exit: ", 1);
+	ft_putstr_fd("too many arguments\n", 1);
+	g_exit_code = 1;
 	return (-1);
 }
 
@@ -21,7 +21,10 @@ int put_too_many_err()
 int	ft_exit(t_cmd *cmd)
 {
 	if (!cmd->token[1])
+	{
+		g_exit_code = 0;
 		exit(0);
+	}
 	else if (cmd->token[1][0] < '0' || cmd->token[1][0] > '9')
 		return (put_not_number_err(cmd));
 	else if (cmd->token[2])
@@ -31,4 +34,5 @@ int	ft_exit(t_cmd *cmd)
 		g_exit_code = atoi(cmd->token[1]);
 		exit(g_exit_code);
 	}
+	return (0);
 }
