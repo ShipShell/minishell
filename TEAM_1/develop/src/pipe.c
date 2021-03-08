@@ -75,6 +75,7 @@ t_cmd	*piping(t_cmd *cmd)
 	i = -1;
 	while (++i < cnt_pip + 1)
 	{
+		substitute_command(cmd);
 		if ((pid[i] = fork()) == -1)
 			ft_error();
 		if (pid[i] == 0)
