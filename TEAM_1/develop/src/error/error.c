@@ -61,3 +61,11 @@ void	ft_error(void)
 	ft_putstr("\n");
 	exit(EXIT_FAILURE);
 }
+
+void	open_error(char *file)
+{
+	ft_putstr("minishell: ");
+	ft_putstr(file);
+	ft_putstr(": No such file or directory\n");
+	exit(EXIT_FAILURE);
+}

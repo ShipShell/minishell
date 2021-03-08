@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:39:01 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/08 17:50:40 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/types.h>
 # include <signal.h>
 # include <errno.h>
+# include <fcntl.h>
 # include "libft.h"
 # include "get_next_line.h"
 # include "libftprintf.h"
