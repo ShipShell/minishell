@@ -14,7 +14,8 @@ SRC_NAME = main \
 		exec/exec_export \
 		exec/exec_pwd \
 		exec/exec_unset \
-		exec/exec_not_builtin
+		exec/exec_not_builtin \
+		pipe
 
 SRC = $(addprefix src/,$(addsuffix .c, $(SRC_NAME)))
 SRCDIR = ./src
