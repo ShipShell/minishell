@@ -53,6 +53,18 @@ void	not_builtin_fork(t_cmd *cmd)
 	}
 }
 
+t_bool is_empty_cmd(t_cmd *cmd)
+{
+	if (cmd->command[0] == NULL)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	skip(void)
+{
+	return ;
+}
+
 void	exec_command(void)
 {
 	t_cmd	*cmd;
@@ -62,12 +74,14 @@ void	exec_command(void)
 	while (cmd)
 	{
 		substitute_command(cmd);
+		if (is_empty_cmd(cmd))
+			skip();
 		// if (cmd->ispipe == 1)
 		// {
 		// 	cmd = piping(cmd);
 		// 	continue;
 		// }
-		if (is_built_in(cmd->command[0]) == 1)
+		else if (is_built_in(cmd->command[0]) == 1)
 			g_exit_code = exec_builtin(cmd);
 		else
 			not_builtin_fork(cmd);

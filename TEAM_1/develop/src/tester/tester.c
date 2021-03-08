@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 14:52:31 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/05 15:17:49 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/08 08:41:53 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	test_make_cmd_str_to_tokens(void)
 		i = 0;
 		while (current_cmd->command[i])
 			printf("[%s], ", current_cmd->command[i++]);
-		printf("}\n");
+		printf("} pipe:%d\n", current_cmd->ispipe);
 		current_cmd = current_cmd->next;
 	}
 }

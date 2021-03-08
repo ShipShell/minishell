@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonheewon <sonheewon@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/06 19:18:40 by sonheewon        ###   ########.fr       */
+/*   Updated: 2021/03/08 08:50:31 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_cmd		*new_cmd(char *cmd_str)
 	if (!(new = (t_cmd *)malloc(sizeof(t_cmd) * 1)))
 		return (NULL);
 	new->cmd_str = cmd_str;
-	new->ispath = FALSE;
+	new->ispipe = FALSE;
 	new->ispath = FALSE;
 	new->isredir = FALSE;
 	new->command = NULL;

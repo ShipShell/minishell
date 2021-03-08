@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/05 16:50:50 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/08 08:40:53 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	loop_prompt(void)
 	{
 		init_prompt();
 		exec_command();
-		// test_make_cmd_str_to_tokens();
+		test_make_cmd_str_to_tokens();
 
 	}
 }
