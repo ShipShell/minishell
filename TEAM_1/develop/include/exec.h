@@ -46,5 +46,7 @@ void	dup_fds(int fds[], int i, int pipe_count);
 // void	wait_parent1(int fds[], pid_t pid, int cnt);
 void	wait_parent(int fds[], pid_t pid[], int cnt);
 t_cmd	*piping(t_cmd *cmd);
+void	skip(void);
+t_bool is_empty_cmd(t_cmd *cmd);
 
 #endif
