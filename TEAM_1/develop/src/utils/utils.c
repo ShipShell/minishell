@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonheewon <sonheewon@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/06 19:18:40 by sonheewon        ###   ########.fr       */
+/*   Updated: 2021/03/08 10:01:03 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+// pipe를 위해 임시로!!
+//#include "utils.h"
+#include "minishell.h"
 
 t_cmd		*new_cmd(char *cmd_str)
 {
@@ -20,7 +22,11 @@ t_cmd		*new_cmd(char *cmd_str)
 		return (NULL);
 	new->cmd_str = cmd_str;
 	new->ispath = FALSE;
-	new->ispath = FALSE;
+	// pipe를 위해 임시로!!
+	if (g_pipe == 1)
+		new->ispipe = TRUE;
+	else
+		new->ispipe = FALSE;
 	new->isredir = FALSE;
 	new->command = NULL;
 	new->next = NULL;

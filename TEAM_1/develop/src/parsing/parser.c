@@ -21,6 +21,8 @@ void	parse_cmd_from_input(char *stdin_buf)
 			break;
 		cmd_str = ft_strndup(stdin_buf, len);
 		add_back_new_cmd(&g_cmd, new_cmd(cmd_str));
+		// pipe를 위해 임시로!!
+		g_pipe = 0;
 		stdin_buf += len;
 	}
 }
@@ -61,7 +63,11 @@ t_bool	need_to_cut_command(t_quoting *quoting, char c)
 {
 	if ((c == ';' || c == '|') && quoting->escape == OFF
 		&& quoting->quotes == CLOSED)
+	{	// pipe를 위해 임시로!!
+		if (c == '|')
+			g_pipe = 1;
 		return (TRUE);
+	}
 	return (FALSE);
 }
 
