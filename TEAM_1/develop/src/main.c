@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:31:53 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/08 10:39:46 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 t_env	*g_env;
 t_cmd	*g_cmd;
 int		g_exit_code;
-// pipe를 위해 임시로!!
-int		g_pipe = 0;
 
 int		show_prompt_title(void)
 {
@@ -49,7 +47,7 @@ void	loop_prompt(void)
 	{
 		init_prompt();
 		exec_command();
-		// test_make_cmd_str_to_tokens();
+		test_make_cmd_str_to_tokens();
 
 	}
 }

@@ -53,6 +53,18 @@ void	not_builtin_fork(t_cmd *cmd)
 	}
 }
 
+t_bool is_empty_cmd(t_cmd *cmd)
+{
+	if (cmd->command[0] == NULL)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	skip(void)
+{
+	return ;
+}
+
 void	exec_command(void)
 {
 	t_cmd	*cmd;
@@ -67,6 +79,8 @@ void	exec_command(void)
 			cmd = piping(cmd);
 			continue;
 		}
+		if (is_empty_cmd(cmd))
+			skip();
 		if (is_built_in(cmd->command[0]) == 1)
 			g_exit_code = exec_builtin(cmd);
 		else

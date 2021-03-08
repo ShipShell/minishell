@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:31:52 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/08 10:39:01 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@
 extern t_env	*g_env;
 extern t_cmd	*g_cmd;
 extern int		g_exit_code;
-// pipe를 위해 로!!
-extern int		g_pipe;
 
 int		prompt_show(void);
 

@@ -71,11 +71,12 @@ t_cmd	*piping(t_cmd *cmd)
 
 	cnt_pip = count_pipes();
 	make_pipes(fds, cnt_pip);
-	//printf("pipe 개수 : %d\n", cnt_pip);
 	i = -1;
 	while (++i < cnt_pip + 1)
 	{
 		substitute_command(cmd);
+		if (is_empty_cmd(cmd))
+			skip();
 		if ((pid[i] = fork()) == -1)
 			ft_error();
 		if (pid[i] == 0)
