@@ -15,4 +15,7 @@ void		delete_cmd_list(t_cmd **lst, void (*del)(void*));
 t_env		*new_env(char *key, char *value);
 void		add_back_new_env(t_env **envs, t_env *new_env);
 
+
+t_redir		*init_redir(void);
+
 #endif

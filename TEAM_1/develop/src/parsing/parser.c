@@ -2,8 +2,13 @@
 
 void	parse_and_split_from_input(char *stdin_buf)
 {
+	if (have_syntax_error(stdin_buf))
+		return ;
 	parse_cmd_from_input(stdin_buf);
 	make_cmd_str_to_tokens();
+	check_cmd_list_redirection();
+	// if (start_with_unexpected_token())
+	// 	return ;
 }
 
 //STEP1. cmd_str ; | 기준으로 쪼개기
@@ -126,7 +131,6 @@ void	make_cmd_str_to_tokens(void)
 			skip_seperator_at_first(&current_ptr);
 			len = count_token_length(current_ptr);
 			current_cmd->command[i++] = ft_strndup(current_ptr, len);
-			//printf("cmd[%d] : %s\n", i - 1, g_cmd->command[i - 1]);
 			current_ptr += len;
 		}
 		current_cmd->ispath = 0;
@@ -193,4 +197,60 @@ int		count_token_length(char *ptr)
 		++len;
 	}
 	return (len);
+}
+
+void	check_cmd_list_redirection(void)
+{
+	t_cmd *cmd;
+
+	cmd = g_cmd;
+	while (cmd)
+	{
+		change_out_redir_status(cmd);
+		cmd = cmd->next;
+	}
+}
+
+void	change_out_redir_status(t_cmd *cmd)
+{
+	int		count;
+	int		i;
+
+	i = 0;
+	count = 0;
+	while (cmd->command[i])
+	{
+		if (ft_strchr(">", cmd->command[i][0]))
+		{
+			free(cmd->command[i]);
+			cmd->command[i] = NULL;
+			++count;
+		}
+		else
+		{
+			if (count == 1)
+				single_out_redir(cmd, i);
+			else if (count == 2)
+				;// ;double_out_redir();// >> 처리
+			else if (count >= 3)
+				;//error();
+		}
+		++i;
+	}
+		if(cmd->redir_out != NULL)
+			printf("redir:%s, \n",cmd->redir_out->file->content);
+}
+
+void	single_out_redir(t_cmd *cmd, int i)
+{
+	t_list	*new;
+
+	cmd->isredir = TRUE;
+	if (cmd->redir_out == NULL)
+		cmd->redir_out = init_redir();
+	new = ft_lstnew(ft_strdup(cmd->command[i]));
+	ft_lstadd_back(&cmd->redir_out->file, new);
+	cmd->redir_out->is_double = FALSE;
+	free(cmd->command[i]);
+	cmd->command[i] = NULL;
 }

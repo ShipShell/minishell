@@ -61,12 +61,11 @@ char	*substitute_token(char *token)
 int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting)
 {
 	int		action;
+
 	action = check_substitute_action(quoting, *token);
 	if (action == SUB_SPECIAL) //  - sigavold 나주엥 막아야함.
 		return (substitute_special_char(buffer, token));
-	else if (action == SUB_SKIP)
-		++*buffer;
-	else // action = SUB_LITERAL - sigavold 나주엥 막아야함.
+	else if (action == SUB_LITERAL) // action = SUB_LITERAL - sigavold 4096이상 나주엥 막아야함.
 	{
 		**buffer = *token;
 		++*buffer;
@@ -76,6 +75,7 @@ int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting)
 
 int		check_substitute_action(t_quoting *quoting, char c)
 {
+
 	if (ft_strchr("$~", c) && quoting->escape == OFF
 		&& quoting->quotes != SINGLE_OPEN)
 		return (SUB_SPECIAL);
@@ -134,8 +134,9 @@ void	push_value_to_buffer(char *value, char **buffer)
 {
 	int	i;
 
+	if (value == NULL)
+		return ;
 	i = 0;
-	printf("%s",value);
 	while (*value)
 	{
 		**buffer = *value;

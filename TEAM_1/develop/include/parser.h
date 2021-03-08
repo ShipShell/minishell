@@ -23,8 +23,18 @@ typedef int t_quotes;
 # define SUB_SKIP 2
 # define SUB_SPECIAL 3
 
+typedef struct		s_redir
+{
+	t_list			*file;
+	int				fd;
+	int				tmp_std;
+	t_bool			is_double;
+}					t_redir;
+
 typedef struct		s_cmd
 {
+	t_redir			*redir_in;
+	t_redir			*redir_out;
 	char			*cmd_str;
 	char			**command;
 	t_bool			ispath;
@@ -64,6 +74,11 @@ void	malloc_commands_room(t_cmd *cmd);
 int		count_amount_of_tokens(char	*cmd_str);
 t_bool	need_to_cut_token(t_quoting *quoting, char c);
 int		count_token_length(char *ptr);
+
+//redir
+void	change_out_redir_status(t_cmd *cmd);
+void	check_cmd_list_redirection(void);
+void	single_out_redir(t_cmd *cmd, int i);
 
 //substitute.c
 void	substitute_command(t_cmd *cmd);

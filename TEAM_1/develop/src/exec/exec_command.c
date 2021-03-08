@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+
 int		is_built_in(char *command)
 {
 	if (ft_strcmp(command,"echo") == 0 ||
@@ -74,14 +75,15 @@ void	exec_command(void)
 	while (cmd)
 	{
 		substitute_command(cmd);
-		if (cmd->ispipe == 1)
+		// test_make_cmd_str_to_tokens();
+		if (is_empty_cmd(cmd))
+			skip();
+		else if (cmd->ispipe == 1)
 		{
 			cmd = piping(cmd);
 			continue;
 		}
-		if (is_empty_cmd(cmd))
-			skip();
-		if (is_built_in(cmd->command[0]) == 1)
+		else if (is_built_in(cmd->command[0]) == 1)
 			g_exit_code = exec_builtin(cmd);
 		else
 			not_builtin_fork(cmd);
