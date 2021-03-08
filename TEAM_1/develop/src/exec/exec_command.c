@@ -17,9 +17,11 @@ int		is_built_in(char *command)
 int		exec_builtin(t_cmd *cmd)
 {
 	int	ret;
+	char buf[1000];
 
 	ret = 0;
 	change_redir(cmd);
+	//printf("up hi\n");
 	if (ft_strcmp(cmd->command[0],"echo") == 0)
 		ret = exec_echo(cmd);
 	if (ft_strcmp(cmd->command[0],"cd") == 0)
@@ -34,7 +36,9 @@ int		exec_builtin(t_cmd *cmd)
 		ret = exec_env(cmd);
 	if (ft_strcmp(cmd->command[0],"exit") == 0)
 		ret = exec_exit(cmd);
+	//printf("hi\n");
 	getback_redir(cmd);
+	printf("hello\n");
 	return (ret);
 }
 
@@ -75,7 +79,7 @@ void	exec_command(void)
 	// printf("exec_command cmd : %s\n", cmd->command[0]);
 	while (cmd)
 	{
-		substitute_command(cmd);
+		//substitute_command(cmd);
 		if (cmd->ispipe == 1)
 		{
 			cmd = piping(cmd);

@@ -45,8 +45,12 @@ void	close_fds(int fds[], int pipe_count);
 void	dup_fds(int fds[], int i, int pipe_count);
 // void	wait_parent1(int fds[], pid_t pid, int cnt);
 void	wait_parent(int fds[], pid_t pid[], int cnt);
-void	change_redir(cmd);
-void	getback_redir(cmd);
+t_cmd	*piping(t_cmd *cmd);
+
+void	do_redir_in(t_redir *in);
+void	do_redir_out(t_redir *out);
+void	change_redir(t_cmd *cmd);
+void	getback_redir(t_cmd *cmd);
 
 void	skip(void);
 t_bool	is_empty_cmd(t_cmd *cmd);

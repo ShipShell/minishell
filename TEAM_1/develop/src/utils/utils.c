@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:16:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/08 19:29:58 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ t_cmd		*new_cmd(char *cmd_str)
 
 	if (!(new = (t_cmd *)malloc(sizeof(t_cmd) * 1)))
 		return (NULL);
+	//redir 임의
+	new->redir_in = 0;
+	new->redir_out = 0;
 	new->cmd_str = cmd_str;
 	new->ispipe = FALSE;
 	new->ispath = FALSE;

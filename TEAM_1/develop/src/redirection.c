@@ -2,11 +2,13 @@
 
 void	do_redir_in(t_redir *in)
 {
+	int		fd;
+
 	while (in->file->next)
 	{
-		if (open(in->file->content, O_RDONLY) == -1)
-			open_error(in->file->content, 2);
-		if (close(in->file->content) == -1)
+		if ((fd = open(in->file->content, O_RDONLY)) == -1)
+			open_error(in->file->content);
+		if (close(fd) == -1)
 			ft_error();
 		in->file = in->file->next;
 	}
@@ -17,14 +19,17 @@ void	do_redir_in(t_redir *in)
 
 void	do_redir_out(t_redir *out)
 {
+	int		fd;
+
 	while (out->file->next)
 	{
-		open(out->file->content, O_WRONLY | O_CREAT, 0666);
-		if (close(out->file->content) == -1)
+		fd = open(out->file->content, O_RDWR | O_CREAT, 0666);
+		if (close(fd) == -1)
 			ft_error();
 		out->file = out->file->next;
 	}
-	out->fd = open(out->file->content, O_WRONLY | O_CREAT);
+	out->fd = open(out->file->content, O_RDWR | O_CREAT);
+	printf("here redir : %d\n", out->fd);
 	out->tmp_std = dup(1);
 	dup2(out->fd, 1);
 }
@@ -35,6 +40,8 @@ void	change_redir(t_cmd *cmd)
 		do_redir_in(cmd->redir_in);
 	if (cmd->redir_out)
 		do_redir_out(cmd->redir_out);
+	//printf("hi\n");
+
 }
 
 void	getback_redir(t_cmd *cmd)
@@ -43,10 +50,13 @@ void	getback_redir(t_cmd *cmd)
 	{
 		dup2(cmd->redir_in->tmp_std, 0);
 		close(cmd->redir_in->tmp_std);
+		close(cmd->redir_in->fd);
 	}
 	else if (cmd->redir_out)
 	{
 		dup2(cmd->redir_out->tmp_std, 1);
+		printf("are u serious?\n");
 		close(cmd->redir_out->tmp_std);
+		close(cmd->redir_out->fd);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:39:46 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/08 20:22:02 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,50 @@ int		init_prompt(void)
 	int		input_byte;
 	t_list	*tokens;
 
-	delete_cmd_list(&g_cmd, delete_data_in_cmd);
-	show_prompt_title();
-	get_prompt_input(&stdin_buffer);
-	parse_and_split_from_input(stdin_buffer);
-	free(stdin_buffer);
+	//delete_cmd_list(&g_cmd, delete_data_in_cmd);
+	//show_prompt_title();
+	//get_prompt_input(&stdin_buffer);
+	//parse_and_split_from_input(stdin_buffer);
+	//free(stdin_buffer);
+
+	g_cmd = (t_cmd *)malloc(sizeof(t_cmd) * 1);
+	//redir 임의
+	// g_cmd->redir_in = 0;
+	g_cmd->redir_in = (t_redir *)malloc(sizeof(t_redir) * 1);
+	g_cmd->redir_out = (t_redir *)malloc(sizeof(t_redir) * 1);
+
+	g_cmd->redir_out->fd = 0;
+	g_cmd->redir_out->tmp_std = 0;
+	g_cmd->redir_out->is_double = 0;
+	g_cmd->redir_out->file = (t_list *)malloc(sizeof(t_list) * 1);
+	g_cmd->redir_out->file->content = "a.txt";
+	g_cmd->redir_out->file->next = (t_list *)malloc(sizeof(t_list) * 1);
+	g_cmd->redir_out->file->next->content = "b.txt";
+	g_cmd->redir_out->file->next->next = 0;
+
+	g_cmd->redir_in->fd = 0;
+	g_cmd->redir_in->tmp_std = 0;
+	g_cmd->redir_in->is_double = 0;
+	g_cmd->redir_in->file = (t_list *)malloc(sizeof(t_list) * 1);
+	g_cmd->redir_in->file->content = "c.txt";
+	g_cmd->redir_in->file->next = (t_list *)malloc(sizeof(t_list) * 1);
+	g_cmd->redir_in->file->next->content = "d.txt";
+	g_cmd->redir_in->file->next->next = 0;
+
+	g_cmd->ispipe = FALSE;
+	g_cmd->ispath = FALSE;
+	g_cmd->isredir = 1;
+	g_cmd->command = (char **)malloc(sizeof(char *) * 3);
+	g_cmd->command[0] = "echo";
+	g_cmd->command[1] = "hi";
+	g_cmd->command[2] = NULL;
+	g_cmd->next = NULL;
 	return (0);
 }
 
 void	loop_prompt(void)
 {
-	while (1)
+	//while (1)
 	{
 		init_prompt();
 		exec_command();
