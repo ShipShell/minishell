@@ -34,5 +34,5 @@ int	ft_exit(t_cmd *cmd)
 		g_exit_code = atoi(cmd->token[1]);
 		exit(g_exit_code);
 	}
-	return (0);
+	return (1);
 }

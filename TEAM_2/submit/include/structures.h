@@ -20,7 +20,7 @@
 
 #define	MAX_BUFF 1000
 
-#define	pipe 11238;
+// #define	pipe 11238;
 
 #define SEMICOLON 178
 #define PIPELINE 180

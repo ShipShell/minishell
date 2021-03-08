@@ -17,7 +17,7 @@
 
 // 		}
 // 	}
-// 	return (0); // 끝까지 가면 0 리턴.
+// 	return (1); // 끝까지 가면 0 리턴.
 // }
 
 int	print_env(t_list *env_list)
@@ -33,7 +33,7 @@ int	print_env(t_list *env_list)
 		}
 		env_list = env_list->next;
 	}
-	return (0);
+	return (1);
 }
 
 // t_cmd *cmd가 굳이 필요할까는 짜면서 생각.
@@ -51,5 +51,5 @@ int ft_env(t_cmd *cmd)
 		return (-1);
 	}
 	print_env(g_env);
-	return (0);
+	return (1);
 }

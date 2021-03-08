@@ -104,5 +104,5 @@ int	cycle_arg(t_cmd *cmd)
 	i = 0;
 	while (cmd->token[++i])	
 		check_equal_place(cmd->token[i]);
-	return (0);
+	return (1);
 }

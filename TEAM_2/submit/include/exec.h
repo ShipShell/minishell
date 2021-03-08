@@ -14,7 +14,6 @@ int	ft_echo(t_cmd *cmd);
 int	ft_pwd(t_cmd *cmd);
 int	ft_unset(t_cmd *cmd);
 int	ft_exit(t_cmd *cmd);
-int	ft_not_built_in(t_cmd *cmd);
 
 /*
 ** error
@@ -37,5 +36,10 @@ int	cycle_arg(t_cmd *cmd);
 int	ft_cd(t_cmd *cmd);
 int	call_no_home_err();
 
+/*
+** not_built_in
+*/
+int	exec_not_built_in(t_cmd *cmd);
+int	ft_not_built_in(t_cmd *cmd);
 
 #endif
