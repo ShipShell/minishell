@@ -12,31 +12,44 @@
 
 #include "minishell.h"
 
-// static int	check_whether_replace_or_not(char c, t_quoting quoting)
-// {
-// 	if ((c == '$' || c == '~')
-// 		&& quoting.quotes != SINGLE_OPEN && quoting.old_escape == OFF)
-// 		return (1);
-// 	else
-// 		return (0);
-// }
+static char	*replace(char *str)
+{
 
-static int	get_len_to_replace(char *str)
+}
+
+static int	check_whether_replace_or_not(char c, t_quoting quoting)
+{
+	if ((c == '$' || c == '~')
+			&& quoting.quotes != SINGLE_OPEN
+			&& quoting.old_escape == CLOSED)
+		return (1);
+	else
+		return (0);
+}
+
+// static char	*check_and_replace(char *str)
+static void	check_and_replace(char *str)
 {
 	int			i;
 	t_quoting	quoting;
-
+	char		*replaced_part;
+	
 	init_quoting(&quoting);
 	i = 0;
 	while (str[i])
 	{
 		change_quoting(str[i], &quoting);
-		
+		//check
+		if (check_whether_replace_or_not(str[i], quoting))
+			replaced_part = replace(str + i);
+		//replace
+		//join
 		++i;
 	}
+	// return (replaced);
 }
 
-void		replace(char **token)
+void		get_replaced_token(char **token)
 {
 	int		i;
 
@@ -48,5 +61,4 @@ void		replace(char **token)
 		// printf("replaced token[%d] : %s\n", i, token[i]);
 		++i;
 	}
-	printf("\n");
 }

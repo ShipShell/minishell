@@ -22,7 +22,7 @@ void	change_quoting(char c, t_quoting *quoting);
 t_list	*tokenize(t_list *single_cmd_list);
 // t_data	*sep_to_token(char *single_cmd);
 
-void	replace(char **token);
+void	get_replaced_token(char **token);
 
 /*
 **	실행함수.

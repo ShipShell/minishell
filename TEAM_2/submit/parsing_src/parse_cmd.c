@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/09 15:43:25 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/09 17:59:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_list			*parse_cmd_line(char *str)
 	list_to_replace = tokenized_single_cmd_list;
 	while (list_to_replace)
 	{
-		replace(((t_cmd *)(list_to_replace->content))->token);
+		get_replaced_token(((t_cmd *)(list_to_replace->content))->token);
 		list_to_replace = list_to_replace->next;
 	}
 	return (tokenized_single_cmd_list);
