@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quoting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:55:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/09 17:08:31 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/09 23:12:06 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,13 @@ void			change_escape(char c, t_quoting *quoting)
 
 void			change_quotes(char c, t_quoting *quoting)
 {
-	quoting->old_quotes = quoting->quotes;
 	if (c == SINGLE_QUOTE)
 	{
 		if (quoting->quotes == SINGLE_OPEN)
 			quoting->quotes = CLOSED;
 		else if (quoting->quotes == CLOSED)
 		{
-			if (quoting->escape == OFF)
+			if (quoting->old_escape == OFF)
 				quoting->quotes = SINGLE_OPEN;
 		}
 	}
