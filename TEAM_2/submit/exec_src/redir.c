@@ -37,11 +37,28 @@ void	check_redir_type(t_cmd *cmd)
 	}
 	if (cmd->re_out)
 	{
-		cmd->re_out->fd = open(cmd->re_out->filename, O_CREAT | O_TRUNC);
+		if (cmd->re_out->redir_type == REDIR_DOUBLE)
+			cmd->re_out->fd = open(cmd->re_out->filename, O_APPEND);
+		else
+			cmd->re_out->fd = open(cmd->re_out->filename, O_CREAT | O_TRUNC);
 		cmd->re_out->tmp_fd = dup(1);
 		dup2(cmd->re_out->fd, 1);
 	}
-	
+}
+
+int		get_fd_back(t_cmd *cmd)
+{
+	if (cmd->re_in)
+	{
+		dup2(cmd->re_in->tmp_fd, 0);
+		close(cmd->re_in->fd);
+	}
+	if (cmd->re_out)
+	{
+		dup2(cmd->re_out->tmp_fd, 1);
+		close(cmd->re_out->fd);
+	}
+	return (0);
 }
 
 int		ft_redir(t_cmd *cmd)
@@ -59,4 +76,6 @@ int		ft_redir(t_cmd *cmd)
 			open_redir_double(cmd, (t_redir *)redir_list->content);
 		redir_list = redir_list->next;
 	}
+	check_redir_type(cmd);
+	return (1);
 }

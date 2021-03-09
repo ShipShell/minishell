@@ -26,6 +26,12 @@ int	cycle_list(t_list *cmd_list);
 int	exec_command(t_cmd *cmd);
 
 /*
+** ridir
+*/
+int	ft_redir(t_cmd *cmd);
+int	get_fd_back(t_cmd *cmd);
+
+/*
 ** export
 */
 int	ft_export(t_cmd *cmd);

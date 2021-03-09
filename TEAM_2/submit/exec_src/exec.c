@@ -2,21 +2,28 @@
 
 int	is_built_in(t_cmd *cmd)
 {
+	// ft_redir(cmd);
 	if (!ft_strcmp(cmd->token[0], "cd"))
-		return (ft_cd(cmd));
+		ft_cd(cmd);
 	else if (!ft_strcmp(cmd->token[0], "echo"))
-		return (ft_echo(cmd));
+		ft_echo(cmd);
 	else if (!ft_strcmp(cmd->token[0], "env"))
-		return (ft_env(cmd));
+		ft_env(cmd);
 	else if (!ft_strcmp(cmd->token[0], "exit"))
-		return (ft_exit(cmd));
+		ft_exit(cmd);
 	else if (!ft_strcmp(cmd->token[0], "export"))
-		return (ft_export(cmd));
+		ft_export(cmd);
 	else if (!ft_strcmp(cmd->token[0], "pwd"))
-		return (ft_pwd(cmd));
+		ft_pwd(cmd);
 	else if (!ft_strcmp(cmd->token[0], "unset"))
-		return (ft_unset(cmd));
-	return (0);
+		ft_unset(cmd);
+	else
+	{
+		// get_fd_back(cmd);
+		return (0);
+	}
+	// get_fd_back(cmd);
+	return (1);
 }
 
 int		exec_command(t_cmd *cmd)
@@ -116,31 +123,19 @@ int	exec_pipe(t_list **cmd_list)
 	if ((pid = (pid_t *)malloc(sizeof(pid_t) * (pipe_num + 1))) == 0)
 		exit (1);
 	i = -1;
-	while (++i < pipe_num + 1)
+	while (++i < pipe_num)
 	{
 		pid[i] = fork();
 		if (pid[i] == 0)
 			connect_pipe(*cmd_list, fd, i * 2, pipe_num * 2);
 		*cmd_list = (*cmd_list)->next;
 	}
+	pid[i] = fork();
+	if (pid[i] == 0)
+		connect_pipe(*cmd_list, fd, i * 2, pipe_num * 2);
 	wait_all_child(pid, pipe_num + 1, fd);
 	free(fd);
 	return (0);
-}
-
-int		ft_exec(t_list **cmd_list)
-{
-	int	result;
-	
-	result = ((t_cmd *)(*cmd_list)->content)->flag;
-	if (result == PIPELINE)
-	{
-		// 리턴하지말고 안터지게 만들자...
-		exec_pipe(cmd_list);
-		return (0);
-	}
-	else
-		return (exec_command((t_cmd *)(*cmd_list)->content));
 }
 
 int		cycle_list(t_list *cmd_list)
@@ -151,7 +146,14 @@ int		cycle_list(t_list *cmd_list)
 
 	while (cmd_list)
 	{
-		result = ft_exec(&cmd_list);
+		result = ((t_cmd *)cmd_list->content)->flag;
+		if (result == PIPELINE)
+		{
+			result = exec_pipe(&cmd_list);
+			// return (0);
+		}
+		else
+			result = exec_command((t_cmd *)cmd_list->content);
 		if (result == -1)
 			return (-1);
 		cmd_list = cmd_list->next;
