@@ -6,7 +6,7 @@
 /*   By: dev_mj <dev_mj@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/06 17:19:44 by dev_mj           ###   ########.fr       */
+/*   Updated: 2021/03/09 13:25:18 by dev_mj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 #define SEMICOLON 178
 #define PIPELINE 180
+#define REDIRECTION 182
 
 #define ON 1
 #define OFF 2
@@ -51,6 +52,14 @@ typedef struct		s_env
 	char			*value;
 }					t_env;
 
+typedef struct		s_redir
+{
+	// INDIR : <, OUTDIR : >, DOUBLE : >>
+	// 마지막 부분의 redir를 생각하자.
+	int				redir_type;
+	char			*filename;
+}					t_redir;
+
 typedef struct		s_quoting
 {
 	t_quotes		quotes;
@@ -63,6 +72,7 @@ typedef struct		s_cmd
 	char			**token;
 	int				flag;
 	int				is_pipe;
+	t_list			*redir;
 }					t_cmd;
 
 #endif

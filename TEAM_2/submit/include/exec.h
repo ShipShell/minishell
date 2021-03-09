@@ -23,6 +23,7 @@ int	print_no_such_file_err(t_cmd *cmd, int index);
 int	print_strerror(char *);
 int	print_not_a_valid_identifier(char *str, int index);
 int	cycle_list(t_list *cmd_list);
+int	exec_command(t_cmd *cmd);
 
 /*
 ** export

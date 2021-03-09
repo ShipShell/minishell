@@ -185,10 +185,40 @@ int main()
    - [x] not_built_in
 
    - [x] exit
-
 2. 에러 처리하고.
+
+- redir 계획
+
+  1. 구조체 파싱.
+
+     1. 구조체 구조.
+
+     - 명령 > a.txt > b.txt > c.txt 일 때 명령부와 각 파일명에 대해서 나눠야함.
+
+  2.  주의점
+
+     1. indir에서 파일이 존재하지 않으면 중간에 있어도 경고.
 
 ### 궁금한 점
 
 - not_built_in에서 에러 발생시 에러 처리 뭐뭐 했는지..
 
+echo hello >> b.txt > c.txt
+
+token[0] = "echo"
+
+token[1] = "hello"
+
+token[2] = ">"
+
+token[3] = ">"
+
+token[4] = ">"
+
+token[4] = "b.txt"
+
+token[5] = ">"
+
+token[6] = "c.txt"
+
+echo hello >
