@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 18:10:38 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/08 18:29:50 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		add_back_new_env(t_env **envs, t_env *new_env)
 	cur->next = new_env;
 }
 
-t_redir	*init_redir(void)
+t_redir		*init_redir(void)
 {
 	t_redir	*redir;
 

@@ -206,42 +206,55 @@ void	check_cmd_list_redirection(void)
 	cmd = g_cmd;
 	while (cmd)
 	{
-		change_out_redir_status(cmd);
+		change_redir_status(cmd);
+		change_redir_status(cmd);
 		cmd = cmd->next;
 	}
 }
 
-void	change_out_redir_status(t_cmd *cmd)
+void	change_redir_status(t_cmd *cmd)
 {
-	int		count;
+	int		in_count;
+	int		out_count;
 	int		i;
 
 	i = 0;
-	count = 0;
+	in_count = 0;
+	out_count = 0;
 	while (cmd->command[i])
 	{
-		if (ft_strchr(">", cmd->command[i][0]))
+		if (ft_strchr("><", cmd->command[i][0]))
 		{
+			if (cmd->command[i][0] == '>')
+				++out_count;
+			else
+				++in_count;
 			free(cmd->command[i]);
 			cmd->command[i] = NULL;
-			++count;
 		}
 		else
 		{
-			if (count == 1)
-				single_out_redir(cmd, i);
-			else if (count == 2)
-				;// ;double_out_redir();// >> 처리
-			else if (count >= 3)
-				;//error();
+			add_redir(cmd, i, in_count, out_count);
+			in_count = 0;
+			out_count = 0;
 		}
 		++i;
 	}
-		if(cmd->redir_out != NULL)
-			printf("redir:%s, \n",cmd->redir_out->file->content);
 }
 
-void	single_out_redir(t_cmd *cmd, int i)
+void	add_redir(t_cmd *cmd, int i, int in_count, int out_count)
+{
+	if (out_count == 1)
+		add_out_redir(cmd, i, FALSE);
+	else if (out_count == 2)
+		add_out_redir(cmd, i, TRUE); // double_out_redir();// >> 처리
+	else if (in_count == 1)
+		add_in_redir(cmd, i, FALSE);
+	else if (in_count == 2)
+		add_in_redir(cmd, i, TRUE);
+}
+
+void	add_out_redir(t_cmd *cmd, int i, t_bool isdouble)
 {
 	t_list	*new;
 
@@ -250,7 +263,21 @@ void	single_out_redir(t_cmd *cmd, int i)
 		cmd->redir_out = init_redir();
 	new = ft_lstnew(ft_strdup(cmd->command[i]));
 	ft_lstadd_back(&cmd->redir_out->file, new);
-	cmd->redir_out->is_double = FALSE;
+	cmd->redir_out->is_double = isdouble;
+	free(cmd->command[i]);
+	cmd->command[i] = NULL;
+}
+
+void	add_in_redir(t_cmd *cmd, int i, t_bool isdouble)
+{
+	t_list	*new;
+
+	cmd->isredir = TRUE;
+	if (cmd->redir_in == NULL)
+		cmd->redir_in = init_redir();
+	new = ft_lstnew(ft_strdup(cmd->command[i]));
+	ft_lstadd_back(&cmd->redir_in->file, new);
+	cmd->redir_in->is_double = isdouble;
 	free(cmd->command[i]);
 	cmd->command[i] = NULL;
 }

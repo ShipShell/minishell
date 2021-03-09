@@ -76,9 +76,11 @@ t_bool	need_to_cut_token(t_quoting *quoting, char c);
 int		count_token_length(char *ptr);
 
 //redir
-void	change_out_redir_status(t_cmd *cmd);
+void	change_redir_status(t_cmd *cmd);
 void	check_cmd_list_redirection(void);
-void	single_out_redir(t_cmd *cmd, int i);
+void	add_redir(t_cmd *cmd, int i, int in_count, int out_count);
+void	add_out_redir(t_cmd *cmd, int i, t_bool isdouble);
+void	add_in_redir(t_cmd *cmd, int i, t_bool isdouble);
 
 //substitute.c
 void	substitute_command(t_cmd *cmd);
@@ -91,5 +93,7 @@ void	push_value_to_buffer(char *value, char **buffer);
 char	*find_value_match_with(char *key);
 t_bool	is_pipe_or_semicolon(char *token);
 void	change_flag(t_cmd *cmd, char **token);
+void	substitute_redir(t_cmd *cmd);
+void	substitute_redir_file_list(t_list *file);
 
 #endif

@@ -22,6 +22,38 @@ void	substitute_command(t_cmd *cmd)
 	}
 }
 
+void	substitute_redir(t_cmd *cmd)
+{
+	t_list	*file;
+	char	*substituted_file;
+
+	if (cmd->isredir == FALSE)
+		return ;
+	if (cmd->redir_in)
+	{
+		file = cmd->redir_in->file;
+		substitute_redir_file_list(file);
+	}
+	if (cmd->redir_out)
+	{
+		file = cmd->redir_out->file;
+		substitute_redir_file_list(file);
+	}
+}
+
+void	substitute_redir_file_list(t_list *file)
+{
+	char	*substituted_file;
+
+	while (file)
+	{
+		substituted_file = substitute_token(file->content);
+		free(file->content);
+		file->content = substituted_file;
+		file = file->next;
+	}
+}
+
 t_bool	is_pipe_or_semicolon(char *token)
 {
 	if (*token == '|' || *token == ';' || *token == '\0')

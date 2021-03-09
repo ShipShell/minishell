@@ -6,11 +6,46 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 14:52:31 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 08:41:53 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/09 19:27:07 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	test_check_cmd_list_redirection(t_cmd *cmd)
+{
+	t_redir	*in;
+	t_redir *out;
+	t_list	*file;
+
+	in = cmd->redir_in;
+	out = cmd->redir_out;
+
+	if (in != NULL)
+	{
+		file = in->file;
+		ft_printf("[redir_in : is_double %d ]\n", in->is_double);
+		ft_printf("path : ");
+		while (file)
+		{
+			ft_printf("%s ", file->content);
+			file = file->next;
+		}
+		ft_printf("\n\n");
+	}
+	if (out != NULL)
+	{
+		file = out->file;
+		ft_printf("[redir_out : is_double %d ]\n", out->is_double);
+		ft_printf("path : ");
+		while (file)
+		{
+			ft_printf("%s ", file->content);
+			file = file->next;
+		}
+		ft_printf("\n\n");
+	}
+}
 
 void	test_parse_cmd_from_input(void)
 {
