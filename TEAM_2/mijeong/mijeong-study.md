@@ -202,23 +202,4 @@ int main()
 ### 궁금한 점
 
 - not_built_in에서 에러 발생시 에러 처리 뭐뭐 했는지..
-
-echo hello >> b.txt > c.txt
-
-token[0] = "echo"
-
-token[1] = "hello"
-
-token[2] = ">"
-
-token[3] = ">"
-
-token[4] = ">"
-
-token[4] = "b.txt"
-
-token[5] = ">"
-
-token[6] = "c.txt"
-
-echo hello >
+- pipe에서 list가 잘 못된 값을 본다...

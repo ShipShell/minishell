@@ -111,11 +111,11 @@ int	exec_pipe(t_list **cmd_list)
 	pid_t	*pid;
 	int		pipe_num;
 
-	i = -1;
 	pipe_num = count_pipe(*cmd_list);
 	fd = make_fd_piping(pipe_num * 2);
 	if ((pid = (pid_t *)malloc(sizeof(pid_t) * (pipe_num + 1))) == 0)
 		exit (1);
+	i = -1;
 	while (++i < pipe_num + 1)
 	{
 		pid[i] = fork();
@@ -128,6 +128,21 @@ int	exec_pipe(t_list **cmd_list)
 	return (0);
 }
 
+int		ft_exec(t_list **cmd_list)
+{
+	int	result;
+	
+	result = ((t_cmd *)(*cmd_list)->content)->flag;
+	if (result == PIPELINE)
+	{
+		// 리턴하지말고 안터지게 만들자...
+		exec_pipe(cmd_list);
+		return (0);
+	}
+	else
+		return (exec_command((t_cmd *)(*cmd_list)->content));
+}
+
 int		cycle_list(t_list *cmd_list)
 {
 	int		result;
@@ -136,14 +151,7 @@ int		cycle_list(t_list *cmd_list)
 
 	while (cmd_list)
 	{
-		result = ((t_cmd *)cmd_list->content)->flag;
-		if (result == PIPELINE)
-		{
-			exec_pipe(&cmd_list);
-			return (0);
-		}
-		else
-			result = exec_command((t_cmd *)cmd_list->content);
+		result = ft_exec(&cmd_list);
 		if (result == -1)
 			return (-1);
 		cmd_list = cmd_list->next;

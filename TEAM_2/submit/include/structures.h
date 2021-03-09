@@ -24,7 +24,9 @@
 
 #define SEMICOLON 178
 #define PIPELINE 180
-#define REDIRECTION 182
+#define REDIR_IN 182
+#define REDIR_OUT 184
+#define REDIR_DOUBLE 186
 
 #define ON 1
 #define OFF 2
@@ -58,6 +60,8 @@ typedef struct		s_redir
 	// 마지막 부분의 redir를 생각하자.
 	int				redir_type;
 	char			*filename;
+	int				fd;
+	int				tmp_fd;
 }					t_redir;
 
 typedef struct		s_quoting
@@ -73,6 +77,8 @@ typedef struct		s_cmd
 	int				flag;
 	int				is_pipe;
 	t_list			*redir;
+	t_redir			*re_in;
+	t_redir			*re_out;
 }					t_cmd;
 
 #endif
