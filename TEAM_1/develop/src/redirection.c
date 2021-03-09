@@ -19,12 +19,12 @@ void	do_redir_out(t_redir *out)
 {
 	while (out->file->next)
 	{
-		open(out->file->content, O_WRONLY | O_CREAT, 0666);
+		open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 		if (close(out->file->content) == -1)
 			ft_error();
 		out->file = out->file->next;
 	}
-	out->fd = open(out->file->content, O_WRONLY | O_CREAT);
+	out->fd = open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	out->tmp_std = dup(1);
 	dup2(out->fd, 1);
 }
@@ -44,7 +44,7 @@ void	getback_redir(t_cmd *cmd)
 		dup2(cmd->redir_in->tmp_std, 0);
 		close(cmd->redir_in->tmp_std);
 	}
-	else if (cmd->redir_out)
+	if (cmd->redir_out)
 	{
 		dup2(cmd->redir_out->tmp_std, 1);
 		close(cmd->redir_out->tmp_std);
