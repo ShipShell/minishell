@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/05 13:31:29 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/09 12:54:57 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,21 @@ typedef struct		s_quoting
 	t_bool			old_escape;
 }					t_quoting;
 
+typedef struct		s_redir
+{
+	// INDIR : <, OUTDIR : >, DOUBLE : >>
+	// 마지막 부분의 redir를 생각하자.
+	int				redir_type;
+	char			*filename;
+	
+}					t_redir;
+
 typedef struct		s_cmd
-{	
-	// char			*cmd;
-	// t_list			*arg;
-	// int				redirect_num;
-	// int				seperator;
+{
 	char			**token;
 	int				flag;
-	// int				exit_code;
+	int				is_pipe;
+	t_list			*redir;
 }					t_cmd;
 
 // typedef struct	s_env

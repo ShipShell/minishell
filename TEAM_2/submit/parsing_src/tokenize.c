@@ -3,18 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:35:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/05 16:51:50 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/09 15:45:31 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** not consider redirection yet.
-*/
+static int		is_tokenizable(char c, t_quoting quoting)
+{
+	if (ft_strchr(";|\t ", c) && quoting.quotes == CLOSED)
+		return (1);
+	else if (ft_strchr("><", c)
+			&& quoting.quotes == CLOSED && quoting.old_escape == OFF)
+		return (1);
+	else
+		return (0);
+}
 
 static int		get_token_len(char *str)
 {
@@ -27,7 +34,8 @@ static int		get_token_len(char *str)
 	{
 		++token_len;
 		change_quoting(*str, &quoting);
-		if (ft_strchr(";|\t ", *str) && quoting.quotes == CLOSED)
+		// if (ft_strchr(";|\t ", *str) && quoting.quotes == CLOSED)
+		if (is_tokenizable(*str, quoting))
 		{
 			if (token_len != 1)
 				--token_len;
@@ -50,7 +58,8 @@ static int		get_token_count(char *str)
 			str++;
 		len = get_token_len(str);
 		str = str + len;
-		count++;
+		if (len != 0)
+			++count;
 	}
 	return (count);
 }
@@ -71,8 +80,8 @@ static char		**split_single_cmd(char *str)
 		while (*str == ' ' || *str == '\t')
 			str++;
 		token_len = get_token_len(str);
-		token[++i] = ft_strndup(str, token_len);
-		printf("token[%d] : %s\n", i, token[i]);
+		if (token_len != 0)
+			token[++i] = ft_strndup(str, token_len);
 		str = str + token_len;
 	}
 	return (token);
@@ -104,11 +113,13 @@ static int		check_flag(t_cmd *tokenized)
 static t_cmd	*tokenize_single_cmd(char *str)
 {
 	t_cmd		*tokenized_cmd;
+	int			i = 0;
 
 	tokenized_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	tokenized_cmd->token = split_single_cmd(str);
 	tokenized_cmd->flag = check_flag(tokenized_cmd);
-	replace_token(tokenized_cmd->token);
+	while (tokenized_cmd->token[i])
+		++i;
 	return (tokenized_cmd);
 }
 
