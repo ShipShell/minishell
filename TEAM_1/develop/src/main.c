@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 20:22:02 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/09 16:13:09 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,22 @@ int		init_prompt(void)
 	g_cmd->isredir = 1;
 	g_cmd->command = (char **)malloc(sizeof(char *) * 3);
 	g_cmd->command[0] = "echo";
-	g_cmd->command[1] = "hi";
+	g_cmd->command[1] = "hson";
 	g_cmd->command[2] = NULL;
-	g_cmd->next = NULL;
+	g_cmd->next = 0;
+
+	// g_cmd->next = (t_cmd *)malloc(sizeof(t_cmd) * 1);
+
+	// g_cmd->next->redir_in = 0;
+	// g_cmd->next->redir_out = 0;
+	// g_cmd->next->ispipe = FALSE;
+	// g_cmd->next->ispath = FALSE;
+	// g_cmd->next->isredir = FALSE;
+	// g_cmd->next->command = (char **)malloc(sizeof(char *) * 3);
+	// g_cmd->next->command[0] = "echo";
+	// g_cmd->next->command[1] = "my name is hson";
+	// g_cmd->next->command[2] = NULL;
+	// g_cmd->next->next = NULL;
 	return (0);
 }
 
@@ -80,7 +93,7 @@ void	loop_prompt(void)
 	{
 		init_prompt();
 		exec_command();
-		test_make_cmd_str_to_tokens();
+		//test_make_cmd_str_to_tokens();
 
 	}
 }

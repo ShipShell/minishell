@@ -38,7 +38,8 @@ int		exec_builtin(t_cmd *cmd)
 		ret = exec_exit(cmd);
 	//printf("hi\n");
 	getback_redir(cmd);
-	printf("hello\n");
+	//printf("here %d\n", cmd->redir_out->tmp_std);
+	printf("helloooo\n");
 	return (ret);
 }
 
