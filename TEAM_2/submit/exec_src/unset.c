@@ -47,5 +47,5 @@ int	find_env(t_cmd *cmd)
 int	ft_unset(t_cmd *cmd)
 {
 	find_env(cmd);
-	return (0);
+	return (1);
 }

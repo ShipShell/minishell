@@ -61,6 +61,7 @@ int main()
 
 - 환경변수 PATH에 변수가 없을 경우 
 - command에 대한 에러 처리를 어떻게 나눴는지 궁금
+- 환경변수 PWD와 OLDPWD를 다 바꿔줘야함.
 
 #### 사용함수
 
@@ -146,11 +147,14 @@ int main()
 ### 에러처리
 
 - [exit status]()
-
 - 전역변수 g_exit_code를 각 실행함수에서 관리를 해줘야한다.
 - 각 실행이 끝나면 에러인지 아닌지 확인 후 그에 대한 출력을 해줘야한다.
 - bash: cd: HOME not set 에러를 보면 exit_code는 1이기 때문에 얼핏보면 no such file or directory 에러를 내야할 거 같지만 아님. 따라서 각 실행함수 내에서 에러처리를 하는 것을 알 수 있음.
 - 커맨드에서 잘못된 이름을 넣으면 127, 인자부에서 잘못되 이름을 넣으면 1, 둘 다 에러 메세지ㅣ는 같다.
+
+### pipe 개념 공부
+
+![파이프](https://github.com/architectophile/blog/blob/master/linux/concepts/images/linux-concepts-cmd-execution-2-pipe-1.1.1.png?raw=true)
 
 
 
@@ -159,6 +163,8 @@ int main()
 - parsing에서 사용하는 env구조체 추가함수를 나도 쓸 수 있으면 좋을듯. export에서 쓰기 위해서. (물어보자~!)
 - 위의 export.c 주의점에서 !, *, =이런 친구들 어디까지 에러로 잡아야 할까 ??? 생각보다 예외사항이 많음. [여기](https://heesy.tistory.com/109)를 보면 bash에서 저런 친구들에 대한 사전정의를 해두기 때문이라는데 어디까지 구현을 해야할까...
 - execve인자로 들어오는 token은 과연 path를 빼줘야할지 붙여줘야할지 궁금하구만..
+- /bin/cat으로 입력하다가 control + c로 나가면 shipshell이 두개 생김.
+- echo(space), echo(nospace)의 결과가 다르다. (상관없나??)
 
 
 

@@ -8,5 +8,5 @@ int	ft_pwd(t_cmd *cmd)
 	if (!getcwd(pwd, MAX_BUFF))
 		return (-1);
 	ft_printf("%s\n", pwd);
-	return (0);
+	return (1);
 }

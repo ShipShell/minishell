@@ -17,23 +17,11 @@
 
 // 		}
 // 	}
-// 	return (0); // 끝까지 가면 0 리턴.
+// 	return (1); // 끝까지 가면 0 리턴.
 // }
 
-// t_cmd *cmd가 굳이 필요할까는 짜면서 생각.
-int ft_env(t_cmd *cmd)
+int	print_env(t_list *env_list)
 {
-	t_list	*env_list;
-	int		i;
-	
-	i = 0;
-	env_list = g_env;
-	// 인자가 환경변수에 있는지 확인.
-	if (cmd->token[++i])
-	{
-		g_exit_code = 127;
-		return (-1);
-	}
 	while (env_list)
 	{
 		if (((t_env *)env_list->content)->value)
@@ -45,5 +33,23 @@ int ft_env(t_cmd *cmd)
 		}
 		env_list = env_list->next;
 	}
-	return (0);
+	return (1);
+}
+
+// t_cmd *cmd가 굳이 필요할까는 짜면서 생각.
+int ft_env(t_cmd *cmd)
+{
+	int		i;
+	
+	i = 0;
+	// 인자가 환경변수에 있는지 확인.
+	if (cmd->token[++i])
+	{
+		ft_putstr_fd("shipshell: ", 2);
+		print_no_such_file_err(cmd, 1);
+		g_exit_code = 127;
+		return (-1);
+	}
+	print_env(g_env);
+	return (1);
 }

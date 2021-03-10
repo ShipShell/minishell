@@ -77,7 +77,7 @@ int	cycle_path(t_cmd *cmd, char **path)
 	ft_putstr_fd("shipshell: ", 2);
 	print_command_not_found_err(cmd, 0);
 	exit(127);
-	return (0);
+	return (1);
 }
 
 int	single_path(t_cmd *cmd)
@@ -88,13 +88,28 @@ int	single_path(t_cmd *cmd)
 	if (env == 0)
 		return (-1);
 	if (execve(cmd->token[0], cmd->token, env) == -1)
-		print_strerror();
+	{
+		print_strerror(cmd->token[0]);
+		return (-1);
+	}
 	ft_free_dptr(env);
 	// free해주고 끝
 	ft_putstr_fd("shipshell: ", 1);
 	print_no_such_file_err(cmd, 0);
 	exit(1);
-	return (0);
+	return (1);
+}
+
+int	exec_not_built_in(t_cmd *cmd)
+{
+	char	**path;
+
+	path = split_path();
+	if (!ft_strncmp(cmd->token[0], "./", 2) 
+		|| !ft_strncmp(cmd->token[0], "/", 1))
+		return (single_path(cmd));
+	else
+		return (cycle_path(cmd, path));
 }
 
 int	ft_not_built_in(t_cmd *cmd)
@@ -105,18 +120,12 @@ int	ft_not_built_in(t_cmd *cmd)
 	
 	pid = fork();
 	if (pid == 0)
-	{
-		path = split_path();
-		if (!ft_strncmp(cmd->token[0], "./", 2) 
-			|| !ft_strncmp(cmd->token[0], "/", 1))
-			return (single_path(cmd));
-		else
-			return (cycle_path(cmd, path));
-	}
+		exec_not_built_in(cmd);
 	else if (pid > 0)
 	{
 		wait(&status);
 		if (WIFEXITED(status))
 			g_exit_code = WEXITSTATUS(status);
 	}
+	return (1);
 }

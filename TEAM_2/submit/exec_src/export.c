@@ -71,7 +71,7 @@ static int	export_no_arg()
 		env_list = env_list->next;
 	}
 	free(sorted_env);
-	return (0);
+	return (1);
 }
 
 int	ft_export(t_cmd *cmd)

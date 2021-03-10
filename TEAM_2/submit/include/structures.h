@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dev_mj <dev_mj@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/04 15:19:58 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/06 17:19:44 by dev_mj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #define	MAX_BUFF 1000
 
-#define	pipe 11238;
+// #define	pipe 11238;
 
 #define SEMICOLON 178
 #define PIPELINE 180
@@ -59,21 +59,10 @@ typedef struct		s_quoting
 }					t_quoting;
 
 typedef struct		s_cmd
-{	
-	// char			*cmd;
-	// t_list			*arg;
-	// int				redirect_num;
-	// int				seperator;
+{
 	char			**token;
 	int				flag;
-	// int				exit_code;
+	int				is_pipe;
 }					t_cmd;
-
-// typedef struct	s_env
-// {
-// 	char		*key;
-// 	char		*value;
-// 	void		*next;
-// }				t_env;
 
 #endif
