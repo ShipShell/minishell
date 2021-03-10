@@ -37,6 +37,7 @@ typedef struct		s_cmd
 	t_redir			*redir_out;
 	char			*cmd_str;
 	char			**command;
+	t_bool			syntax_error;
 	t_bool			ispath;
 	t_bool			ispipe;
 	t_bool			isredir;
@@ -56,7 +57,7 @@ typedef struct		s_quoting
 	t_quotes	quotes;
 }					t_quoting;
 
-void	parse_and_split_from_input(char *stdin_buf);
+t_bool	parse_and_split_from_input(char *stdin_buf);
 
 //step1
 void	parse_cmd_from_input(char *stdin_buf);
