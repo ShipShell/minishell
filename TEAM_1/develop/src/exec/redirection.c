@@ -41,10 +41,10 @@ int		do_redir_out(t_redir *out)
 
 int		change_redir(t_cmd *cmd)
 {
-	if (cmd->redir_in)
-		return (do_redir_in(cmd->redir_in));
+	if (cmd->redir_in && (do_redir_in(cmd->redir_in) == -1))
+		return (-1);
 	if (cmd->redir_out)
-		return (do_redir_out(cmd->redir_out));
+		do_redir_out(cmd->redir_out);
 	return (0);
 }
 
