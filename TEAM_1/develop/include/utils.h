@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 13:23:07 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 13:23:16 by hson             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UTILS_H
 # define UTILS_H
 
@@ -11,10 +23,8 @@ void		delete_data_in_cmd(void *data);
 void		delete_one_cmd(t_cmd *cmd, void (*del)(void*));
 void		delete_cmd_list(t_cmd **lst, void (*del)(void*));
 
-
 t_env		*new_env(char *key, char *value);
 void		add_back_new_env(t_env **envs, t_env *new_env);
-
 
 t_redir		*init_redir(void);
 

@@ -1,7 +1,17 @@
-#include "minishell.h"
-#include <errno.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 13:38:07 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 13:38:14 by hson             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//exit
+#include "minishell.h"
+
 int		num_arg_error(t_cmd *cmd, int err_num)
 {
 	ft_putstr("minishell: ");
@@ -20,7 +30,6 @@ int		too_many_arg_error(t_cmd *cmd, int err_num)
 	return (err_num);
 }
 
-//command not found
 int		no_command_error(t_cmd *cmd, int err_num)
 {
 	ft_putstr("minishell: ");
@@ -29,7 +38,6 @@ int		no_command_error(t_cmd *cmd, int err_num)
 	return (err_num);
 }
 
-//no such file or directory
 int		no_file_error(t_cmd *cmd, int err_num)
 {
 	ft_putstr("minishell: ");
@@ -43,7 +51,6 @@ int		no_file_error(t_cmd *cmd, int err_num)
 	return (err_num);
 }
 
-//export arg error
 int		not_valid_idt(t_cmd *cmd, char *arg, int err_num)
 {
 	ft_putstr("minishell: ");
@@ -52,20 +59,4 @@ int		not_valid_idt(t_cmd *cmd, char *arg, int err_num)
 	ft_putstr(arg);
 	ft_putstr("': not a valid identifierd\n");
 	return (err_num);
-}
-
-void	ft_error(void)
-{
-	ft_putstr("minishell: error: ");
-	ft_putstr(strerror(errno));
-	ft_putstr("\n");
-	exit(EXIT_FAILURE);
-}
-
-int		open_error(char *file)
-{
-	ft_putstr("minishell: ");
-	ft_putstr(file);
-	ft_putstr(": No such file or directory\n");
-	return (-1);
 }

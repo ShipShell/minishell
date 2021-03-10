@@ -1,15 +1,26 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 13:41:26 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 14:00:21 by hson             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
 
 int		is_built_in(char *command)
 {
-	if (ft_strcmp(command,"echo") == 0 ||
-		ft_strcmp(command,"cd") == 0 ||
-		ft_strcmp(command,"pwd") == 0 ||
-		ft_strcmp(command,"export") == 0 ||
-		ft_strcmp(command,"unset") == 0 ||
-		ft_strcmp(command,"env") == 0 ||
-		ft_strcmp(command,"exit") == 0)
+	if (ft_strcmp(command, "echo") == 0 ||
+		ft_strcmp(command, "cd") == 0 ||
+		ft_strcmp(command, "pwd") == 0 ||
+		ft_strcmp(command, "export") == 0 ||
+		ft_strcmp(command, "unset") == 0 ||
+		ft_strcmp(command, "env") == 0 ||
+		ft_strcmp(command, "exit") == 0)
 		return (1);
 	else
 		return (0);
@@ -22,19 +33,19 @@ int		exec_builtin(t_cmd *cmd)
 	ret = 0;
 	if (change_redir(cmd) == -1)
 		return (1);
-	if (ft_strcmp(cmd->command[0],"echo") == 0)
+	if (ft_strcmp(cmd->command[0], "echo") == 0)
 		ret = exec_echo(cmd);
-	if (ft_strcmp(cmd->command[0],"cd") == 0)
+	if (ft_strcmp(cmd->command[0], "cd") == 0)
 		ret = exec_cd(cmd);
-	if (ft_strcmp(cmd->command[0],"pwd") == 0)
+	if (ft_strcmp(cmd->command[0], "pwd") == 0)
 		ret = exec_pwd(cmd);
-	if (ft_strcmp(cmd->command[0],"export") == 0)
+	if (ft_strcmp(cmd->command[0], "export") == 0)
 		ret = exec_export(cmd);
-	if (ft_strcmp(cmd->command[0],"unset") == 0)
+	if (ft_strcmp(cmd->command[0], "unset") == 0)
 		ret = exec_unset(cmd);
-	if (ft_strcmp(cmd->command[0],"env") == 0)
+	if (ft_strcmp(cmd->command[0], "env") == 0)
 		ret = exec_env(cmd);
-	if (ft_strcmp(cmd->command[0],"exit") == 0)
+	if (ft_strcmp(cmd->command[0], "exit") == 0)
 		ret = exec_exit(cmd);
 	getback_redir(cmd);
 	return (ret);
@@ -57,30 +68,15 @@ void	not_builtin_fork(t_cmd *cmd)
 	}
 }
 
-t_bool is_empty_cmd(t_cmd *cmd)
-{
-	if (cmd->command[0] == NULL)
-		return (TRUE);
-	return (FALSE);
-}
-
-void	skip(void)
-{
-	return ;
-}
-
 void	exec_command(void)
 {
 	t_cmd	*cmd;
 
 	cmd = g_cmd;
-	// printf("exec_command cmd : %s\n", cmd->command[0]);
 	while (cmd)
 	{
 		substitute_command(cmd);
 		substitute_redir(cmd);
-		// test_make_cmd_str_to_tokens();
-		// test_check_cmd_list_redirection(cmd);
 		if (is_empty_cmd(cmd))
 			skip();
 		else if (cmd->ispipe == 1)

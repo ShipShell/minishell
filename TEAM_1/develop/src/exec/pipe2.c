@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_echo.c                                        :+:      :+:    :+:   */
+/*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 13:41:50 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 13:57:23 by hson             ###   ########.fr       */
+/*   Created: 2021/03/10 13:44:02 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 14:04:44 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_val(t_cmd *cmd, int i, int cnt)
+int		count_pipes(t_cmd *cmd)
 {
-	while (cmd->command[i])
+	int		cnt;
+
+	cnt = 0;
+	while (cmd)
 	{
-		ft_putstr(cmd->command[i]);
-		if (i < cnt - 1)
-			ft_putstr(" ");
-		i++;
+		if (cmd->ispipe == 1)
+			cnt++;
+		else
+			break ;
+		cmd = cmd->next;
 	}
+	return (cnt);
 }
 
-int		exec_echo(t_cmd *cmd)
+int		make_pipes(int fds[], int cnt)
 {
-	t_env	*env;
-	int		cnt_arg;
+	int	i;
 
-	env = g_env;
-	cnt_arg = chk_arg_cnt(cmd);
-	if (cnt_arg > 2 && ft_strcmp(cmd->command[1], "-n") == 0)
-		print_val(cmd, 2, cnt_arg);
-	else
+	i = -1;
+	while (++i < cnt)
 	{
-		print_val(cmd, 1, cnt_arg);
-		write(1, "\n", 1);
+		if (pipe(fds + (i * 2)) == -1)
+			ft_error();
 	}
 	return (0);
 }
