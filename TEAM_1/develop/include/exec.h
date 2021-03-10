@@ -49,8 +49,8 @@ t_cmd	*piping(t_cmd *cmd);
 
 void	do_redir_in(t_redir *in);
 void	do_redir_out(t_redir *out);
-void	change_redir(cmd);
-void	getback_redir(cmd);
+void	change_redir(t_cmd *cmd);
+void	getback_redir(t_cmd *cmd);
 
 void	skip(void);
 t_bool	is_empty_cmd(t_cmd *cmd);

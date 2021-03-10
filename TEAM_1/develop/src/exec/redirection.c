@@ -2,25 +2,33 @@
 
 void	do_redir_in(t_redir *in)
 {
+	int		fd;
+
 	while (in->file->next)
 	{
-		if (open(in->file->content, O_RDONLY) == -1)
-			open_error(in->file->content, 2);
-		if (close(in->file->content) == -1)
+		if ((fd = open(in->file->content, O_RDONLY)) == -1)
+		{
+			printf("here\n");
+			open_error(in->file->content);
+		}
+		if (close(fd) == -1)
 			ft_error();
 		in->file = in->file->next;
 	}
-	in->fd = open(in->file->content, O_RDWR);
+	if ((in->fd = open(in->file->content, O_RDONLY)) == -1)
+		open_error(in->file->content);
 	in->tmp_std = dup(0);
 	dup2(in->fd, 0);
 }
 
 void	do_redir_out(t_redir *out)
 {
+	int		fd;
+
 	while (out->file->next)
 	{
-		open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
-		if (close(out->file->content) == -1)
+		fd = open(out->file->content, O_WRONLY | O_TRUNC |O_CREAT, 0666);
+		if (close(fd) == -1)
 			ft_error();
 		out->file = out->file->next;
 	}
