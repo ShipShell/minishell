@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_unset.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 13:42:23 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 13:44:33 by hson             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	remove_env(char *key)
@@ -16,17 +28,12 @@ void	remove_env(char *key)
 			if (bef)
 				bef->next = next;
 			else
-			{
 				g_env = next;
-				//printf("1st env %s : %s\n", g_env->key, g_env->val);
-			}
 			free(env->key);
 			if (env->val)
 				free(env->val);
 			free(env);
-			// printf("bef : %s=%s\n", bef->key, bef->val);
-			// printf("next : %s=%s\n", next->key, next->val);
-			break;
+			break ;
 		}
 		bef = env;
 		env = env->next;

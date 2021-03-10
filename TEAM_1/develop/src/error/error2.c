@@ -1,52 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   error2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 13:38:07 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 14:17:58 by hson             ###   ########.fr       */
+/*   Created: 2021/03/10 13:38:37 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 14:17:47 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		no_command_error(t_cmd *cmd, int err_num)
+int		num_arg_error(t_cmd *cmd, int err_num)
 {
 	ft_putstr("minishell: ");
 	ft_putstr(cmd->command[0]);
-	ft_putstr(": command not found\n");
+	ft_putstr(": ");
+	ft_putstr(cmd->command[1]);
+	ft_putstr(": numeric argument required\n");
 	return (err_num);
 }
 
-int		no_file_error(t_cmd *cmd, int err_num)
+int		too_many_arg_error(t_cmd *cmd, int err_num)
 {
 	ft_putstr("minishell: ");
 	ft_putstr(cmd->command[0]);
-	if (cmd->command[1])
-	{
-		ft_putstr(": ");
-		ft_putstr(cmd->command[1]);
-	}
+	ft_putstr(": too many arguments\n");
+	return (err_num);
+}
+
+int		open_error(char *file)
+{
+	ft_putstr("minishell: ");
+	ft_putstr(file);
 	ft_putstr(": No such file or directory\n");
-	return (err_num);
-}
-
-int		not_valid_idt(t_cmd *cmd, char *arg, int err_num)
-{
-	ft_putstr("minishell: ");
-	ft_putstr(cmd->command[0]);
-	ft_putstr(": '");
-	ft_putstr(arg);
-	ft_putstr("': not a valid identifierd\n");
-	return (err_num);
-}
-
-void	ft_error(void)
-{
-	ft_putstr("minishell: error: ");
-	ft_putstr(strerror(errno));
-	ft_putstr("\n");
-	exit(EXIT_FAILURE);
+	return (-1);
 }

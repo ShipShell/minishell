@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_not_builtin.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 13:42:00 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 14:01:54 by hson             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	chk_is_cmd_path(t_cmd *cmd)
@@ -7,9 +19,9 @@ void	chk_is_cmd_path(t_cmd *cmd)
 		cmd->ispath = 1;
 }
 
-char	**get_path_env()
+char	**get_path_env(void)
 {
-	t_env 	*env;
+	t_env	*env;
 	char	**path;
 	char	*env_path;
 
@@ -27,20 +39,7 @@ char	**get_path_env()
 	return (path);
 }
 
-void	free_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	if (arr)
-	{
-		while (arr[++i])
-			free(arr[i]);
-		free(arr);
-	}
-}
-
-char	**make_env_char()
+char	**make_env_char(void)
 {
 	t_env	*env;
 	char	**res;
@@ -49,7 +48,7 @@ char	**make_env_char()
 	int		i;
 
 	env = g_env;
-	size = chk_arg_cnt_env(env);
+	size = chk_arg_cnt_env();
 	res = (char **)malloc(sizeof(char *) * (size + 1));
 	i = 0;
 	while (env)
@@ -59,7 +58,7 @@ char	**make_env_char()
 			env = env->next;
 			continue;
 		}
-		tmp = ft_strjoin(env->key,"=");
+		tmp = ft_strjoin(env->key, "=");
 		res[i] = ft_strjoin(tmp, env->val);
 		free(tmp);
 		i++;
@@ -93,12 +92,10 @@ void	exec_not_builtin(t_cmd *cmd)
 {
 	char	**path;
 
-	// printf("ispath : %d\n", cmd->ispath);
 	change_redir(cmd);
 	chk_is_cmd_path(cmd);
 	if (cmd->ispath == 0)
 	{
-		// printf("no path\n");
 		path = get_path_env();
 		exec_not_builtin_sub(cmd, path);
 		free_arr(path);
@@ -106,7 +103,6 @@ void	exec_not_builtin(t_cmd *cmd)
 	}
 	else
 	{
-		// printf("has path\n");;
 		execve(cmd->command[0], cmd->command, make_env_char());
 		exit(no_file_error(cmd, 127));
 	}

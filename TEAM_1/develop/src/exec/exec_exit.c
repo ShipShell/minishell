@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_exit.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 13:41:23 by hson              #+#    #+#             */
+/*   Updated: 2021/03/10 13:50:01 by hson             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int		chk_arg_cnt(t_cmd *cmd)
@@ -38,7 +50,6 @@ int		exec_exit(t_cmd *cmd)
 
 	cnt_arg = chk_arg_cnt(cmd);
 	isdigit = chk_arg_digit(cmd->command[1]);
-	//printf("cnt_arg : %d and isdigit : %d\n", cnt_arg, isdigit);
 	if (cmd->command[1])
 	{
 		if (isdigit == 0)
