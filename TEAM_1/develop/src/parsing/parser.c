@@ -2,8 +2,13 @@
 
 void	parse_and_split_from_input(char *stdin_buf)
 {
+	if (have_syntax_error(stdin_buf))
+		return ;
 	parse_cmd_from_input(stdin_buf);
 	make_cmd_str_to_tokens();
+	check_cmd_list_redirection();
+	// if (start_with_unexpected_token())
+	// 	return ;
 }
 
 //STEP1. cmd_str ; | 기준으로 쪼개기
@@ -126,7 +131,6 @@ void	make_cmd_str_to_tokens(void)
 			skip_seperator_at_first(&current_ptr);
 			len = count_token_length(current_ptr);
 			current_cmd->command[i++] = ft_strndup(current_ptr, len);
-			//printf("cmd[%d] : %s\n", i - 1, g_cmd->command[i - 1]);
 			current_ptr += len;
 		}
 		current_cmd->ispath = 0;
@@ -193,4 +197,87 @@ int		count_token_length(char *ptr)
 		++len;
 	}
 	return (len);
+}
+
+void	check_cmd_list_redirection(void)
+{
+	t_cmd *cmd;
+
+	cmd = g_cmd;
+	while (cmd)
+	{
+		change_redir_status(cmd);
+		change_redir_status(cmd);
+		cmd = cmd->next;
+	}
+}
+
+void	change_redir_status(t_cmd *cmd)
+{
+	int		in_count;
+	int		out_count;
+	int		i;
+
+	i = 0;
+	in_count = 0;
+	out_count = 0;
+	while (cmd->command[i])
+	{
+		if (ft_strchr("><", cmd->command[i][0]))
+		{
+			if (cmd->command[i][0] == '>')
+				++out_count;
+			else
+				++in_count;
+			free(cmd->command[i]);
+			cmd->command[i] = NULL;
+		}
+		else
+		{
+			add_redir(cmd, i, in_count, out_count);
+			in_count = 0;
+			out_count = 0;
+		}
+		++i;
+	}
+}
+
+void	add_redir(t_cmd *cmd, int i, int in_count, int out_count)
+{
+	if (out_count == 1)
+		add_out_redir(cmd, i, FALSE);
+	else if (out_count == 2)
+		add_out_redir(cmd, i, TRUE); // double_out_redir();// >> 처리
+	else if (in_count == 1)
+		add_in_redir(cmd, i, FALSE);
+	else if (in_count == 2)
+		add_in_redir(cmd, i, TRUE);
+}
+
+void	add_out_redir(t_cmd *cmd, int i, t_bool isdouble)
+{
+	t_list	*new;
+
+	cmd->isredir = TRUE;
+	if (cmd->redir_out == NULL)
+		cmd->redir_out = init_redir();
+	new = ft_lstnew(ft_strdup(cmd->command[i]));
+	ft_lstadd_back(&cmd->redir_out->file, new);
+	cmd->redir_out->is_double = isdouble;
+	free(cmd->command[i]);
+	cmd->command[i] = NULL;
+}
+
+void	add_in_redir(t_cmd *cmd, int i, t_bool isdouble)
+{
+	t_list	*new;
+
+	cmd->isredir = TRUE;
+	if (cmd->redir_in == NULL)
+		cmd->redir_in = init_redir();
+	new = ft_lstnew(ft_strdup(cmd->command[i]));
+	ft_lstadd_back(&cmd->redir_in->file, new);
+	cmd->redir_in->is_double = isdouble;
+	free(cmd->command[i]);
+	cmd->command[i] = NULL;
 }

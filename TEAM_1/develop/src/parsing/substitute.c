@@ -22,6 +22,38 @@ void	substitute_command(t_cmd *cmd)
 	}
 }
 
+void	substitute_redir(t_cmd *cmd)
+{
+	t_list	*file;
+	char	*substituted_file;
+
+	if (cmd->isredir == FALSE)
+		return ;
+	if (cmd->redir_in)
+	{
+		file = cmd->redir_in->file;
+		substitute_redir_file_list(file);
+	}
+	if (cmd->redir_out)
+	{
+		file = cmd->redir_out->file;
+		substitute_redir_file_list(file);
+	}
+}
+
+void	substitute_redir_file_list(t_list *file)
+{
+	char	*substituted_file;
+
+	while (file)
+	{
+		substituted_file = substitute_token(file->content);
+		free(file->content);
+		file->content = substituted_file;
+		file = file->next;
+	}
+}
+
 t_bool	is_pipe_or_semicolon(char *token)
 {
 	if (*token == '|' || *token == ';' || *token == '\0')
@@ -61,12 +93,11 @@ char	*substitute_token(char *token)
 int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting)
 {
 	int		action;
+
 	action = check_substitute_action(quoting, *token);
 	if (action == SUB_SPECIAL) //  - sigavold 나주엥 막아야함.
 		return (substitute_special_char(buffer, token));
-	else if (action == SUB_SKIP)
-		++*buffer;
-	else // action = SUB_LITERAL - sigavold 나주엥 막아야함.
+	else if (action == SUB_LITERAL) // action = SUB_LITERAL - sigavold 4096이상 나주엥 막아야함.
 	{
 		**buffer = *token;
 		++*buffer;
@@ -76,6 +107,7 @@ int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting)
 
 int		check_substitute_action(t_quoting *quoting, char c)
 {
+
 	if (ft_strchr("$~", c) && quoting->escape == OFF
 		&& quoting->quotes != SINGLE_OPEN)
 		return (SUB_SPECIAL);
@@ -134,8 +166,9 @@ void	push_value_to_buffer(char *value, char **buffer)
 {
 	int	i;
 
+	if (value == NULL)
+		return ;
 	i = 0;
-	printf("%s",value);
 	while (*value)
 	{
 		**buffer = *value;

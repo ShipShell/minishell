@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:16:16 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/09 19:18:52 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void	loop_prompt(void)
 	while (1)
 	{
 		init_prompt();
-		exec_command();
-		test_make_cmd_str_to_tokens();
-
+		// test_parse_cmd_from_input();
+		// test_make_cmd_str_to_tokens();
+		if (g_exit_code != 258) // syntax_error
+			exec_command();
 	}
 }
 void	erase_signal_ascii(void)

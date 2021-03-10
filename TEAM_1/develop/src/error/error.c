@@ -26,7 +26,7 @@ int		no_command_error(t_cmd *cmd, int err_num)
 	ft_putstr("minishell: ");
 	ft_putstr(cmd->command[0]);
 	ft_putstr(": command not found\n");
-	return (err_num);	
+	return (err_num);
 }
 
 //no such file or directory

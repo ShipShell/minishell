@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:16:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/08 18:29:50 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_cmd		*new_cmd(char *cmd_str)
 
 	if (!(new = (t_cmd *)malloc(sizeof(t_cmd) * 1)))
 		return (NULL);
+	new->redir_in = NULL;
+	new->redir_out = NULL;
 	new->cmd_str = cmd_str;
 	new->ispipe = FALSE;
 	new->ispath = FALSE;
@@ -109,4 +111,18 @@ void		add_back_new_env(t_env **envs, t_env *new_env)
 	while (cur->next)
 		cur = cur->next;
 	cur->next = new_env;
+}
+
+t_redir		*init_redir(void)
+{
+	t_redir	*redir;
+
+	redir = malloc(sizeof(t_redir));
+	if (redir == NULL)
+		exit (1);
+	redir->fd = 0;
+	redir->tmp_std = 0;
+	redir->is_double = FALSE;
+	redir->file = NULL;
+	return (redir);
 }
