@@ -56,7 +56,7 @@ typedef struct		s_quoting
 	t_quotes	quotes;
 }					t_quoting;
 
-void	parse_and_split_from_input(char *stdin_buf);
+t_bool	parse_and_split_from_input(char *stdin_buf);
 
 //step1
 void	parse_cmd_from_input(char *stdin_buf);

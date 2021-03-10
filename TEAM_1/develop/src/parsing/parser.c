@@ -1,14 +1,13 @@
 #include "minishell.h"
 
-void	parse_and_split_from_input(char *stdin_buf)
+t_bool	parse_and_split_from_input(char *stdin_buf)
 {
 	if (have_syntax_error(stdin_buf))
-		return ;
+		return (FALSE);
 	parse_cmd_from_input(stdin_buf);
 	make_cmd_str_to_tokens();
 	check_cmd_list_redirection();
-	// if (start_with_unexpected_token())
-	// 	return ;
+	return (TRUE);
 }
 
 //STEP1. cmd_str ; | 기준으로 쪼개기
