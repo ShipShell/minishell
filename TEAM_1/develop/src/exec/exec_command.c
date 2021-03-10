@@ -85,7 +85,7 @@ void	exec_command(void)
 			cmd = piping(cmd);
 			continue;
 		}
-		else if (is_built_in(cmd->command[0]) == 1)
+		if (is_built_in(cmd->command[0]) == 1)
 			g_exit_code = exec_builtin(cmd);
 		else
 			not_builtin_fork(cmd);
