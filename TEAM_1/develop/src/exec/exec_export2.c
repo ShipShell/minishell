@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:09 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 13:58:56 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/10 15:14:00 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_sort_env(t_env **sort_env, int size)
 void	print_export_sub(t_env **sort_env)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (sort_env[i])
@@ -62,7 +63,13 @@ void	print_export_sub(t_env **sort_env)
 		if (sort_env[i]->val)
 		{
 			write(1, "=\"", 2);
-			ft_putstr(sort_env[i]->val);
+			j = 0;
+			while (sort_env[i]->val[j])
+			{
+				if (sort_env[i]->val[j] == '\"')
+					write(1, "\\", 1);
+				ft_putchar(sort_env[i]->val[j++]);
+			}
 			write(1, "\"", 1);
 		}
 		write(1, "\n", 1);
