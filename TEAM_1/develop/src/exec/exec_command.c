@@ -20,6 +20,7 @@ int		exec_builtin(t_cmd *cmd)
 	int	ret;
 
 	ret = 0;
+	change_redir(cmd);
 	if (ft_strcmp(cmd->command[0],"echo") == 0)
 		ret = exec_echo(cmd);
 	if (ft_strcmp(cmd->command[0],"cd") == 0)
@@ -34,6 +35,7 @@ int		exec_builtin(t_cmd *cmd)
 		ret = exec_env(cmd);
 	if (ft_strcmp(cmd->command[0],"exit") == 0)
 		ret = exec_exit(cmd);
+	getback_redir(cmd);
 	return (ret);
 }
 

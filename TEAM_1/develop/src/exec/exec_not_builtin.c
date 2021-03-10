@@ -94,6 +94,7 @@ void	exec_not_builtin(t_cmd *cmd)
 	char	**path;
 
 	// printf("ispath : %d\n", cmd->ispath);
+	change_redir(cmd);
 	chk_is_cmd_path(cmd);
 	if (cmd->ispath == 0)
 	{
