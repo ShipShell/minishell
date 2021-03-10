@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 18:29:50 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/10 12:47:59 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ void		add_back_new_cmd(t_cmd **cmds, t_cmd *new_cmd)
 	cur->next = new_cmd;
 }
 
+void	lst_del_one(void * target)
+{
+	free(target);
+}
+
+void	delete_redir_in_cmd(t_redir *redir)
+{
+	if (redir == NULL)
+		return ;
+	ft_lstclear(&redir->file, lst_del_one);
+	free(redir);
+}
+
 void	delete_data_in_cmd(void *data)
 {
 	t_cmd	*cmd;
@@ -52,6 +65,8 @@ void	delete_data_in_cmd(void *data)
 	cmd = (t_cmd *)data;
 	i = 0;
 	free(cmd->cmd_str);
+	delete_redir_in_cmd(cmd->redir_in);
+	delete_redir_in_cmd(cmd->redir_out);
 	if (cmd->command != NULL)
 	{
 		while (cmd->command[i])
@@ -67,6 +82,7 @@ void	delete_one_cmd(t_cmd *cmd, void (*del)(void*))
 	if (del)
 		del(cmd);
 	free(cmd);
+	cmd = NULL;
 }
 
 void	delete_cmd_list(t_cmd **lst, void (*del)(void*))
