@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/08 10:39:46 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/10 10:30:30 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void	loop_prompt(void)
 	while (1)
 	{
 		init_prompt();
-		exec_command();
-		test_make_cmd_str_to_tokens();
-
+		// test_parse_cmd_from_input();
+		// test_make_cmd_str_to_tokens();
+		if (g_exit_code != 258) // syntax_error
+			exec_command();
 	}
 }
 void	erase_signal_ascii(void)

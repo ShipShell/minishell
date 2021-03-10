@@ -6,6 +6,7 @@ SRC_NAME = main \
 		tester/tester \
 		utils/utils \
 		error/error \
+		error/syntax_error \
 		exec/exec_cd \
 		exec/exec_command \
 		exec/exec_echo \
