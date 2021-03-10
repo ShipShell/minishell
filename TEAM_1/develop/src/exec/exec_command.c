@@ -20,7 +20,8 @@ int		exec_builtin(t_cmd *cmd)
 	int	ret;
 
 	ret = 0;
-	change_redir(cmd);
+	if (change_redir(cmd) == -1)
+		return (1);
 	if (ft_strcmp(cmd->command[0],"echo") == 0)
 		ret = exec_echo(cmd);
 	if (ft_strcmp(cmd->command[0],"cd") == 0)
@@ -78,8 +79,8 @@ void	exec_command(void)
 	{
 		substitute_command(cmd);
 		substitute_redir(cmd);
-		// test_make_cmd_str_to_tokens();
-		//test_check_cmd_list_redirection(cmd);
+		test_make_cmd_str_to_tokens();
+		test_check_cmd_list_redirection(cmd);
 		if (is_empty_cmd(cmd))
 			skip();
 		else if (cmd->ispipe == 1)

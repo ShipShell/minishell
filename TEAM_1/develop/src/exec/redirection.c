@@ -1,48 +1,51 @@
 #include "minishell.h"
 
-void	do_redir_in(t_redir *in)
+int		do_redir_in(t_redir *in)
 {
 	int		fd;
 
 	while (in->file->next)
 	{
 		if ((fd = open(in->file->content, O_RDONLY)) == -1)
-		{
-			printf("here\n");
-			open_error(in->file->content);
-		}
+			return (open_error(in->file->content));
 		if (close(fd) == -1)
 			ft_error();
 		in->file = in->file->next;
 	}
 	if ((in->fd = open(in->file->content, O_RDONLY)) == -1)
-		open_error(in->file->content);
+		return (open_error(in->file->content));
 	in->tmp_std = dup(0);
 	dup2(in->fd, 0);
+	return (0);
 }
 
-void	do_redir_out(t_redir *out)
+int		do_redir_out(t_redir *out)
 {
 	int		fd;
 
 	while (out->file->next)
 	{
-		fd = open(out->file->content, O_WRONLY | O_TRUNC |O_CREAT, 0666);
+		fd = open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 		if (close(fd) == -1)
 			ft_error();
 		out->file = out->file->next;
 	}
-	out->fd = open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+	if (out->is_double == 1)
+		out->fd = open(out->file->content, O_WRONLY | O_APPEND | O_CREAT, 0666);
+	else
+		out->fd = open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	out->tmp_std = dup(1);
 	dup2(out->fd, 1);
+	return (0);
 }
 
-void	change_redir(t_cmd *cmd)
+int		change_redir(t_cmd *cmd)
 {
 	if (cmd->redir_in)
-		do_redir_in(cmd->redir_in);
+		return (do_redir_in(cmd->redir_in));
 	if (cmd->redir_out)
-		do_redir_out(cmd->redir_out);
+		return (do_redir_out(cmd->redir_out));
+	return (0);
 }
 
 void	getback_redir(t_cmd *cmd)
