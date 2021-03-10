@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/10 10:30:30 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/10 11:26:16 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,35 @@ void	get_prompt_input(char **stdin_buffer)
 	get_next_line(0, stdin_buffer);
 }
 
-int		init_prompt(void)
+t_bool	init_prompt(void)
 {
 	char	*stdin_buffer;
 	int		input_byte;
 	t_list	*tokens;
+	t_bool	syntax_ok;
 
 	delete_cmd_list(&g_cmd, delete_data_in_cmd);
 	show_prompt_title();
 	get_prompt_input(&stdin_buffer);
-	parse_and_split_from_input(stdin_buffer);
+	syntax_ok = parse_and_split_from_input(stdin_buffer);
 	free(stdin_buffer);
-	return (0);
+	return (syntax_ok);
 }
 
 void	loop_prompt(void)
 {
+	t_bool	syntax_ok;
+
 	while (1)
 	{
-		init_prompt();
+		syntax_ok = init_prompt();
 		// test_parse_cmd_from_input();
 		// test_make_cmd_str_to_tokens();
-		if (g_exit_code != 258) // syntax_error
+		if (syntax_ok) // syntax_error
 			exec_command();
 	}
 }
+
 void	erase_signal_ascii(void)
 {
 	ft_printf("\b\b  \b\b\n");
