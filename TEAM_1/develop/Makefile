@@ -6,6 +6,7 @@ SRC_NAME = main \
 		tester/tester \
 		utils/utils \
 		error/error \
+		error/error2 \
 		error/syntax_error \
 		exec/exec_cd \
 		exec/exec_command \
@@ -13,11 +14,14 @@ SRC_NAME = main \
 		exec/exec_env \
 		exec/exec_exit \
 		exec/exec_export \
+		exec/exec_export2 \
 		exec/exec_pwd \
 		exec/exec_unset \
 		exec/exec_not_builtin \
 		exec/pipe \
-		exec/redirection
+		exec/pipe2 \
+		exec/redirection \
+		exec/util_exec
 
 SRC = $(addprefix src/,$(addsuffix .c, $(SRC_NAME)))
 SRCDIR = ./src

@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:42:30 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 14:05:07 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/10 14:13:36 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_cmd	*piping(t_cmd *cmd)
 	while (++i < cnt_pip + 1)
 	{
 		substitute_command(cmd);
+		substitute_redir(cmd);
 		if (is_empty_cmd(cmd))
 			skip();
 		if ((pid[i] = fork()) == -1)
