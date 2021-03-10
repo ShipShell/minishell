@@ -2,7 +2,8 @@
 
 int	is_built_in(t_cmd *cmd)
 {
-	// ft_redir(cmd);
+	if (ft_redir(cmd) == -1)
+		return (-1);
 	if (!ft_strcmp(cmd->token[0], "cd"))
 		ft_cd(cmd);
 	else if (!ft_strcmp(cmd->token[0], "echo"))
@@ -19,10 +20,10 @@ int	is_built_in(t_cmd *cmd)
 		ft_unset(cmd);
 	else
 	{
-		// get_fd_back(cmd);
+		get_fd_back(cmd);
 		return (0);
 	}
-	// get_fd_back(cmd);
+	get_fd_back(cmd);
 	return (1);
 }
 

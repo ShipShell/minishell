@@ -1,8 +1,8 @@
 #include "exec.h"
 
-int	print_no_such_file_err(t_cmd *cmd, int index)
+int	print_no_such_file_err(char *filename)
 {
-	ft_putstr_fd(cmd->token[index], 2);
+	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
 	return (0);
 }

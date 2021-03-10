@@ -7,8 +7,7 @@ all :
 	#./exec_src/*.c
 test : 
 	make re -C ./libdir
-	$(CC) -g3 -fsanitize=address -L libdir -lft -I ./libdir -I ./include test.c
-	./a.out
+	$(CC) -g3 -fsanitize=address -L libdir -lft -I ./libdir -I ./include ./parsing_src/*.c ./exec_src/*.c test.c
 clean :
 	rm -rf *.o
 fclean : clean

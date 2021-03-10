@@ -19,7 +19,7 @@ int	ft_exit(t_cmd *cmd);
 ** error
 */
 int	print_command_not_found_err(t_cmd *cmd, int index);
-int	print_no_such_file_err(t_cmd *cmd, int index);
+int	print_no_such_file_err(char *filename);
 int	print_strerror(char *);
 int	print_not_a_valid_identifier(char *str, int index);
 int	cycle_list(t_list *cmd_list);

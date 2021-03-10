@@ -46,7 +46,7 @@ int ft_env(t_cmd *cmd)
 	if (cmd->token[++i])
 	{
 		ft_putstr_fd("shipshell: ", 2);
-		print_no_such_file_err(cmd, 1);
+		print_no_such_file_err(cmd->token[1]);
 		g_exit_code = 127;
 		return (-1);
 	}

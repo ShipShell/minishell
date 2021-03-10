@@ -93,7 +93,7 @@ int	check_arg(t_cmd *cmd)
 	{
 		g_exit_code = 1;
 		ft_putstr_fd("shipshell: cd: ", 1);
-		print_no_such_file_err(cmd, 1);
+		print_no_such_file_err(cmd->token[1]);
 		return (-1);
 	}
 	change_env_pwd(getcwd(buff, MAX_BUFF));

@@ -47,6 +47,19 @@ static t_env	*sort_env()
 	return (env);
 }
 
+static void	print_export_value(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '\"')
+			ft_putchar_fd('\\', 1);
+		ft_putchar_fd(str[i], 1);
+	}
+}
+
 static int	export_no_arg()
 {
 	int		i;
@@ -63,7 +76,7 @@ static int	export_no_arg()
 		if (sorted_env[i].value)
 		{
 			ft_putstr_fd("=\"", 1);
-			ft_putstr_fd(sorted_env[i].value, 1);
+			print_export_value(sorted_env[i].value);
 			ft_putstr_fd("\"\n", 1);
 		}
 		else

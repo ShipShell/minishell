@@ -94,7 +94,7 @@ int	single_path(t_cmd *cmd)
 	}
 	ft_free_dptr(env);
 	ft_putstr_fd("shipshell: ", 1);
-	print_no_such_file_err(cmd, 0);
+	print_no_such_file_err(cmd->token[0]);
 	exit(1);
 	return (1);
 }
@@ -103,6 +103,7 @@ int	exec_not_built_in(t_cmd *cmd)
 {
 	char	**path;
 
+	ft_redir(cmd);
 	path = split_path();
 	if (!ft_strncmp(cmd->token[0], "./", 2) 
 		|| !ft_strncmp(cmd->token[0], "/", 1))
@@ -119,10 +120,7 @@ int	ft_not_built_in(t_cmd *cmd)
 	
 	pid = fork();
 	if (pid == 0)
-	{
-		// ft_redir(cmd);
 		exec_not_built_in(cmd);
-	}
 	else if (pid > 0)
 	{
 		wait(&status);

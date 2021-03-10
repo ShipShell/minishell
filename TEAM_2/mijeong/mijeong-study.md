@@ -203,3 +203,4 @@ int main()
 
 - not_built_in에서 에러 발생시 에러 처리 뭐뭐 했는지..
 - pipe에서 list가 잘 못된 값을 본다...
+- echo hi > a.txt > b.txt < c.txt ; env
