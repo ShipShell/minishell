@@ -37,7 +37,6 @@ typedef struct		s_cmd
 	t_redir			*redir_out;
 	char			*cmd_str;
 	char			**command;
-	t_bool			syntax_error;
 	t_bool			ispath;
 	t_bool			ispipe;
 	t_bool			isredir;
