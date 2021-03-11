@@ -158,8 +158,18 @@ int		substitute_special_char(char **buffer, char *token)
 
 void	push_exit_code_to_buffer(char **buffer)
 {
-	**buffer = g_exit_code + 48;
-	++*buffer;
+	char	*exit_code_str;
+	int		i;
+
+	exit_code_str = ft_itoa(g_exit_code);
+	i = -1;
+	while (exit_code_str[++i])
+	{
+		**buffer = exit_code_str[i];
+		++*buffer;
+	}
+	free(exit_code_str);
+	exit_code_str = NULL;
 }
 
 void	push_value_to_buffer(char *value, char **buffer)
