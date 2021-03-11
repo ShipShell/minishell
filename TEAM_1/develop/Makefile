@@ -1,8 +1,15 @@
 NAME = minishell
 CFLAG = -g3 -fsanitize=address -Wall -Wextra -Werror
 SRC_NAME = main \
-		parsing/parser \
+		parsing/add_redir \
+		parsing/cmd_to_tokens \
+		parsing/input_to_cmd \
+		parsing/quoting \
+		parsing/redirection \
 		parsing/substitute \
+		parsing/substitute2 \
+		parsing/substitute3 \
+		parsing/substitute4 \
 		tester/tester \
 		utils/utils \
 		error/error \

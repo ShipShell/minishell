@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 15:10:46 by kilee             #+#    #+#             */
-/*   Updated: 2021/02/26 09:14:18 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/11 15:38:18 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,7 @@ int				get_next_line(int fd, char **line)
 			free(room[fd]);
 		}
 		room[fd] = temp;
-		if (ft_strchr(room[fd], '\n')
-			|| ft_strchr(room[fd], 3)
-			|| ft_strchr(room[fd], 2)
-			|| ft_strchr(room[fd], 4)
-			|| read_val == 0)
+		if (ft_strchr(room[fd], '\n') || read_val == 0)
 			break ;
 	}
 	ft_strfree(&buf);

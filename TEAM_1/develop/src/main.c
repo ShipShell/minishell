@@ -6,10 +6,9 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 13:50:05 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/11 16:53:28 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -29,6 +28,7 @@ void	exit_with_cntl_d(void)
 	printf("exit\n");
 	exit (0);
 }
+
 void	get_prompt_input(char **stdin_buffer)
 {
 	char	*temp;
@@ -135,7 +135,6 @@ int		main(int argc, char *argv[], char *envp[])
 	if (argv == NULL)
 		return (0);
 	init_g_env(envp);
-	// test_init_g_env(g_env);
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
 	loop_prompt();
