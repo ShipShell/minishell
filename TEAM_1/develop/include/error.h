@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:23:24 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 15:02:33 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/11 15:27:51 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_error(void);
 int		open_error(char *file);
 int		no_home_error(t_cmd *cmd, int err_num);
 
-//syntax_error
 t_bool	have_syntax_error(char *stdin_buf);
 void	syntax_error(void);
 t_bool	too_many_semicolon(char *stdin_buf);
