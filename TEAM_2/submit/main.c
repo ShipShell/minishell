@@ -39,18 +39,46 @@ void	prompt_loop(void)
 void	handle_sigint(int signo)
 {
 	(void)signo;
-	ft_putstr_fd("\b\b  \b\b\n", 1);
-	ft_putstr_fd("shipshell$ ", 1);
+	if (g_child)
+		ft_putstr_fd("\n", 1);
+	else
+	{
+		ft_putstr_fd("\b\b  \b\b\n", 1);
+		ft_putstr_fd("shipshell$ ", 1);
+	}
+	return ;
+}
+
+void	handle_sigterm(int signo)
+{
+	(void)signo;
+	if (g_child)
+		ft_putstr_fd("exit\n", 1);
+	exit(0);
+	return ;
+}
+
+void	handle_sigquit(int signo)
+{
+	(void)signo;
+	ft_putstr_fd("\b\b  \b\b", 1);
+	if (g_child)
+	{
+		ft_putstr_fd("^\\Quit: 3\n", 1);
+		g_exit_code = 131;
+	}
 	return ;
 }
 
 int		main(int argc, char **argv, char **envp)
 {
-	set_env_list(envp);
-	
 	(void)argc;
 	(void)argv;
+	g_child = 0;
 	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
+	signal(SIGTERM, handle_sigterm);
+	set_env_list(envp);
 	prompt_loop();
 	return (0);
 }

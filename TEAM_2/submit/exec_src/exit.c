@@ -2,7 +2,7 @@
 
 int	put_not_number_err(t_cmd *cmd)
 {
-	ft_putstr_fd("shipshell: exit: ", 1);
+	ft_putstr_fd("exit\nshipshell: exit: ", 1);
 	ft_putstr_fd(cmd->token[1], 1);
 	ft_putstr_fd(": numeric argument required\n", 1);
 	exit(255);

@@ -2,8 +2,8 @@
 
 int	is_built_in(t_cmd *cmd)
 {
-	if (ft_redir(cmd) == -1)
-		return (-1);
+	// if (ft_redir(cmd) == -1)
+	// 	return (-1);
 	if (!ft_strcmp(cmd->token[0], "cd"))
 		ft_cd(cmd);
 	else if (!ft_strcmp(cmd->token[0], "echo"))
@@ -20,10 +20,10 @@ int	is_built_in(t_cmd *cmd)
 		ft_unset(cmd);
 	else
 	{
-		get_fd_back(cmd);
+		// get_fd_back(cmd);
 		return (0);
 	}
-	get_fd_back(cmd);
+	// get_fd_back(cmd);
 	return (1);
 }
 
@@ -54,7 +54,7 @@ int	count_pipe(t_list *cmd_list)
 	int	result;
 
 	result = 0;
-	while (((t_cmd *)cmd_list->content)->flag == PIPELINE)
+	while (((t_cmd *)cmd_list->content)->flag == PIPE)
 	{
 		result++;
 		cmd_list = cmd_list->next;
@@ -126,6 +126,7 @@ int	exec_pipe(t_list **cmd_list)
 	i = -1;
 	while (++i < pipe_num)
 	{
+		g_child = 1;
 		pid[i] = fork();
 		if (pid[i] == 0)
 			connect_pipe(*cmd_list, fd, i * 2, pipe_num * 2);
@@ -135,6 +136,7 @@ int	exec_pipe(t_list **cmd_list)
 	if (pid[i] == 0)
 		connect_pipe(*cmd_list, fd, i * 2, pipe_num * 2);
 	wait_all_child(pid, pipe_num + 1, fd);
+	g_child = 0;
 	free(fd);
 	return (0);
 }
@@ -148,7 +150,7 @@ int		cycle_list(t_list *cmd_list)
 	while (cmd_list)
 	{
 		result = ((t_cmd *)cmd_list->content)->flag;
-		if (result == PIPELINE)
+		if (result == PIPE)
 		{
 			result = exec_pipe(&cmd_list);
 			// return (0);

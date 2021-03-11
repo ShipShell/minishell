@@ -92,7 +92,7 @@ static int		check_flag(t_cmd *tokenized)
 	{
 		free(tokenized->token[i]);
 		tokenized->token[i] = NULL;
-		return (PIPELINE);
+		return (PIPE);
 	}
 	else
 		return (0);
@@ -101,8 +101,8 @@ static int		check_flag(t_cmd *tokenized)
 
 // static char		*to_str(int flag)
 // {
-// 	if (flag == PIPELINE)
-// 		return ("PIPELINE");
+// 	if (flag == PIPE)
+// 		return ("PIPE");
 // 	else if (flag == SEMICOLON)
 // 		return ("SEMICOLON");
 // 	else

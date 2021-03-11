@@ -20,10 +20,8 @@
 
 #define	MAX_BUFF 1000
 
-// #define	pipe 11238;
-
 #define SEMICOLON 178
-#define PIPELINE 180
+#define PIPE 180
 #define REDIR_IN 182
 #define REDIR_OUT 184
 #define REDIR_DOUBLE 186
@@ -41,6 +39,7 @@
 
 t_list				*g_env;
 int					g_exit_code;
+int					g_child;
 
 typedef int			t_bool;
 typedef int			t_quotes;

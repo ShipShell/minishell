@@ -72,6 +72,7 @@ int	check_home()
 			pwd = ((t_env *)temp_env->content)->value;
 			chdir(pwd);
 			change_env_pwd(getcwd(buff, 1000));
+			return (1);
 		}
 		temp_env = temp_env->next;
 	}
@@ -85,7 +86,6 @@ int	check_arg(t_cmd *cmd)
 {
 	char	buff[MAX_BUFF];
 	int		temp;
-
 
 	// 에러 처리를 여기서 해야한다.
 	temp = chdir(cmd->token[1]);
@@ -107,7 +107,8 @@ int	ft_cd(t_cmd *cmd)
 {
 	int	result;
 	// 인자가 없을 때 HOME을 참조
-	if (cmd->token[1] == 0)
+	if (cmd->token[1] == 0 || !ft_strcmp(cmd->token[1], "~")
+		|| !ft_strcmp(cmd->token[1], "~/"))
 		result = check_home();
 	else
 		return (check_arg(cmd));
