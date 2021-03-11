@@ -16,13 +16,44 @@ void	show_prompt()
 	ft_putstr_fd("shipshell$ ", 1);
 }
 
+void	exit_by_cntl_d(void)
+{
+	ft_putstr_fd("exit\n", 1);
+	exit(0);
+}
+
 int		wait_cmd(void)
 {
 	char	*stdin_buf;
 	t_list	*tokenized_single_cmd_list;
+	char	*tmp;
+	char	*garbage;
+	int		len;
 
+	tmp = 0;
 	show_prompt();
-	get_next_line(0, &stdin_buf);
+	while (get_next_line(0, &stdin_buf) == 0)
+	{
+		len = ft_strlen(stdin_buf);
+		// printf("tmp: %s\n", tmp);
+		if (tmp == 0 && len == 0)
+			exit_by_cntl_d();
+		else if (len != 0)
+		{
+			garbage = tmp;
+			if (tmp == NULL)
+				tmp = ft_strdup(stdin_buf);
+			else
+			{
+				tmp = ft_strjoin(tmp, stdin_buf);
+				free(garbage);
+			}
+		}
+		ft_putstr_fd("  \b\b  \b\b", 1);
+	}
+	if (tmp)
+		tmp = ft_strjoin(tmp, stdin_buf);
+
 	tokenized_single_cmd_list = parse_cmd_line(stdin_buf);
 	// substitute_token(tokenized_single_cmd_list);
 	// tokenized_single_cmd_list 가 t_cmd(**command 랑 flag, exit_code가 담긴)의 연결리스트임!
@@ -50,14 +81,14 @@ void	handle_sigint(int signo)
 	return ;
 }
 
-void	handle_sigterm(int signo)
-{
-	(void)signo;
-	if (g_child)
-		ft_putstr_fd("exit\n", 1);
-	exit(0);
-	return ;
-}
+// void	handle_sigterm(int signo)
+// {
+// 	(void)signo;
+// 	if (g_child)
+// 		ft_putstr_fd("exit\n", 1);
+// 	exit(0);
+// 	return ;
+// }
 
 void	handle_sigquit(int signo)
 {
@@ -78,7 +109,7 @@ int		main(int argc, char **argv, char **envp)
 	g_child = 0;
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
-	signal(SIGTERM, handle_sigterm);
+	// signal(SIGTERM, handle_sigterm);
 	set_env_list(envp);
 	prompt_loop();
 	return (0);

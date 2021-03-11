@@ -199,6 +199,10 @@ int main()
 
      1. indir에서 파일이 존재하지 않으면 중간에 있어도 경고.
 
+- echo -nnnnn, echo -n -n -n도 echo -n와 같이 들어가야한다.
+
+- "cd"와 "cd "가 다르게 들어간다.
+
 ### 궁금한 점
 
 - not_built_in에서 에러 발생시 에러 처리 뭐뭐 했는지..

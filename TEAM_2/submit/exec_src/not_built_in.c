@@ -103,7 +103,7 @@ int	exec_not_built_in(t_cmd *cmd)
 {
 	char	**path;
 
-	// ft_redir(cmd);
+	ft_redir(cmd);
 	path = split_path();
 	if (!ft_strncmp(cmd->token[0], "./", 2) 
 		|| !ft_strncmp(cmd->token[0], "/", 1))
@@ -114,7 +114,6 @@ int	exec_not_built_in(t_cmd *cmd)
 
 int	ft_not_built_in(t_cmd *cmd)
 {
-	char	**path;
 	pid_t	pid;
 	int		status;
 	

@@ -2,8 +2,8 @@
 
 int	is_built_in(t_cmd *cmd)
 {
-	// if (ft_redir(cmd) == -1)
-	// 	return (-1);
+	if (ft_redir(cmd) == -1)
+		return (-1);
 	if (!ft_strcmp(cmd->token[0], "cd"))
 		ft_cd(cmd);
 	else if (!ft_strcmp(cmd->token[0], "echo"))
@@ -20,10 +20,10 @@ int	is_built_in(t_cmd *cmd)
 		ft_unset(cmd);
 	else
 	{
-		// get_fd_back(cmd);
+		get_fd_back(cmd);
 		return (0);
 	}
-	// get_fd_back(cmd);
+	get_fd_back(cmd);
 	return (1);
 }
 
@@ -67,12 +67,10 @@ int	*make_fd_piping(int size)
 	int	i;
 	int	*result;
 
-	// printf("fd malloc size : %d\n", size);
 	result = (int *)malloc(sizeof(int) * (size));
 	i = 0;
 	while (i < size)
 	{
-		// printf("piping : %d\n", i);
 		pipe(&(result[i]));
 		i += 2;
 	}
@@ -144,17 +142,12 @@ int	exec_pipe(t_list **cmd_list)
 int		cycle_list(t_list *cmd_list)
 {
 	int		result;
-	pid_t	pid;
-	int		status;
 
 	while (cmd_list)
 	{
 		result = ((t_cmd *)cmd_list->content)->flag;
 		if (result == PIPE)
-		{
 			result = exec_pipe(&cmd_list);
-			// return (0);
-		}
 		else
 			result = exec_command((t_cmd *)cmd_list->content);
 		if (result == -1)

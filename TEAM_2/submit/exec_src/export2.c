@@ -16,7 +16,6 @@ t_env *is_same_env(char *str)
 
 static int	equal_split(char *str, char **env_key_value)
 {
-	char	**result;
 	int		i;
 
 	i = -1;
@@ -60,7 +59,7 @@ static int	is_err_char(char *str)
 		c == '*')
 	{
 		ft_putstr_fd("shipshell: export: ", 2);
-		print_not_a_valid_identifier(str, 1);
+		print_not_a_valid_identifier(str);
 		return (1);
 	}
 	g_exit_code = 1;

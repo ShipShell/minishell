@@ -107,8 +107,9 @@ int	ft_cd(t_cmd *cmd)
 {
 	int	result;
 	// 인자가 없을 때 HOME을 참조
-	if (cmd->token[1] == 0 || !ft_strcmp(cmd->token[1], "~")
-		|| !ft_strcmp(cmd->token[1], "~/"))
+	// if (cmd->token[1] == 0 || !ft_strcmp(cmd->token[1], "~")
+	// 	|| !ft_strcmp(cmd->token[1], "~/"))
+	if (cmd->token[1] == 0)
 		result = check_home();
 	else
 		return (check_arg(cmd));
