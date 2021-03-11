@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 11:31:25 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/11 13:28:44 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,5 @@ extern int		g_exit_code;
 extern t_bool	g_child;
 
 int		prompt_show(void);
-void	handle_sigint(int signo);
-void	erase_signal_ascii(void);
-int		show_prompt_title(void);
 
 #endif
