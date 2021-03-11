@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/10 14:06:50 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 11:31:44 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_env	*g_env;
 t_cmd	*g_cmd;
 int		g_exit_code;
+t_bool	g_child;
 
 int		show_prompt_title(void)
 {
@@ -30,8 +31,6 @@ void	get_prompt_input(char **stdin_buffer)
 t_bool	init_prompt(void)
 {
 	char	*stdin_buffer;
-	int		input_byte;
-	t_list	*tokens;
 	t_bool	syntax_ok;
 
 	delete_cmd_list(&g_cmd, delete_data_in_cmd);
@@ -63,6 +62,7 @@ void	erase_signal_ascii(void)
 
 void	handle_sigint(int signo)
 {
+	(void)signo;
 	erase_signal_ascii();
 	show_prompt_title();
 	return ;
@@ -88,6 +88,10 @@ void	init_g_env(char *envp[])
 
 int		main(int argc, char *argv[], char *envp[])
 {
+	if (argc != 1)
+		return (0);
+	if (argv == NULL)
+		return (0);
 	init_g_env(envp);
 	// test_init_g_env(g_env);
 	signal(SIGINT, handle_sigint);

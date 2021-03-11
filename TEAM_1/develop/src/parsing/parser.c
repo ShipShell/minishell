@@ -73,14 +73,14 @@ t_bool	need_to_cut_command(t_quoting *quoting, char c)
 void	change_quoting(t_quoting *quoting, char	c)
 {
 	if (c == BACKSLASH)
-		change_escape_status(quoting, c);
+		change_escape_status(quoting);
 	else if (c == SINGLE_QUOTE || c == DOUBLE_QUOTE)
 		change_quotes_status(quoting, c);
 	else if (quoting->escape == ON)
 		quoting->escape = OFF;
 }
 
-void	change_escape_status(t_quoting *quoting, char c)
+void	change_escape_status(t_quoting *quoting)
 {
 	if (quoting->quotes != SINGLE_OPEN)
 	{
@@ -206,7 +206,6 @@ void	check_cmd_list_redirection(void)
 	while (cmd)
 	{
 		change_redir_status(cmd);
-		change_redir_status(cmd);
 		cmd = cmd->next;
 	}
 }
@@ -241,6 +240,17 @@ void	change_redir_status(t_cmd *cmd)
 	}
 }
 
+void	pull_token(t_cmd *cmd, int i)
+{
+	int		last;
+
+	last = 0;
+	while (cmd->command[last])
+		++last;
+	cmd->command[last] = cmd->command[i];
+	cmd->command[i] = NULL;
+}
+
 void	add_redir(t_cmd *cmd, int i, int in_count, int out_count)
 {
 	if (out_count == 1)
@@ -251,6 +261,8 @@ void	add_redir(t_cmd *cmd, int i, int in_count, int out_count)
 		add_in_redir(cmd, i, FALSE);
 	else if (in_count == 2)
 		add_in_redir(cmd, i, TRUE);
+	else if (cmd->isredir == TRUE)
+		pull_token(cmd, i);
 }
 
 void	add_out_redir(t_cmd *cmd, int i, t_bool isdouble)

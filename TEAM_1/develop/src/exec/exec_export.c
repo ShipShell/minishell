@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:12 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 13:56:34 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 11:10:57 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	print_export(void)
 
 void	put_env(char *str)
 {
-	size_t	ret;
 	char	*key;
 	char	*val;
 	int		i;
