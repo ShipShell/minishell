@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:26 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 10:33:33 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/11 13:19:57 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	not_builtin_fork(t_cmd *cmd)
 	pid_t	pid;
 	int		status;
 
+	g_child = TRUE;
 	if ((pid = fork()) == -1)
 		ft_error();
 	if (pid == 0)
@@ -63,6 +64,7 @@ void	not_builtin_fork(t_cmd *cmd)
 	else if (pid > 0)
 	{
 		wait(&status);
+		g_child = FALSE;
 		if (WIFEXITED(status))
 			g_exit_code = WEXITSTATUS(status);
 	}
@@ -75,11 +77,11 @@ void	exec_command(void)
 	cmd = g_cmd;
 	while (cmd)
 	{
-		test_make_cmd_str_to_tokens();
+		//test_make_cmd_str_to_tokens();
 		substitute_command(cmd);
-		test_make_cmd_str_to_tokens();
+		//test_make_cmd_str_to_tokens();
 		substitute_redir(cmd);
-		test_make_cmd_str_to_tokens();
+		//test_make_cmd_str_to_tokens();
 		if (is_empty_cmd(cmd))
 			skip();
 		else if (cmd->ispipe == 1)
