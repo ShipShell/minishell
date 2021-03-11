@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 13:24:39 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 13:34:53 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,13 @@ void	handle_sigint(int signo)
 {
 	(void)signo;
 	if (g_child == 1)
+	{
+		g_exit_code = 130;
 		printf("\n");
+	}
 	else
 	{
+		g_exit_code = 1;
 		erase_signal_ascii();
 		show_prompt_title();
 	}
@@ -77,7 +81,10 @@ void	handle_sigquit(int signo)
 {
 	(void)signo;
 	if (g_child == 1)
+	{
+		g_exit_code = 131;
 		printf("Quit: 3\n");
+	}
 	else
 		ft_printf("\b\b  \b\b");
 	return ;
