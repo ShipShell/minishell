@@ -25,7 +25,6 @@ void	substitute_command(t_cmd *cmd)
 void	substitute_redir(t_cmd *cmd)
 {
 	t_list	*file;
-	char	*substituted_file;
 
 	if (cmd->isredir == FALSE)
 		return ;

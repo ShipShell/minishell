@@ -65,7 +65,7 @@ int		count_cmd_length(char *ptr);
 void	init_quoting(t_quoting *quoting);
 t_bool	need_to_cut_command(t_quoting *quoting, char c);
 void	change_quoting(t_quoting *quoting, char	c);
-void	change_escape_status(t_quoting *quoting, char c);
+void	change_escape_status(t_quoting *quoting);
 void	change_quotes_status(t_quoting *quoting, char c);
 
 //step2

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:31 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 13:46:17 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 11:28:28 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 int		do_redir_in(t_redir *in)
 {
 	int		fd;
+	t_list	*tmp;
 
-	while (in->file->next)
+	tmp = in->file;
+	while (tmp->next)
 	{
-		if ((fd = open(in->file->content, O_RDONLY)) == -1)
-			return (open_error(in->file->content));
+		if ((fd = open(tmp->content, O_RDONLY)) == -1)
+			return (open_error(tmp->content));
 		if (close(fd) == -1)
 			ft_error();
-		in->file = in->file->next;
+		tmp = tmp->next;
 	}
-	if ((in->fd = open(in->file->content, O_RDONLY)) == -1)
-		return (open_error(in->file->content));
+	if ((in->fd = open(tmp->content, O_RDONLY)) == -1)
+		return (open_error(tmp->content));
 	in->tmp_std = dup(0);
 	dup2(in->fd, 0);
 	return (0);
@@ -34,18 +36,20 @@ int		do_redir_in(t_redir *in)
 int		do_redir_out(t_redir *out)
 {
 	int		fd;
+	t_list	*tmp;
 
-	while (out->file->next)
+	tmp = out->file;
+	while (tmp->next)
 	{
-		fd = open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+		fd = open(tmp->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 		if (close(fd) == -1)
 			ft_error();
-		out->file = out->file->next;
+		tmp = tmp->next;
 	}
 	if (out->is_double == 1)
-		out->fd = open(out->file->content, O_WRONLY | O_APPEND | O_CREAT, 0666);
+		out->fd = open(tmp->content, O_WRONLY | O_APPEND | O_CREAT, 0666);
 	else
-		out->fd = open(out->file->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+		out->fd = open(tmp->content, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	out->tmp_std = dup(1);
 	dup2(out->fd, 1);
 	return (0);
