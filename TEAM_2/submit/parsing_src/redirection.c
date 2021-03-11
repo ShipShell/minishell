@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/11 14:35:49 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:00:32 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void		handle_redirection(char **token, t_cmd *cmd)
 	}
 	// printf("%s\n", (char *)tmp_token->content);
 	// test_save_tmp_token(tmp_token);
-	test_save_redir_list(redir);
+	// test_save_redir_list(redir);
 	free(cmd->token);
 	cmd->token = list_to_token(tmp_token);
-	test_list_to_token(cmd->token);
+	// test_list_to_token(cmd->token);
 	cmd->redir = redir;
 }

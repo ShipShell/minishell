@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dev_mj <dev_mj@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/03/11 14:02:27 by hyeonkim         ###   ########.fr       */
+=======
+/*   Updated: 2021/03/06 17:19:44 by dev_mj           ###   ########.fr       */
+>>>>>>> 6337529d374269bfc393abab20fdf8f2ad5fdf4a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +22,9 @@
 #include "libft.h"
 #include "get_next_line.h"
 
-#define	pipe 11238;
+#define	MAX_BUFF 1000
+
+// #define	pipe 11238;
 
 #define SEMICOLON 178
 #define PIPE 180
@@ -39,6 +45,10 @@
 #define REDIR_DOUBLE 186
 
 t_list				*g_env;
+int					g_exit_code;
+
+typedef int			t_bool;
+typedef int			t_quotes;
 
 int					g_exit_code;
 
@@ -77,12 +87,5 @@ typedef struct		s_cmd
 	t_redir			*re_in;
 	t_redir			*re_out;
 }					t_cmd;
-
-// typedef struct	s_env
-// {
-// 	char		*key;
-// 	char		*value;
-// 	void		*next;
-// }				t_env;
 
 #endif

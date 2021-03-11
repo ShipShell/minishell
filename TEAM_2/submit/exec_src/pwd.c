@@ -1,13 +1,12 @@
 #include "exec.h"
 
 // 출력만 한다. 환경변수나 에러처리를 하지 않았다.
-int ft_pwd(t_data *data)
+int	ft_pwd(t_cmd *cmd)
 {
-    char    *pwd;
+	char	pwd[MAX_BUFF];
 
-    if (getcwd(pwd, 1000))
-        return (-1);
-    ft_printf("%s", pwd);
-    free(pwd);
-    return (0);
+	if (!getcwd(pwd, MAX_BUFF))
+		return (-1);
+	ft_printf("%s\n", pwd);
+	return (1);
 }

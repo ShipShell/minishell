@@ -1,35 +1,31 @@
 #include "exec.h"
 
-int	put_arg_to_std(t_data *data, int option)
+int	put_arg_to_std(t_cmd *cmd, int option, int i)
 {
-	t_list	*arg_list;
-
-	arg_list = data->arg;
-	if ((char *)arg_list->content)
-	{
-		ft_putstr_fd((char *)arg_list->content, 1);
-		arg_list = arg_list->next;
-	}
-	arg_list = arg_list->next;
-	while ((char *)data->arg->content)
+	if (cmd->token[i])
+		ft_putstr_fd(cmd->token[i++], 1);
+	while (cmd->token[i])
 	{
 		write(1, " ", 1);
-		ft_putstr_fd((char *)arg_list->content, 1);
-		arg_list = arg_list->next;
+		ft_putstr_fd(cmd->token[i++], 1);
 	}
-	if (option)
+	if (!option)
 		ft_putstr_fd("\n", 1);
-	return (0);
+	return (1);
 }
 
-int	ft_echo(t_data *data)
+int	ft_echo(t_cmd *cmd)
 {
 	int	option;
+	int	i;
 
+	i = 1;
 	option = 0;
-	if (!ft_strcmp((char *)data->arg->content, "-n"))
+	if (!ft_strcmp(cmd->token[i], "-n"))
+	{
 		option = 1;
-	put_arg_to_std(data, option);
-	
-	return (0);
+		i++;
+	}
+	put_arg_to_std(cmd, option, i);
+	return (1);
 }
