@@ -5,6 +5,7 @@ t_bool	parse_and_split_from_input(char *stdin_buf)
 	if (have_syntax_error(stdin_buf))
 		return (FALSE);
 	parse_cmd_from_input(stdin_buf);
+	
 	make_cmd_str_to_tokens();
 	check_cmd_list_redirection();
 	return (TRUE);

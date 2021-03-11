@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:26 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 13:19:57 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 15:03:55 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,16 @@ void	exec_command(void)
 	cmd = g_cmd;
 	while (cmd)
 	{
-		//test_make_cmd_str_to_tokens();
+		// test_make_cmd_str_to_tokens();
 		substitute_command(cmd);
-		//test_make_cmd_str_to_tokens();
+		// test_make_cmd_str_to_tokens();
 		substitute_redir(cmd);
 		//test_make_cmd_str_to_tokens();
 		if (is_empty_cmd(cmd))
-			skip();
+		{
+			syntax_error();
+			return ;
+		}
 		else if (cmd->ispipe == 1)
 		{
 			cmd = piping(cmd);

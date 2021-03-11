@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:23 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 13:50:01 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 14:03:18 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ int		exec_exit(t_cmd *cmd)
 			ft_putstr("exit\n");
 			return (too_many_arg_error(cmd, 1));
 		}
-		printf("exit number : %d\n", ft_atoi(cmd->command[1]));
+		ft_putstr("exit\n");
 		exit(ft_atoi(cmd->command[1]));
 	}
+	ft_putstr("exit\n");
 	exit(0);
 	return (EXIT_SUCCESS);
 }

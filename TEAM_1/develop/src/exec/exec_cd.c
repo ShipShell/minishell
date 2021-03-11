@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:37 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 14:01:24 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 15:02:05 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,16 @@ int		exec_cd(t_cmd *cmd)
 	char *val;
 	char cwd[PATH_MAX];
 
-	val = cmd->command[1];
-	if (strlen(val) > PATH_MAX)
-	{
-		return (-1);
-	}
-	if (strcmp(val, "~") == 0)
-	{
+	if (cmd->command[1] == NULL)
 		val = lst_find_env("HOME");
-	}
+	else
+		val = cmd->command[1];
+	if (!val || val[0] == '\0')
+		return (no_home_error(cmd, 1));
 	if (chdir(val) == -1)
 		return (no_file_error(cmd, 1));
+	if (ft_strlen(val) > PATH_MAX)
+		return (-1);
 	else
 		lst_change_add_env("PWD", getcwd(cwd, PATH_MAX));
 	return (0);
