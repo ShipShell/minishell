@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:35:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/09 23:24:01 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/11 13:21:23 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ static t_cmd	*tokenize_single_cmd(char *str)
 	int			i = 0;
 
 	tokenized_cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	tokenized_cmd->re_in = NULL;
+	tokenized_cmd->re_out = NULL;
+	tokenized_cmd->redir = NULL;
 	tokenized_cmd->token = split_single_cmd(str);
 	tokenized_cmd->flag = check_flag(tokenized_cmd);
 	while (tokenized_cmd->token[i])

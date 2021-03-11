@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quoting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:55:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/09 23:12:06 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/11 11:15:49 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void			init_quoting(t_quoting *quoting)
 {
-	quoting->escape = OFF;
 	quoting->quotes = CLOSED;
 	quoting->old_quotes = CLOSED;
+	quoting->escape = OFF;
+	quoting->old_escape = OFF;
 }
 
 void			change_quoting(char c, t_quoting *quoting)
@@ -28,9 +29,10 @@ void			change_quoting(char c, t_quoting *quoting)
 
 void			change_escape(char c, t_quoting *quoting)
 {
+	quoting->old_escape = quoting->escape;
 	if (quoting->quotes != SINGLE_OPEN && quoting->escape == ON)
 	{
-		quoting->old_escape = quoting->escape;
+		// quoting->old_escape = quoting->escape;
 		quoting->escape = OFF;
 	}
 	else
@@ -39,17 +41,18 @@ void			change_escape(char c, t_quoting *quoting)
 		{
 			if (quoting->quotes != SINGLE_OPEN && quoting->escape == OFF)
 			{
-				quoting->old_escape = quoting->escape;
+				// quoting->old_escape = quoting->escape;
 				quoting->escape = ON;
 			}
 		}
-		else
-			quoting->old_escape = OFF;
+		// else
+		// 	quoting->old_escape = OFF;
 	}
 }
 
 void			change_quotes(char c, t_quoting *quoting)
 {
+	quoting->old_quotes = quoting->quotes;
 	if (c == SINGLE_QUOTE)
 	{
 		if (quoting->quotes == SINGLE_OPEN)
