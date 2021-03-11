@@ -145,15 +145,27 @@ static char	*check_and_replace(char *str)
 	return (result);
 }
 
-void		get_replaced_token(char **token)
+static void		get_replaced_token(t_cmd *cmd)
 {
 	int		i;
+	char	**token;
 
+	token = cmd->token;
 	i = 0;
 	while (token[i])
 	{
 		token[i] = check_and_replace(token[i]);
 		// printf("%s\n", token[i]);
 		++i;
+	}
+	handle_redirection(token, cmd);
+}
+
+void		replace_token_list(t_list *list_to_replace)
+{
+		while (list_to_replace)
+	{
+		get_replaced_token(((t_cmd *)(list_to_replace->content)));
+		list_to_replace = list_to_replace->next;
 	}
 }

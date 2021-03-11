@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/09 17:59:51 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/11 12:46:55 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,19 @@ static t_list	*sep_to_single_cmd(char *stdin_buf)
 
 t_list			*parse_cmd_line(char *str)
 {
-	t_list		*list_to_replace;
+	t_list		*list_to_handle;
 	t_list		*tokenized_single_cmd_list;
 	t_list		*single_cmd_list;
 
+	if (check_syntax_error(str))
+	{
+		return (NULL);
+	}
 	single_cmd_list = sep_to_single_cmd(str); // STEP 1
 	tokenized_single_cmd_list = tokenize(single_cmd_list); // STEP 2
-	list_to_replace = tokenized_single_cmd_list;
-	while (list_to_replace)
-	{
-		get_replaced_token(((t_cmd *)(list_to_replace->content))->token);
-		list_to_replace = list_to_replace->next;
-	}
+	list_to_handle = tokenized_single_cmd_list;
+	replace_token_list(list_to_handle); // STEP 3
+	// list_to_handle = tokenized_single_cmd_list;
+	// handle_redirection(list_to_handle);
 	return (tokenized_single_cmd_list);
 }
