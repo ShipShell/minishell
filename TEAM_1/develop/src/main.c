@@ -6,16 +6,17 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 13:48:27 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/11 13:50:05 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
 t_env	*g_env;
 t_cmd	*g_cmd;
 int		g_exit_code;
-t_bool	g_child;
+t_bool	g_child = 0;
 
 int		show_prompt_title(void)
 {
@@ -82,8 +83,30 @@ void	erase_signal_ascii(void)
 void	handle_sigint(int signo)
 {
 	(void)signo;
-	erase_signal_ascii();
-	show_prompt_title();
+	if (g_child == 1)
+	{
+		g_exit_code = 130;
+		printf("\n");
+	}
+	else
+	{
+		g_exit_code = 1;
+		erase_signal_ascii();
+		show_prompt_title();
+	}
+	return ;
+}
+
+void	handle_sigquit(int signo)
+{
+	(void)signo;
+	if (g_child == 1)
+	{
+		g_exit_code = 131;
+		printf("Quit: 3\n");
+	}
+	else
+		ft_printf("\b\b  \b\b");
 	return ;
 }
 
@@ -114,6 +137,7 @@ int		main(int argc, char *argv[], char *envp[])
 	init_g_env(envp);
 	// test_init_g_env(g_env);
 	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
 	loop_prompt();
 	return (0);
 }
