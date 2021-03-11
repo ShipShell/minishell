@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2021/03/11 14:02:27 by hyeonkim         ###   ########.fr       */
 =======
 /*   Updated: 2021/03/06 17:19:44 by dev_mj           ###   ########.fr       */
 >>>>>>> 6337529d374269bfc393abab20fdf8f2ad5fdf4a
+=======
+/*   Updated: 2021/03/11 14:02:27 by hyeonkim         ###   ########.fr       */
+>>>>>>> 1266473b8061e5d961403e716fcf74f4cae6d5e2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +53,8 @@ int					g_exit_code;
 
 typedef int			t_bool;
 typedef int			t_quotes;
+
+int					g_exit_code;
 
 int					g_exit_code;
 
