@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dev_mj <dev_mj@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/09 13:25:18 by dev_mj           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
@@ -22,6 +10,7 @@
 
 #define SEMICOLON 178
 #define PIPE 180
+
 #define REDIR_IN 182
 #define REDIR_OUT 184
 #define REDIR_DOUBLE 186
@@ -37,12 +26,20 @@
 #define SINGLE_QUOTE 39
 #define DOUBLE_QUOTE 34
 
+#define REDIR_IN 182
+#define REDIR_OUT 184
+#define REDIR_DOUBLE 186
+
 t_list				*g_env;
 int					g_exit_code;
 int					g_child;
 
 typedef int			t_bool;
 typedef int			t_quotes;
+
+int					g_exit_code;
+
+int					g_exit_code;
 
 typedef int			t_bool;
 typedef int			t_quotes;
@@ -66,6 +63,7 @@ typedef struct		s_redir
 typedef struct		s_quoting
 {
 	t_quotes		quotes;
+	t_quotes		old_quotes;
 	t_bool			escape;
 	t_bool			old_escape;
 }					t_quoting;

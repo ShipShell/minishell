@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:16 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/02/28 15:59:18 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:44:13 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ t_env	*set_env(char *envp)
 	key_value = ft_split(envp, '=');
 	result->key = key_value[0];
 	result->value = key_value[1];
-	// free(key_value);
 	return (result);
 }
