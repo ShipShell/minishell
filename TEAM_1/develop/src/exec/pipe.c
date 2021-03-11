@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:42:30 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 13:24:48 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 15:11:18 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	wait_parent(int fds[], pid_t pid[], int cnt)
 	i = -1;
 	while (++i < cnt + 1)
 		waitpid(pid[i], &status, 0);
+	g_child = 0;
 	if (WIFEXITED(status))
 		g_exit_code = WEXITSTATUS(status);
 }
@@ -59,6 +60,7 @@ t_cmd	*piping(t_cmd *cmd)
 		substitute_redir(cmd);
 		if ((pid[i] = fork()) == -1)
 			ft_error();
+		g_child = 1;
 		if (pid[i] == 0)
 		{
 			dup_fds(fds, i, cnt_pip);
