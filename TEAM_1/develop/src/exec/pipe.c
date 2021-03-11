@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:42:30 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 15:11:18 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/11 16:54:04 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ t_cmd	*piping(t_cmd *cmd)
 	int		i;
 	pid_t	pid[count_pipes(cmd) + 1];
 
-	cnt_pip = count_pipes(cmd);
-	make_pipes(fds, cnt_pip);
+	make_pipes(cmd, fds, &cnt_pip);
 	i = -1;
 	while (++i < cnt_pip + 1)
 	{
