@@ -6,7 +6,7 @@
 /*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:23:45 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 14:04:54 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 16:53:49 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ char	**make_env_char(void);
 void	exec_not_builtin_sub(t_cmd *cmd, char **path);
 void	exec_not_builtin(t_cmd *cmd);
 
+void	change_is_pipe(t_cmd *cmd);
 int		count_pipes(t_cmd *cmd);
-int		make_pipes(int fds[], int cnt);
+void	make_pipes(t_cmd *cmd, int fds[], int *cnt_pip);
 void	close_fds(int fds[], int pipe_count);
 void	dup_fds(int fds[], int i, int pipe_count);
 void	wait_parent(int fds[], pid_t pid[], int cnt);
