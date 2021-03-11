@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:44 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 13:34:53 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/11 13:50:05 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -23,9 +24,28 @@ int		show_prompt_title(void)
 	return (0);
 }
 
+void	exit_with_cntl_d(void)
+{
+	printf("exit\n");
+	exit (0);
+}
 void	get_prompt_input(char **stdin_buffer)
 {
-	get_next_line(0, stdin_buffer);
+	char	*temp;
+	int		len;
+
+	temp = NULL;
+	while (get_next_line(0, stdin_buffer) == 0)
+	{
+		len = ft_strlen(*stdin_buffer);
+		if (temp == NULL && len == 0)
+			exit_with_cntl_d();
+		else if (temp == NULL)
+			temp = *stdin_buffer;
+		ft_printf("  \b\b  \b\b");
+	}
+	if (temp != NULL)
+		*stdin_buffer = temp;
 }
 
 t_bool	init_prompt(void)
