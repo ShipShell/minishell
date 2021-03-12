@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/11 12:46:55 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/11 18:00:28 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		get_command_len(char *str)
 	return (cmd_len);
 }
 
-static t_list	*sep_to_single_cmd(char *stdin_buf)
+t_list	*sep_to_single_cmd(char *stdin_buf)
 {
 	t_list		*single_cmd_list;
 	char		*single_cmd;

@@ -1,23 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dev_mj <dev_mj@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/26 08:59:37 by hyeonkim          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2021/03/11 14:02:27 by hyeonkim         ###   ########.fr       */
-=======
-/*   Updated: 2021/03/06 17:19:44 by dev_mj           ###   ########.fr       */
->>>>>>> 6337529d374269bfc393abab20fdf8f2ad5fdf4a
-=======
-/*   Updated: 2021/03/11 14:02:27 by hyeonkim         ###   ########.fr       */
->>>>>>> 1266473b8061e5d961403e716fcf74f4cae6d5e2
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
@@ -47,6 +27,10 @@
 #define REDIR_IN 182
 #define REDIR_OUT 184
 #define REDIR_DOUBLE 186
+
+#define	DOLLAR_ON 200
+#define WAVE_ON 300
+#define NOT_TO_REPLACE 400
 
 t_list				*g_env;
 int					g_exit_code;
