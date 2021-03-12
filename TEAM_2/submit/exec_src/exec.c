@@ -46,7 +46,7 @@ int	count_pipe(t_list *cmd_list)
 	int	result;
 
 	result = 0;
-	while (((t_cmd *)cmd_list->content)->flag == PIPELINE)
+	while (((t_cmd *)cmd_list->content)->flag == PIPE)
 	{
 		result++;
 		cmd_list = cmd_list->next;
@@ -137,7 +137,7 @@ int		cycle_list(t_list *cmd_list)
 	while (cmd_list)
 	{
 		result = ((t_cmd *)cmd_list->content)->flag;
-		if (result == PIPELINE)
+		if (result == PIPE)
 		{
 			exec_pipe(&cmd_list);
 			return (0);

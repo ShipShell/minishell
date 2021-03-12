@@ -3,66 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:35:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/11 13:21:23 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:03:46 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int		is_tokenizable(char c, t_quoting quoting)
-{
-	if (ft_strchr(";|\t ", c) && quoting.quotes == CLOSED)
-		return (1);
-	else if (ft_strchr("><", c)
-			&& quoting.quotes == CLOSED && quoting.old_escape == OFF)
-		return (1);
-	else
-		return (0);
-}
-
-static int		get_token_len(char *str)
-{
-	int			token_len;
-	t_quoting	quoting;
-
-	init_quoting(&quoting);
-	token_len = 0;
-	while (*str)
-	{
-		++token_len;
-		change_quoting(*str, &quoting);
-		// if (ft_strchr(";|\t ", *str) && quoting.quotes == CLOSED)
-		if (is_tokenizable(*str, quoting))
-		{
-			if (token_len != 1)
-				--token_len;
-			break ;
-		}
-		str++;
-	}
-	return (token_len);
-}
-
-static int		get_token_count(char *str)
-{
-	int			count;
-	int			len;
-
-	count = 0;
-	while (*str != '\0')
-	{
-		while (*str == ' ' || *str == '\t')
-			str++;
-		len = get_token_len(str);
-		str = str + len;
-		if (len != 0)
-			++count;
-	}
-	return (count);
-}
 
 static char		**split_single_cmd(char *str)
 {
@@ -113,7 +61,6 @@ static int		check_flag(t_cmd *tokenized)
 static t_cmd	*tokenize_single_cmd(char *str)
 {
 	t_cmd		*tokenized_cmd;
-	int			i = 0;
 
 	tokenized_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	tokenized_cmd->re_in = NULL;
@@ -121,8 +68,6 @@ static t_cmd	*tokenize_single_cmd(char *str)
 	tokenized_cmd->redir = NULL;
 	tokenized_cmd->token = split_single_cmd(str);
 	tokenized_cmd->flag = check_flag(tokenized_cmd);
-	while (tokenized_cmd->token[i])
-		++i;
 	return (tokenized_cmd);
 }
 

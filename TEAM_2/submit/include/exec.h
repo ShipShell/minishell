@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:05:26 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 14:05:43 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXEC_H
 # define EXEC_H
 
@@ -7,7 +19,6 @@
 # include <string.h>
 # include "structures.h"
 # include "libft.h"
-
 
 int	ft_env(t_cmd *cmd);
 int	ft_echo(t_cmd *cmd);

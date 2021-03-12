@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   replace5_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/11 15:32:20 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:01:17 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ static char		**list_to_token(t_list *token_list)
 		token_list = token_list->next;
 		++i;
 	}
-	free (token_list);
+	free(token_list);
 	return (token);
 }
 
-void		handle_redirection(char **token, t_cmd *cmd)
+void			handle_redirection(char **token, t_cmd *cmd)
 {
 	t_list		*redir;
 	t_list		*tmp_token;
@@ -104,11 +104,7 @@ void		handle_redirection(char **token, t_cmd *cmd)
 			save_redir_list(token[i], &redir, &redir_check);
 		++i;
 	}
-	// printf("%s\n", (char *)tmp_token->content);
-	// test_save_tmp_token(tmp_token);
-	// test_save_redir_list(redir);
 	free(cmd->token);
 	cmd->token = list_to_token(tmp_token);
-	// test_list_to_token(cmd->token);
 	cmd->redir = redir;
 }

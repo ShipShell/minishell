@@ -1,14 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:06:29 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 14:07:17 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include "libft.h"
-#include "get_next_line.h"
+# include <stdio.h>
+# include <unistd.h>
+# include "libft.h"
+# include "get_next_line.h"
 
 #define	MAX_BUFF 1000
-
-// #define	pipe 11238;
 
 #define SEMICOLON 178
 #define PIPE 180
@@ -53,8 +63,6 @@ typedef struct		s_env
 
 typedef struct		s_redir
 {
-	// INDIR : <, OUTDIR : >, DOUBLE : >>
-	// 마지막 부분의 redir를 생각하자.
 	int				redir_type;
 	char			*filename;
 	int				fd;
