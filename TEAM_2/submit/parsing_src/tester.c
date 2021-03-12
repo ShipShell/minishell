@@ -18,13 +18,19 @@ static char		*tester(int i)
 		return ("REDIR_OUT");
 	else if (i == 186)
 		return ("REDIR_DOUBLE");
+	else if (i == 200)
+		return ("DOLLAR_ON");
+	else if (i == 300)
+		return ("WAVE_ON");
+	else if (i == 400)
+		return ("NOT_TO_REPLACE");
 	else
 		return (NULL);
 }
 
 void	test_change_quoting(t_quoting quoting)
 {
-	printf("quotes : %s\nescape : %s\nold_escape : %s\n",
+	printf("quotes : %s\nescape : %s\nold_escape : %s\n\n",
 		tester(quoting.quotes), tester(quoting.escape), tester(quoting.old_escape));
 }
 
@@ -57,4 +63,9 @@ void	test_list_to_token(char **token)
 		printf("token[%d] : %s\n", i, token[i]);
 		++i;
 	}
+}
+
+void	test_check_whether_replace(int replace_check)
+{
+	printf("replace_check : %s\n", tester(replace_check));
 }

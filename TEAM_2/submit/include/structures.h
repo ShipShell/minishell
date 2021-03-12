@@ -30,6 +30,10 @@
 #define REDIR_OUT 184
 #define REDIR_DOUBLE 186
 
+#define	DOLLAR_ON 200
+#define WAVE_ON 300
+#define NOT_TO_REPLACE 400
+
 t_list				*g_env;
 int					g_exit_code;
 int					g_child;
