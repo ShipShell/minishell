@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace5_redirection.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 16:39:15 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void		check_redir(char *str, int *redir_check)
@@ -67,18 +79,17 @@ static char		**list_to_token(t_list *token_list)
 		token_list = token_list->next;
 		++i;
 	}
-	free (token_list);
+	free(token_list);
 	return (token);
 }
 
-void		handle_redirection(char **token, t_cmd *cmd)
+void			handle_redirection(char **token, t_cmd *cmd)
 {
 	t_list		*redir;
 	t_list		*tmp_token;
 	int			i;
 	int			redir_check;
 
-	(void)cmd;
 	i = 0;
 	redir_check = 0;
 	redir = NULL;
@@ -92,11 +103,7 @@ void		handle_redirection(char **token, t_cmd *cmd)
 			save_redir_list(token[i], &redir, &redir_check);
 		++i;
 	}
-	// printf("%s\n", (char *)tmp_token->content);
-	// test_save_tmp_token(tmp_token);
-	// test_save_redir_list(redir);
 	free(cmd->token);
 	cmd->token = list_to_token(tmp_token);
-	// test_list_to_token(cmd->token);
 	cmd->redir = redir;
 }

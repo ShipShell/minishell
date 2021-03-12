@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 15:04:59 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 16:44:51 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXEC_H
 # define EXEC_H
 
@@ -8,14 +20,12 @@
 # include "structures.h"
 # include "libft.h"
 
-
-
 /*
 ** error
 */
 int		print_command_not_found_err(t_cmd *cmd, int index);
 int		print_no_such_file_err(char *filename);
-int		print_strerror(char *);
+int		print_strerror(char *str);
 int		print_not_a_valid_identifier(char *str);
 int		cycle_list(t_list *cmd_list);
 
@@ -39,9 +49,9 @@ int		exec_command(t_cmd *cmd);
 /*
 ** ridir
 */
-int	ft_redir(t_cmd *cmd);
-int	get_fd_back(t_cmd *cmd);
-int	open_redir_in(t_cmd *cmd, t_redir *redir);
+int		ft_redir(t_cmd *cmd);
+int		get_fd_back(t_cmd *cmd);
+int		open_redir_in(t_cmd *cmd, t_redir *redir);
 
 /*
 ** export

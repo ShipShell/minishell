@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quoting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:55:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/11 11:15:49 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 15:49:32 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void			init_quoting(t_quoting *quoting)
 
 void			change_quoting(char c, t_quoting *quoting)
 {
+	quoting->old_quotes = quoting->quotes;
 	if (c == SINGLE_QUOTE || c == DOUBLE_QUOTE)
 		change_quotes(c, quoting);
 	change_escape(c, quoting);
@@ -31,28 +32,19 @@ void			change_escape(char c, t_quoting *quoting)
 {
 	quoting->old_escape = quoting->escape;
 	if (quoting->quotes != SINGLE_OPEN && quoting->escape == ON)
-	{
-		// quoting->old_escape = quoting->escape;
 		quoting->escape = OFF;
-	}
 	else
 	{
 		if (c == BACKSLASH)
 		{
 			if (quoting->quotes != SINGLE_OPEN && quoting->escape == OFF)
-			{
-				// quoting->old_escape = quoting->escape;
 				quoting->escape = ON;
-			}
 		}
-		// else
-		// 	quoting->old_escape = OFF;
 	}
 }
 
 void			change_quotes(char c, t_quoting *quoting)
 {
-	quoting->old_quotes = quoting->quotes;
 	if (c == SINGLE_QUOTE)
 	{
 		if (quoting->quotes == SINGLE_OPEN)
