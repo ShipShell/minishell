@@ -1,6 +1,6 @@
 #include "exec.h"
 
-static char	**split_path(void)
+char	**split_path(void)
 {
 	t_list	*env;
 
@@ -14,7 +14,7 @@ static char	**split_path(void)
 	return (ft_split(((t_env *)env->content)->value, ':'));
 }
 
-static char	**connect_env_key_value(void)
+char	**connect_env_key_value(void)
 {
 	t_list	*env;
 	char	**result;
