@@ -1,24 +1,16 @@
-# include "exec.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:31:21 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 14:31:22 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// arg에 문제가 없는지 확인
-// 이 기능은 굳이 구현할 필요성을 못 느껴서 형태형이랑 이야기 한사바리!!
-// int	check_arg(t_cmd *cmd)
-// {
-// 	t_list	*env_list;
-// 	char	*env_key_value;
-
-// 	env_list = g_env;
-// 	while ((char *)cmd->arg->content)
-// 	{
-// 		env_list = g_env;
-// 		env_key_value = ft_strjoin()
-// 		while (((t_env *)env_list->content)->)
-// 		{
-
-// 		}
-// 	}
-// 	return (1); // 끝까지 가면 0 리턴.
-// }
+#include "exec.h"
 
 int	print_env(t_list *env_list)
 {
@@ -36,17 +28,15 @@ int	print_env(t_list *env_list)
 	return (1);
 }
 
-// t_cmd *cmd가 굳이 필요할까는 짜면서 생각.
-int ft_env(t_cmd *cmd)
+int	ft_env(t_cmd *cmd)
 {
-	int		i;
-	
+	int	i;
+
 	i = 0;
-	// 인자가 환경변수에 있는지 확인.
 	if (cmd->token[++i])
 	{
 		ft_putstr_fd("shipshell: ", 2);
-		print_no_such_file_err(cmd, 1);
+		print_no_such_file_err(cmd->token[1]);
 		g_exit_code = 127;
 		return (-1);
 	}

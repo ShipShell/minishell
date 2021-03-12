@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd2.c                                              :+:      :+:    :+:   */
+/*   redir2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 14:31:14 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:16 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/12 14:31:50 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 14:31:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	call_no_home_err(void)
+int	open_redir_in(t_cmd *cmd, t_redir *redir)
 {
-	ft_putstr_fd("shipshell: cd: HOME not set\n", 1);
-	g_exit_code = 1;
-	return (-1);
-}
-
-int	put_env_pwd(char *current_dir, t_list *pwd_lst)
-{
-	char	*pwd;
-	int		len;
-	int		i;
-
-	len = ft_strlen(current_dir);
-	pwd = (char *)malloc(sizeof(char) * (len + 1));
-	if (pwd == 0)
+	redir->fd = open(redir->filename, O_RDONLY, 00700);
+	if (redir->fd == -1)
+	{
+		ft_putstr_fd("shipshell: ", 2);
+		print_no_such_file_err(redir->filename);
 		return (-1);
-	i = -1;
-	while (current_dir[++i])
-		pwd[i] = current_dir[i];
-	pwd[i] = 0;
-	((t_env *)pwd_lst->content)->value = pwd;
-	return (1);
+	}
+	cmd->re_in = redir;
+	close(redir->fd);
+	return (0);
 }

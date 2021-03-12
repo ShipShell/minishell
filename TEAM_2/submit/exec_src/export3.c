@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   export3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 14:31:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:47 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/12 14:31:38 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 14:31:39 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	ft_pwd(void)
+t_env	*is_same_env(char *str)
 {
-	char	pwd[MAX_BUFF];
+	t_list	*env;
 
-	if (!getcwd(pwd, MAX_BUFF))
-		return (-1);
-	ft_printf("%s\n", pwd);
-	return (1);
+	env = g_env;
+	while (env)
+	{
+		if (!ft_strcmp(((t_env *)env->content)->key, str))
+			return ((t_env *)env->content);
+		env = env->next;
+	}
+	return (0);
 }

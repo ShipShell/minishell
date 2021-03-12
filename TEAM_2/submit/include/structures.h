@@ -23,6 +23,10 @@
 #define SEMICOLON 178
 #define PIPE 180
 
+#define REDIR_IN 182
+#define REDIR_OUT 184
+#define REDIR_DOUBLE 186
+
 #define ON 1
 #define OFF 2
 
@@ -44,6 +48,7 @@
 
 t_list				*g_env;
 int					g_exit_code;
+int					g_child;
 
 typedef int			t_bool;
 typedef int			t_quotes;
@@ -68,6 +73,7 @@ typedef struct		s_redir
 	int				fd;
 	int				tmp_fd;
 }					t_redir;
+
 typedef struct		s_quoting
 {
 	t_quotes		quotes;
