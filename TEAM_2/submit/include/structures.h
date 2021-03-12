@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:06:29 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 15:06:41 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include "libft.h"
-#include "get_next_line.h"
+# include <stdio.h>
+# include <unistd.h>
+# include "libft.h"
+# include "get_next_line.h"
 
 #define	MAX_BUFF 1000
 
@@ -41,13 +53,6 @@ int					g_child;
 typedef int			t_bool;
 typedef int			t_quotes;
 
-int					g_exit_code;
-
-int					g_exit_code;
-
-typedef int			t_bool;
-typedef int			t_quotes;
-
 typedef struct		s_env
 {
 	char			*key;
@@ -56,8 +61,6 @@ typedef struct		s_env
 
 typedef struct		s_redir
 {
-	// INDIR : <, OUTDIR : >, DOUBLE : >>
-	// 마지막 부분의 redir를 생각하자.
 	int				redir_type;
 	char			*filename;
 	int				fd;

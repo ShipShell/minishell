@@ -1,35 +1,32 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   replace.c                                          :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2021/03/05 14:50:11 by hyeonkim          #+#    #+#             */
-// /*   Updated: 2021/03/09 15:43:46 by hyeonkim         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/05 14:50:11 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 13:58:18 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*check_and_replace(char *str)
+static char		*check_and_replace(char *str)
 {
 	int			i;
 	int			handled_len;
 	t_quoting	quoting;
 	char		*tmp;
 	char		*result;
-	
+
 	result = NULL;
 	init_quoting(&quoting);
 	i = 0;
 	while (str[i])
 	{
-		//check
 		handled_len = check_replace_len(str + i, quoting);
-		//replace
 		tmp = replace(str + i, handled_len, &quoting);
-		//join
 		result = join_handled_part(result, tmp);
 		i += handled_len;
 	}
@@ -39,8 +36,8 @@ static char	*check_and_replace(char *str)
 
 static void		get_replaced_token(t_cmd *cmd)
 {
-	int		i;
-	char	**token;
+	int			i;
+	char		**token;
 
 	token = cmd->token;
 	i = 0;
@@ -52,7 +49,7 @@ static void		get_replaced_token(t_cmd *cmd)
 	handle_redirection(token, cmd);
 }
 
-void	replace_token_list(t_list *list_to_replace)
+void			replace_token_list(t_list *list_to_replace)
 {
 	while (list_to_replace)
 	{
