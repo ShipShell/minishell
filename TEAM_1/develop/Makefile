@@ -1,6 +1,7 @@
 NAME = minishell
-CFLAG = -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror
 SRC_NAME = main \
+		main_sub \
 		parsing/add_redir \
 		parsing/cmd_to_tokens \
 		parsing/input_to_cmd \
@@ -15,8 +16,10 @@ SRC_NAME = main \
 		error/error \
 		error/error2 \
 		error/syntax_error \
+		error/syntax_error2 \
 		exec/exec_cd \
 		exec/exec_command \
+		exec/exec_command_sub \
 		exec/exec_echo \
 		exec/exec_env \
 		exec/exec_exit \
@@ -28,7 +31,8 @@ SRC_NAME = main \
 		exec/pipe \
 		exec/pipe2 \
 		exec/redirection \
-		exec/util_exec
+		exec/util_exec \
+		prompt/prompt \
 
 SRC = $(addprefix src/,$(addsuffix .c, $(SRC_NAME)))
 SRCDIR = ./src

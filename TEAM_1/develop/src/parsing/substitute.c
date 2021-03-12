@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substitute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:55:40 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 16:11:16 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/12 11:25:10 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	substitute_command(t_cmd *cmd)
 	{
 		if (is_pipe_or_semicolon(command[i]))
 		{
-			change_flag(cmd, &command[i]);
+			if (*command[i] == '|' && i != 0)
+				cmd->ispipe = TRUE;
+			free(command[i]);
+			command[i] = NULL;
 			break ;
 		}
 		substituted_token = substitute_token(command[i]);
@@ -70,12 +73,4 @@ t_bool	is_pipe_or_semicolon(char *token)
 	if (*token == '|' || *token == ';' || *token == '\0')
 		return (TRUE);
 	return (FALSE);
-}
-
-void	change_flag(t_cmd *cmd, char **token)
-{
-	if (**token == '|')
-		cmd->ispipe = TRUE;
-	free(*token);
-	*token = NULL;
 }

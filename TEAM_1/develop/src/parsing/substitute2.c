@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substitute2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 16:15:27 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 16:15:56 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/12 11:20:06 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting)
 
 int		check_substitute_action(t_quoting *quoting, char c)
 {
-
 	if (ft_strchr("$~", c) && quoting->escape == OFF
 		&& quoting->quotes != SINGLE_OPEN)
 		return (SUB_SPECIAL);

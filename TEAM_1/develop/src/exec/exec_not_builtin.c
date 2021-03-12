@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_not_builtin.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:42:00 by hson              #+#    #+#             */
-/*   Updated: 2021/03/10 14:01:54 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/12 09:46:21 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	exec_not_builtin(t_cmd *cmd)
 
 	change_redir(cmd);
 	chk_is_cmd_path(cmd);
-	if (cmd->ispath == 0)
+	if (cmd->ispath == FALSE)
 	{
 		path = get_path_env();
 		exec_not_builtin_sub(cmd, path);

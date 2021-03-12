@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:44:02 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 16:52:46 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/12 07:07:18 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	change_is_pipe(t_cmd *cmd)
 		i = 0;
 		while (cmd->command[i])
 		{
-			if (*cmd->command[i] == '|')
-				cmd->ispipe = 1;
+			if (*cmd->command[i] == '|' && i != 0)
+				cmd->ispipe = TRUE;
 			i++;
 		}
-		if (cmd->ispipe != 1)
+		if (cmd->ispipe == FALSE)
 			break;
 		cmd = cmd->next;
 	}

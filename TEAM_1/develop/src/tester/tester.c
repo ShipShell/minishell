@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 14:52:31 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/09 19:27:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/12 09:58:26 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	test_make_cmd_str_to_tokens(void)
 		i = 0;
 		while (current_cmd->command[i])
 			printf("[%s], ", current_cmd->command[i++]);
-		printf("} pipe:%d\n", current_cmd->ispipe);
+		printf("} pipe:%d redir:%d\n", current_cmd->ispipe, current_cmd->isredir);
 		current_cmd = current_cmd->next;
 	}
 }
