@@ -1,7 +1,6 @@
 #include "exec.h"
 
-// 출력만 한다. 환경변수나 에러처리를 하지 않았다.
-int	ft_pwd(t_cmd *cmd)
+int	ft_pwd(void)
 {
 	char	pwd[MAX_BUFF];
 

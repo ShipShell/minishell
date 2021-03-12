@@ -14,6 +14,32 @@ int	put_arg_to_std(t_cmd *cmd, int option, int i)
 	return (1);
 }
 
+int	check_option(t_cmd *cmd, int *i)
+{
+	char	*str;
+	int		result;
+	int		j;
+
+	result = 0;
+	while (cmd->token[*i])
+	{
+		str = cmd->token[*i];
+		j = 1;
+		if (!ft_strncmp(str, "-n", 2))
+		{
+			while (str[++j] == 'n')
+				;
+			if (str[j])
+				return (result);
+		}
+		else
+			return (result);
+		result = 1;
+		(*i)++;
+	}
+	return (result);
+}
+
 int	ft_echo(t_cmd *cmd)
 {
 	int	option;
@@ -21,11 +47,8 @@ int	ft_echo(t_cmd *cmd)
 
 	i = 1;
 	option = 0;
-	if (!ft_strcmp(cmd->token[i], "-n"))
-	{
+	if (check_option(cmd, &i))
 		option = 1;
-		i++;
-	}
 	put_arg_to_std(cmd, option, i);
 	return (1);
 }

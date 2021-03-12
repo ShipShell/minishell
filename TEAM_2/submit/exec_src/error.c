@@ -1,8 +1,8 @@
 #include "exec.h"
 
-int	print_no_such_file_err(t_cmd *cmd, int index)
+int	print_no_such_file_err(char *filename)
 {
-	ft_putstr_fd(cmd->token[index], 2);
+	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
 	return (0);
 }
@@ -14,7 +14,7 @@ int	print_command_not_found_err(t_cmd *cmd, int index)
 	return (0);
 }
 
-int	print_not_a_valid_identifier(char *str, int index)
+int	print_not_a_valid_identifier(char *str)
 {
 	ft_putchar_fd('\'', 2);
 	ft_putstr_fd(str, 2);

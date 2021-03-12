@@ -1,47 +1,5 @@
 #include "exec.h"
 
-// PATH는 무조건 있다고 가정.
-// split 실패시 0리턴일듯.
-static char	**split_path()
-{
-	t_list	*env;
-
-	env = g_env;
-	while (env)
-	{
-		if (!ft_strcmp(((t_env *)env->content)->key, "PATH"))
-			break;
-		env = env->next;
-	}
-	return (ft_split(((t_env *)env->content)->value, ':'));
-}
-
-static char	**connect_env_key_value()
-{
-	t_list	*env;
-	char	**result;
-	char	*temp;
-	int		i;
-
-	result = (char **)malloc(sizeof(char *) * (ft_lstsize(g_env) + 1));
-	result[ft_lstsize(g_env)] = 0;
-	i = -1;
-	env = g_env;
-	if (result == 0)
-		return (0);
-	while (env)
-	{
-		if (((t_env *)env->content)->value)
-			temp = ft_strjoin(((t_env *)env->content)->key, "=");
-		else
-			temp = ft_strdup(((t_env *)env->content)->key);
-		result[++i] = ft_strjoin(temp, ((t_env *)env->content)->value);
-		free(temp);
-		env = env->next;
-	}
-	return (result);
-}
-
 int	ft_free_dptr(char **dptr)
 {
 	int	i;
@@ -53,7 +11,6 @@ int	ft_free_dptr(char **dptr)
 	return (0);
 }
 
-// 여러 path를 도는 함수.
 int	cycle_path(t_cmd *cmd, char **path)
 {
 	char	**env;
@@ -93,9 +50,8 @@ int	single_path(t_cmd *cmd)
 		return (-1);
 	}
 	ft_free_dptr(env);
-	// free해주고 끝
 	ft_putstr_fd("shipshell: ", 1);
-	print_no_such_file_err(cmd, 0);
+	print_no_such_file_err(cmd->token[0]);
 	exit(1);
 	return (1);
 }
@@ -104,8 +60,9 @@ int	exec_not_built_in(t_cmd *cmd)
 {
 	char	**path;
 
+	ft_redir(cmd);
 	path = split_path();
-	if (!ft_strncmp(cmd->token[0], "./", 2) 
+	if (!ft_strncmp(cmd->token[0], "./", 2)
 		|| !ft_strncmp(cmd->token[0], "/", 1))
 		return (single_path(cmd));
 	else
@@ -114,10 +71,10 @@ int	exec_not_built_in(t_cmd *cmd)
 
 int	ft_not_built_in(t_cmd *cmd)
 {
-	char	**path;
 	pid_t	pid;
 	int		status;
-	
+
+	g_child = 1;
 	pid = fork();
 	if (pid == 0)
 		exec_not_built_in(cmd);
@@ -126,6 +83,7 @@ int	ft_not_built_in(t_cmd *cmd)
 		wait(&status);
 		if (WIFEXITED(status))
 			g_exit_code = WEXITSTATUS(status);
+		g_child = 0;
 	}
 	return (1);
 }
