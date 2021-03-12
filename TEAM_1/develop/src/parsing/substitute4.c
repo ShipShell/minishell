@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_exec.c                                        :+:      :+:    :+:   */
+/*   substitute4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 14:00:35 by hson              #+#    #+#             */
-/*   Updated: 2021/03/12 06:29:28 by kihoonlee        ###   ########.fr       */
+/*   Created: 2021/03/11 16:14:12 by kilee             #+#    #+#             */
+/*   Updated: 2021/03/11 16:50:59 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_arr(char **arr)
+void	push_exit_code_to_buffer(char **buffer)
 {
-	int	i;
+	char	*exit_code_str;
+	int		i;
 
+	exit_code_str = ft_itoa(g_exit_code);
 	i = -1;
-	if (arr)
+	while (exit_code_str[++i])
 	{
-		while (arr[++i])
-			free(arr[i]);
-		free(arr);
+		**buffer = exit_code_str[i];
+		++*buffer;
 	}
-}
-
-t_bool	is_empty_cmd(t_cmd *cmd)
-{
-	if (cmd->command[0] == NULL)
-		return (TRUE);
-	return (FALSE);
+	free(exit_code_str);
+	exit_code_str = NULL;
 }

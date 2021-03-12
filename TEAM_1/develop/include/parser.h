@@ -81,6 +81,7 @@ void	check_cmd_list_redirection(void);
 void	add_redir(t_cmd *cmd, int i, int in_count, int out_count);
 void	add_out_redir(t_cmd *cmd, int i, t_bool isdouble);
 void	add_in_redir(t_cmd *cmd, int i, t_bool isdouble);
+void	pull_token(t_cmd *cmd, int i);
 
 //substitute.c
 void	substitute_command(t_cmd *cmd);

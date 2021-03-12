@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 13:28:44 by hson             ###   ########.fr       */
+/*   Updated: 2021/03/12 12:00:39 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "parser.h"
 # include "error.h"
 # include "exec.h"
+# include "prompt.h"
 
 # define BUFFER_MAX 4096
 # define PATH_MAX 1024
@@ -39,6 +40,11 @@ extern t_cmd	*g_cmd;
 extern int		g_exit_code;
 extern t_bool	g_child;
 
-int		prompt_show(void);
+void	erase_signal_ascii(void);
+void	make_envp_to_t_env(char *envpi);
+void	init_g_env(char *envp[]);
+void	handle_sigint(int signo);
+void	handle_sigquit(int signo);
+void	ascii_art(void);
 
 #endif
