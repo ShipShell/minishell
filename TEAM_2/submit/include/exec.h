@@ -62,5 +62,7 @@ int		put_env_pwd(char *current_dir, t_list *pwd_lst);
 */
 int		exec_not_built_in(t_cmd *cmd);
 int		ft_not_built_in(t_cmd *cmd);
+char	**connect_env_key_value(void);
+char	**split_path(void);
 
 #endif
