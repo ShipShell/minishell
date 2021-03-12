@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:28:31 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:39:15 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void			handle_redirection(char **token, t_cmd *cmd)
 	int			i;
 	int			redir_check;
 
-	(void)cmd;
 	i = 0;
 	redir_check = 0;
 	redir = NULL;

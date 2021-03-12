@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:11:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:14:13 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 15:14:23 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		check_replace_len(char *str, t_quoting quoting);
 char	*replace(char *str, int len, t_quoting *quoting);
 char	*join_handled_part(char *result, char *str);
 void	handle_redirection(char **token, t_cmd *cmd);
+char	*trim_quotes(char *str);
 int		check_whether_replace(char c, t_quoting quoting);
 
 #endif

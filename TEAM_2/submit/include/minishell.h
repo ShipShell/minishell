@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:06:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:16:44 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 15:44:22 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "exec.h"
 # include "parse.h"
+# include "tester.h"
 
 void	prompt_show(void);
 void	prompt_loop(void);

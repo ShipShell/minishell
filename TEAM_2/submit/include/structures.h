@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:06:29 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 15:06:41 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:45:28 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,33 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-#define	MAX_BUFF 1000
+# define MAX_BUFF 1000
 
-#define SEMICOLON 178
-#define PIPE 180
+# define SEMICOLON 178
+# define PIPE 180
 
-#define REDIR_IN 182
-#define REDIR_OUT 184
-#define REDIR_DOUBLE 186
+# define REDIR_IN 182
+# define REDIR_OUT 184
+# define REDIR_DOUBLE 186
 
-#define ON 1
-#define OFF 2
+# define ON 1
+# define OFF 2
 
-#define CLOSED 3
-#define	SINGLE_OPEN 4
-#define DOUBLE_OPEN 5
+# define CLOSED 3
+# define SINGLE_OPEN 4
+# define DOUBLE_OPEN 5
 
-#define BACKSLASH 92
-#define SINGLE_QUOTE 39
-#define DOUBLE_QUOTE 34
+# define BACKSLASH 92
+# define SINGLE_QUOTE 39
+# define DOUBLE_QUOTE 34
 
-#define REDIR_IN 182
-#define REDIR_OUT 184
-#define REDIR_DOUBLE 186
+# define REDIR_IN 182
+# define REDIR_OUT 184
+# define REDIR_DOUBLE 186
 
-#define	DOLLAR_ON 200
-#define WAVE_ON 300
-#define NOT_TO_REPLACE 400
+# define DOLLAR_ON 200
+# define WAVE_ON 300
+# define NOT_TO_REPLACE 400
 
 t_list				*g_env;
 int					g_exit_code;
