@@ -1,6 +1,6 @@
 #include "exec.h"
 
-static int	sort_env_add(t_env *env, int len)
+static int		sort_env_add(t_env *env, int len)
 {
 	int		i;
 	int		j;
@@ -26,7 +26,7 @@ static int	sort_env_add(t_env *env, int len)
 	return (0);
 }
 
-static t_env	*sort_env()
+static t_env	*sort_env(void)
 {
 	t_env	*env;
 	t_list	*temp_g_env;
@@ -47,7 +47,7 @@ static t_env	*sort_env()
 	return (env);
 }
 
-static void	print_export_value(char *str)
+static void		print_export_value(char *str)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ static void	print_export_value(char *str)
 	}
 }
 
-static int	export_no_arg()
+static int		export_no_arg(void)
 {
 	int		i;
 	t_list	*env_list;
@@ -87,7 +87,7 @@ static int	export_no_arg()
 	return (1);
 }
 
-int	ft_export(t_cmd *cmd)
+int				ft_export(t_cmd *cmd)
 {
 	if (!cmd->token[1])
 		return (export_no_arg());

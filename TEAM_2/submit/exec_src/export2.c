@@ -1,19 +1,5 @@
 #include "exec.h"
 
-t_env *is_same_env(char *str)
-{
-	t_list	*env;
-
-	env = g_env;
-	while (env)
-	{
-		if (!ft_strcmp(((t_env *)env->content)->key, str))
-			return ((t_env *)env->content);
-		env = env->next;
-	}
-	return (0);
-}
-
 static int	equal_split(char *str, char **env_key_value)
 {
 	int		i;
@@ -22,7 +8,7 @@ static int	equal_split(char *str, char **env_key_value)
 	while (str[++i] != '\0')
 	{
 		if (str[i] == '=')
-			break;
+			break ;
 	}
 	env_key_value[0] = ft_strndup(str, i);
 	env_key_value[1] = ft_strndup(&(str[i + 1]), ft_strlen(str) - i);
@@ -66,13 +52,11 @@ static int	is_err_char(char *str)
 	return (0);
 }
 
-
 static int	check_equal_place(char *str)
 {
 	char	*env_key_value[2];
 	int		i;
 
-	// 에러 처리하자..
 	if (is_err_char(str))
 		return (-1);
 	else
@@ -96,12 +80,12 @@ static int	check_equal_place(char *str)
 	return (0);
 }
 
-int	cycle_arg(t_cmd *cmd)
+int			cycle_arg(t_cmd *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (cmd->token[++i])	
+	while (cmd->token[++i])
 		check_equal_place(cmd->token[i]);
 	return (1);
 }

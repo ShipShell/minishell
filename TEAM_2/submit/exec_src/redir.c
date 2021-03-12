@@ -1,20 +1,6 @@
 #include "exec.h"
 
-int	open_redir_in(t_cmd *cmd, t_redir *redir)
-{
-	redir->fd = open(redir->filename, O_RDONLY, 00700);
-	if (redir->fd == -1)
-	{
-		ft_putstr_fd("shipshell: ", 2);
-		print_no_such_file_err(redir->filename);
-		return (-1);
-	}
-	cmd->re_in = redir;
-	close(redir->fd);
-	return (0);
-}
-
-int	open_redir_out(t_cmd *cmd, t_redir *redir)
+int		open_redir_out(t_cmd *cmd, t_redir *redir)
 {
 	redir->fd = open(redir->filename, O_CREAT | O_TRUNC | O_WRONLY, 00700);
 	if (redir->fd == -1)
@@ -24,7 +10,7 @@ int	open_redir_out(t_cmd *cmd, t_redir *redir)
 	return (0);
 }
 
-int	open_redir_double(t_cmd *cmd, t_redir *redir)
+int		open_redir_double(t_cmd *cmd, t_redir *redir)
 {
 	redir->fd = open(redir->filename, O_APPEND | O_CREAT, 00700);
 	if (redir->fd == -1)
@@ -45,9 +31,11 @@ void	check_redir_type(t_cmd *cmd)
 	if (cmd->re_out)
 	{
 		if (cmd->re_out->redir_type == REDIR_DOUBLE)
-			cmd->re_out->fd = open(cmd->re_out->filename, O_APPEND | O_CREAT, 00700);
+			cmd->re_out->fd = open(cmd->re_out->filename,
+									O_APPEND | O_CREAT, 00700);
 		else
-			cmd->re_out->fd = open(cmd->re_out->filename, O_WRONLY | O_TRUNC | O_CREAT, 00700);
+			cmd->re_out->fd = open(cmd->re_out->filename,
+									O_WRONLY | O_TRUNC | O_CREAT, 00700);
 		cmd->re_out->tmp_fd = dup(1);
 		dup2(cmd->re_out->fd, 1);
 	}
