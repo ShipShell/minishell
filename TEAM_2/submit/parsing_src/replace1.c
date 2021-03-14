@@ -49,6 +49,7 @@ static void		get_replaced_token(t_cmd *cmd)
 		token[i] = check_and_replace(token[i]);
 		++i;
 	}
+	i = 0;
 	handle_redirection(token, cmd);
 }
 

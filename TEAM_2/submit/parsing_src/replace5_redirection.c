@@ -92,9 +92,6 @@ void		handle_redirection(char **token, t_cmd *cmd)
 			save_redir_list(token[i], &redir, &redir_check);
 		++i;
 	}
-	// printf("%s\n", (char *)tmp_token->content);
-	// test_save_tmp_token(tmp_token);
-	// test_save_redir_list(redir);
 	free(cmd->token);
 	cmd->token = list_to_token(tmp_token);
 	// test_list_to_token(cmd->token);

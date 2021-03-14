@@ -34,7 +34,6 @@ int		ft_echo(t_cmd *cmd);
 int		ft_pwd();
 int		ft_unset(t_cmd *cmd);
 int		ft_exit(t_cmd *cmd);
-int		exec_command(t_cmd *cmd);
 
 /*
 ** ridir

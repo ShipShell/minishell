@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:48:47 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/11 11:38:24 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:40:52 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			check_syntax_error(char *str)
 		// test_change_quoting(quoting);
 		if (count > 2)
 		{
-			printf("shipshell : syntax error near '%c'\n", *str);		
+			ft_printf("shipshell : syntax error near '%c'\n", *str);		
 			g_exit_code = 258;
 			
 			return (1);
