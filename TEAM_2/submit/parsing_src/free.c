@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   replace4_join.c                                    :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 13:55:34 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 14:48:31 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/15 08:22:45 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/15 08:34:15 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*join_handled_part(char *result, char *str)
+void	free_used_double_pointer(char **str)
 {
-	char		*tmp;
+	int	i;
 
-	if (result == NULL)
-		result = ft_strdup(str);
-	else
-	{
-		tmp = result;
-		result = ft_strjoin(tmp, str);
-		free(tmp);
-	}
+	i = -1;
+	while (str[++i])
+		free(str[i]);
 	free(str);
-	return (result);
+}
+
+void	free_used_str_list(t_list *tmp_token)
+{
+	while (tmp_token)
+	{
+		free(tmp_token->content);
+		tmp_token = tmp_token->next;
+	}
 }

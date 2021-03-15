@@ -22,26 +22,6 @@ void	set_env_list(char **envp)
 		ft_lstadd_back(&g_env, ft_lstnew(set_env(envp[i])));
 }
 
-// t_env	*set_env(char *envp)
-// {
-// 	t_env	*result;
-// 	char	**key_value;
-
-// 	result = (t_env *)malloc(sizeof(t_env));
-// 	key_value = ft_split(envp, '=');
-// 	result->key = key_value[0];
-// 	result->value = key_value[1];
-// 	return (result);
-// }
-
-static void	free_used_double_pointer(char **str)
-{
-	free(str[0]);
-	free(str[1]);
-	free(str[2]);
-	free(str);
-}
-
 t_env		*set_env(char *envp)
 {
 	t_env	*result;
@@ -49,12 +29,6 @@ t_env		*set_env(char *envp)
 
 	result = (t_env *)malloc(sizeof(t_env));
 	key_value = ft_split(envp, '=');
-	int	i;
-	i = -1;
-	// while (key_value[++i])
-	// {
-	// 	printf("%d\n", i);
-	// }
 	result->key = ft_strdup(key_value[0]);
 	result->value = ft_strdup(key_value[1]);
 	free_used_double_pointer(key_value);

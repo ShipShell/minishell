@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace2_check.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 13:55:04 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/12 13:58:50 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	len_of_dollar(char *str, t_quoting quoting)
@@ -20,7 +32,8 @@ static int	len_not_to_replace(char *str, t_quoting quoting)
 	int		len;
 
 	len = 1;
-	while (str[len] && check_whether_replace(str[len], quoting) == NOT_TO_REPLACE)
+	while (str[len]
+		&& check_whether_replace(str[len], quoting) == NOT_TO_REPLACE)
 		++len;
 	return (len);
 }

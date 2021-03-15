@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace3_replace.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 13:55:08 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/15 10:43:17 by hyeonkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static char	*replace_tmp_with_exit_code(char *tmp)
 {
-	free (tmp);
+	free(tmp);
 	tmp = ft_itoa(g_exit_code);
 	return (tmp);
 }
@@ -22,7 +34,7 @@ static char	*replace_dollar(char *str, int len)
 	{
 		if (ft_strncmp(tmp, ((t_env *)(env->content))->key, len - 1) == 0)
 		{
-			free (tmp);
+			free(tmp);
 			tmp = ft_strdup(((t_env *)(env->content))->value);
 			return (tmp);
 		}

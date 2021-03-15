@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   replace4_join.c                                    :+:      :+:    :+:   */
+/*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 13:55:34 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 14:48:31 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/15 08:23:42 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/15 08:34:33 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef FREE_H
+# define FREE_H
 
-char	*join_handled_part(char *result, char *str)
-{
-	char		*tmp;
+void	free_used_double_pointer(char **str);
+void	free_used_str_list(t_list *tmp_token);
 
-	if (result == NULL)
-		result = ft_strdup(str);
-	else
-	{
-		tmp = result;
-		result = ft_strjoin(tmp, str);
-		free(tmp);
-	}
-	free(str);
-	return (result);
-}
+#endif
