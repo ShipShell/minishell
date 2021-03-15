@@ -8,10 +8,22 @@
 
 void	prompt_show(void);
 void	prompt_loop(void);
-void	handle_sigint(int signo);
+void	show_prompt(void);
 t_env	*set_env(char *envp);
 void	set_env_list(char **envp);
 int		command_len(char *stdin_buf);
+
+/*
+**	cmd_cycle
+*/
+int		wait_cmd(void);
+
+/*
+**	signal
+*/
+void	handle_sigint(int signo);
+void	handle_sigquit(int signo);
+void	exit_by_cntl_d(void);
 
 /*
 **	parsing 대문함수

@@ -213,9 +213,6 @@ int main()
 
 #### 마지막 고칠거
 
-- Exit code 130: ctrl-c로 종료된거.
 - 절대경로로 명령 실행 후 exit code 확인.
-- 파이프가 안먹네....
 - Unset PATH하고 ls 확인.
-- 
 
