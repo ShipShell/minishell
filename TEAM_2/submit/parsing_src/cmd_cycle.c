@@ -47,6 +47,7 @@ int		wait_cmd(void)
 		stdin_buf = join_and_abandon(tmp, stdin_buf);
 	tokenized_single_cmd_list = parse_cmd_line(stdin_buf);
 	cycle_list(tokenized_single_cmd_list);
+	free_tokenized_single_cmd_list(tokenized_single_cmd_list);
 	free(stdin_buf);
 	return (0);
 }
