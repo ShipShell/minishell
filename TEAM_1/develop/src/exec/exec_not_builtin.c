@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_not_builtin.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sonheewon <sonheewon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:42:00 by hson              #+#    #+#             */
-/*   Updated: 2021/03/12 09:46:21 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/15 10:57:40 by sonheewon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	exec_not_builtin(t_cmd *cmd)
 	chk_is_cmd_path(cmd);
 	if (cmd->ispath == FALSE)
 	{
-		path = get_path_env();
+		if(!(path = get_path_env()))
+			exit(no_file_error(cmd, 127));
 		exec_not_builtin_sub(cmd, path);
 		free_arr(path);
 		exit(no_command_error(cmd, 127));
