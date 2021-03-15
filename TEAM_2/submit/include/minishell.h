@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:06:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 17:12:39 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:36:14 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	exit_by_cntl_d(void);
 
 int		return_with_syntax_error(char c);
 int		return_with_multiline_command(char *str);
+int		return_with_many_syntax_error(char c);
 
 #endif

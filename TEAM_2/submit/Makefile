@@ -6,7 +6,7 @@
 #    By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/15 17:26:49 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/03/15 18:17:02 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/03/15 18:54:37 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ $(LIBDIR)/$(LIBFT) :
 
 clean :
 	rm -rf $(EXEC_OBJS) $(PARSING_OBJS) $(MAIN_OBJS)
+	make -C $(LIBDIR) fclean
 fclean : clean
 	rm -rf $(NAME)
 re : fclean all

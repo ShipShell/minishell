@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:48 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:49 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:52:23 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		open_redir_out(t_cmd *cmd, t_redir *redir)
 
 int		open_redir_double(t_cmd *cmd, t_redir *redir)
 {
-	redir->fd = open(redir->filename, O_APPEND | O_CREAT, 00700);
+	redir->fd = open(redir->filename, O_WRONLY | O_APPEND | O_CREAT, 00700);
 	if (redir->fd == -1)
 		return (-1);
 	cmd->re_out = redir;
@@ -44,7 +44,7 @@ void	check_redir_type(t_cmd *cmd)
 	{
 		if (cmd->re_out->redir_type == REDIR_DOUBLE)
 			cmd->re_out->fd = open(cmd->re_out->filename,
-									O_APPEND | O_CREAT, 00700);
+									O_WRONLY | O_APPEND | O_CREAT, 00700);
 		else
 			cmd->re_out->fd = open(cmd->re_out->filename,
 									O_WRONLY | O_TRUNC | O_CREAT, 00700);

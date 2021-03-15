@@ -6,11 +6,18 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:42:35 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 17:10:44 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:44:14 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		return_with_many_syntax_error(char c)
+{
+	printf("shipshell : syntax error near unexpected token '%c'\n", c);
+	g_exit_code = 258;
+	return (1);
+}
 
 int		return_with_syntax_error(char c)
 {

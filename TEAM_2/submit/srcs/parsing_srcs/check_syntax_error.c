@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:48:47 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 16:40:52 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/15 19:50:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,20 @@ static int		too_many_metacharacter(char c, int count)
 static char		is_first_char_metacharacter(char *str)
 {
 	int			i;
+	char		c;
 
 	i = 0;
 	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		++i;
 	if (is_metacharacter(str[i]))
-		return (str[i]);
+	{
+		c = str[i];
+		++i;
+		while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+			++i;
+		if (str[i] == '\0')
+			return (c);
+	}
 	return (0);
 }
 
@@ -71,14 +79,14 @@ int				check_syntax_error(char *str)
 	init_quoting(&quoting);
 	i = -1;
 	count = 0;
-	if ((c = is_first_char_metacharacter(str)))
+	if ((c = is_first_char_metacharacter(str)) != '\0')
 		return (return_with_syntax_error(c));
 	while (str[++i])
 	{
 		change_quoting(str[i], &quoting);
 		count += count_metacharacter(str[i], quoting, count);
 		if (too_many_metacharacter(str[i], count) != 0)
-			return (return_with_syntax_error(str[i]));
+			return (return_with_many_syntax_error(str[i]));
 	}
 	if (quoting.quotes != CLOSED || (count != 0 && (count % 178) != 0))
 		return (return_with_multiline_command(str));

@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:24 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:04:22 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	print_not_a_valid_identifier(char *str)
 {
 	ft_putchar_fd('\'', 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd("\': not a valisd identifier\n", 2);
+	ft_putstr_fd("\': not a valid identifier\n", 2);
 	return (0);
 }
 
