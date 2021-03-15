@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_env.c                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/28 15:59:16 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 08:55:08 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/15 08:22:45 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/15 08:34:15 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
 #include "minishell.h"
 
-void	set_env_list(char **envp)
+void	free_used_double_pointer(char **str)
 {
-	int		i;
+	int	i;
 
 	i = -1;
-	while (envp[++i])
-		ft_lstadd_back(&g_env, ft_lstnew(set_env(envp[i])));
+	while (str[++i])
+		free(str[i]);
+	free(str);
 }
 
-t_env	*set_env(char *envp)
+void	free_used_str_list(t_list *tmp_token)
 {
-	t_env	*result;
-	char	**key_value;
-
-	result = (t_env *)malloc(sizeof(t_env));
-	key_value = ft_split(envp, '=');
-	result->key = ft_strdup(key_value[0]);
-	result->value = ft_strdup(key_value[1]);
-	free_used_double_pointer(key_value);
-	return (result);
+	while (tmp_token)
+	{
+		free(tmp_token->content);
+		tmp_token = tmp_token->next;
+	}
 }

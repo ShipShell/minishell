@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace5_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 16:39:15 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 10:58:48 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ static void		save_redir_list(char *token, t_list **redir_list, int *check)
 
 static void		save_tmp_token(char *token, t_list **tmp_token)
 {
-	ft_lstadd_back(tmp_token, ft_lstnew(token));
+	ft_lstadd_back(tmp_token, ft_lstnew(ft_strdup(token)));
 }
 
-static char		**list_to_token(t_list *token_list)
+static char		**list_to_double_pointer(t_list *token_list)
 {
 	char		**token;
 	t_list		*start;
 	int			count;
 	int			i;
 
-	i = 0;
+	i = -1;
 	count = 0;
 	start = token_list;
 	while (start)
@@ -73,13 +73,11 @@ static char		**list_to_token(t_list *token_list)
 	}
 	token = (char **)malloc(sizeof(char *) * (count + 1));
 	token[count] = NULL;
-	while (token[i])
+	while (token_list)
 	{
-		token[i] = ft_strdup((char *)token_list->content);
+		token[++i] = ft_strdup((char *)(token_list->content));
 		token_list = token_list->next;
-		++i;
 	}
-	free(token_list);
 	return (token);
 }
 
@@ -103,7 +101,8 @@ void			handle_redirection(char **token, t_cmd *cmd)
 			save_redir_list(token[i], &redir, &redir_check);
 		++i;
 	}
-	free(cmd->token);
-	cmd->token = list_to_token(tmp_token);
+	free_used_double_pointer(cmd->token);
+	cmd->token = list_to_double_pointer(tmp_token);
+	free_used_str_list(tmp_token);
 	cmd->redir = redir;
 }

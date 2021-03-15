@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:50:11 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 16:01:18 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 11:23:04 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void		get_replaced_token(t_cmd *cmd)
 	char		**token;
 
 	token = cmd->token;
+	if (token == NULL)
+		return ;
 	i = 0;
 	while (token[i])
 	{

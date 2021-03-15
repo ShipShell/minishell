@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenkize_utils.c                                  :+:      :+:    :+:   */
+/*   tokenize_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:03:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:04:02 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 11:19:21 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		get_token_count(char *str)
 	count = 0;
 	while (*str != '\0')
 	{
-		while (*str == ' ' || *str == '\t')
+		while (*str && (*str == ' ' || *str == '\t'))
 			str++;
 		len = get_token_len(str);
 		str = str + len;

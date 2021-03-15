@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 15:56:51 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 13:16:32 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ t_list			*sep_to_single_cmd(char *stdin_buf)
 	return (single_cmd_list);
 }
 
+static int		has_only_whitespace(char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ' && *str != '\t')
+			return (0);
+		++str;
+	}
+	return (1);
+}
+
 t_list			*parse_cmd_line(char *str)
 {
 	t_list		*list_to_handle;
@@ -55,6 +66,8 @@ t_list			*parse_cmd_line(char *str)
 	t_list		*single_cmd_list;
 
 	if (check_syntax_error(str))
+		return (NULL);
+	if (has_only_whitespace(str))
 		return (NULL);
 	single_cmd_list = sep_to_single_cmd(str);
 	tokenized_single_cmd_list = tokenize(single_cmd_list);
