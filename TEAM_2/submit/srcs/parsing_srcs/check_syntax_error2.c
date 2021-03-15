@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:42:35 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 14:05:23 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:10:44 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		return_with_multiline_command(char *str)
 		--len;
 	if (str[len] == '>' || str[len] == '<')
 		printf("shipshell : syntax error near unexpected token 'newline'\n");
-	else 
+	else
 		printf("%s is multiline command\n", str);
 	g_exit_code = 1;
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace6_delete_quotes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 15:13:41 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 16:44:06 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:51:25 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static int	check_quotes(t_quoting quoting)
 {
 	if (quoting.old_quotes != quoting.quotes)
+		return (0);
+	else if (quoting.escape == ON)
 		return (0);
 	else
 		return (1);

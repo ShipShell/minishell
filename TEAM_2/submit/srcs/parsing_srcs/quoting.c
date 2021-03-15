@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quoting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:55:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 15:49:32 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:58:48 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void			change_escape(char c, t_quoting *quoting)
 			if (quoting->quotes != SINGLE_OPEN && quoting->escape == OFF)
 				quoting->escape = ON;
 		}
+		else
+			quoting->escape = OFF;
 	}
 }
 

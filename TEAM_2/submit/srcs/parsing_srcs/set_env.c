@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:16 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/14 11:49:16 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/15 17:11:30 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_env_list(char **envp)
 		ft_lstadd_back(&g_env, ft_lstnew(set_env(envp[i])));
 }
 
-t_env		*set_env(char *envp)
+t_env	*set_env(char *envp)
 {
 	t_env	*result;
 	char	**key_value;

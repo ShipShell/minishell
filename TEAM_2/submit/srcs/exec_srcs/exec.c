@@ -85,7 +85,7 @@ int		exec_pipe(t_list **cmd_list)
 		connect_pipe(*cmd_list, fd, i * 2, pipe_num * 2);
 	wait_all_child(pid, pipe_num + 1, fd);
 	g_child = 0;
-	free(fd);
+	free_fd_pid(fd, pid);
 	return (0);
 }
 

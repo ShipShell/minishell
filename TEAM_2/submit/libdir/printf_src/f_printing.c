@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_printing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mijeong <minje70@naver.com>                +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:04:16 by mijeong           #+#    #+#             */
-/*   Updated: 2020/11/08 23:10:17 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/15 18:02:33 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		f_align_check(int count, t_key *key, union u_f result)
 	else
 		c = ' ';
 	i = -1;
-	if (result.d < 0 || key->flag.plus || key->flag.space || result.s == 1)
+	if (result.d < 0 || key->flag.plus ||
+		key->flag.space || result.s_bit.s == 1)
 		i++;
 	front = (long long)result.d;
 	i++;
@@ -38,7 +39,7 @@ int		f_align_check(int count, t_key *key, union u_f result)
 
 int		bitcheck(union u_f result, t_key *key)
 {
-	if ((result.frac <<= (12 + key->precision)) == 0)
+	if ((result.s_bit.frac <<= (12 + key->precision)) == 0)
 		return (1);
 	else
 		return (0);
@@ -50,10 +51,10 @@ int		bankround(int count, union u_f *result,
 	int				sign;
 
 	sign = 0;
-	if ((*result).s != 0)
+	if ((*result).s_bit.s != 0)
 	{
 		sign = 1;
-		(*result).s = 0;
+		(*result).s_bit.s = 0;
 	}
 	bankround_div(result, front, key, count);
 	if ((*result).d >= 1.0)
@@ -96,11 +97,11 @@ int		f_printer(t_key *key)
 	else
 		count = 6;
 	if (key->flag.zero)
-		f_util(key, result.s);
+		f_util(key, result.s_bit.s);
 	if (!(key->flag.minus))
 		f_align_check(count, key, result);
 	if (!(key->flag.zero))
-		f_util(key, result.s);
+		f_util(key, result.s_bit.s);
 	i = -1;
 	while (++i < key->precision - count)
 		putfunc('0', key);

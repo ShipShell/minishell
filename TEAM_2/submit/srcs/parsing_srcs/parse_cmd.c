@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:59:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 13:16:32 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:47:38 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ t_list			*parse_cmd_line(char *str)
 	t_list		*tokenized_single_cmd_list;
 	t_list		*single_cmd_list;
 
+	if (str == NULL)
+		return (NULL);
 	if (check_syntax_error(str))
 		return (NULL);
 	if (has_only_whitespace(str))
