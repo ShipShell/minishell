@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mijeong <minje70@naver.com>                +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:04:44 by mijeong           #+#    #+#             */
-/*   Updated: 2020/11/06 18:18:25 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/15 17:15:46 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ t_list				*ft_lstmap(t_list *lst,
 void				*(*f)(void *), void (*del)(void *));
 char				*ft_strndup(const char *s, size_t n);
 
-// ft_ printf
 int					ft_printf(const char *str, ...);
 #endif

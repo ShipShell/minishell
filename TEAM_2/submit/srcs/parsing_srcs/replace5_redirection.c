@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 14:51:10 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 16:37:03 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		save_redir_list(char *token, t_list **redir_list, int *check)
 
 	redir = (t_redir *)malloc(sizeof(t_redir));
 	if (*token == '>' || *token == '<')
-		return ;
+		free(redir);
 	else
 	{
 		if (*check == REDIR_OUT)

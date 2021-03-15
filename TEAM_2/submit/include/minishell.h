@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:06:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 13:46:20 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:12:39 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	handle_sigint(int signo);
 void	handle_sigquit(int signo);
 void	exit_by_cntl_d(void);
 
-int 	return_with_syntax_error(char c);
-int 	return_with_multiline_command(char *str);
+int		return_with_syntax_error(char c);
+int		return_with_multiline_command(char *str);
 
 #endif

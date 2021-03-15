@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:41 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 12:56:45 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:10:13 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	cycle_path(t_cmd *cmd)
 int	single_path(t_cmd *cmd)
 {
 	char	**env;
+
 	env = connect_env_key_value();
 	if (env == 0)
 		return (-1);

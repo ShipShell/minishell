@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 08:22:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 16:08:50 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:11:21 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_used_double_pointer(char **str)
 void	free_used_str_list(t_list *tmp_token)
 {
 	t_list	*removing_nodes;
-	
+
 	while (tmp_token)
 	{
 		free(tmp_token->content);
@@ -38,7 +38,7 @@ void	free_used_str_list(t_list *tmp_token)
 void	free_redir_list(t_list *redir)
 {
 	t_list	*removing_nodes;
-	
+
 	while (redir)
 	{
 		free(((t_redir *)redir->content)->filename);
