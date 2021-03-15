@@ -13,10 +13,9 @@ char	*join_and_abandon(char *str1, char *str2)
 	return (str1);
 }
 
-char	*attach_stdin_buf(char *stdin_buf)
+char	*attach_stdin_buf(char *stdin_buf, char *tmp)
 {
 	int		len;
-	char	*tmp;
 
 	len = ft_strlen(stdin_buf);
 	if (len)
@@ -42,7 +41,7 @@ int		wait_cmd(void)
 	tmp = 0;
 	show_prompt();
 	while (get_next_line(0, &stdin_buf) == 0)
-		tmp = attach_stdin_buf(stdin_buf);
+		tmp = attach_stdin_buf(stdin_buf, tmp);
 	if (tmp != 0)
 		stdin_buf = join_and_abandon(tmp, stdin_buf);
 	tokenized_single_cmd_list = parse_cmd_line(stdin_buf);
