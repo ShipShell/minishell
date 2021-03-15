@@ -78,9 +78,13 @@ void	handle_sigint(int signo)
 {
 	(void)signo;
 	if (g_child)
+	{
 		ft_putstr_fd("\n", 1);
+		g_exit_code = 130;
+	}
 	else
 	{
+		g_exit_code = 1;
 		ft_putstr_fd("\b\b  \b\b\n", 1);
 		ft_putstr_fd("shipshell$ ", 1);
 	}

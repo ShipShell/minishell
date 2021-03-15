@@ -11,6 +11,8 @@ char	**split_path(void)
 			break ;
 		env = env->next;
 	}
+	if (env == 0)
+		return (0);
 	return (ft_split(((t_env *)env->content)->value, ':'));
 }
 

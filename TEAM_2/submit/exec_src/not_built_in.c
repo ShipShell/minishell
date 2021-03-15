@@ -11,16 +11,20 @@ int	ft_free_dptr(char **dptr)
 	return (0);
 }
 
-int	cycle_path(t_cmd *cmd, char **path)
+int	cycle_path(t_cmd *cmd)
 {
 	char	**env;
+	char	**path;
 	char	*path_and_cmd;
 	char	*temp;
 	int		i;
 
 	i = -1;
 	env = connect_env_key_value();
-	if (path == 0 || env == 0)
+	path = split_path();
+	if (path == 0)
+		print_no_such_file_err(cmd->token[0]);
+	if (env == 0)
 		return (-1);
 	while (path[++i])
 	{
@@ -31,16 +35,13 @@ int	cycle_path(t_cmd *cmd, char **path)
 		free(path_and_cmd);
 	}
 	ft_free_dptr(env);
-	ft_putstr_fd("shipshell: ", 2);
 	print_command_not_found_err(cmd, 0);
-	exit(127);
 	return (1);
 }
 
 int	single_path(t_cmd *cmd)
 {
 	char	**env;
-
 	env = connect_env_key_value();
 	if (env == 0)
 		return (-1);
@@ -50,7 +51,6 @@ int	single_path(t_cmd *cmd)
 		return (-1);
 	}
 	ft_free_dptr(env);
-	ft_putstr_fd("shipshell: ", 1);
 	print_no_such_file_err(cmd->token[0]);
 	exit(1);
 	return (1);
@@ -61,12 +61,14 @@ int	exec_not_built_in(t_cmd *cmd)
 	char	**path;
 
 	ft_redir(cmd);
-	path = split_path();
+	if (path == 0)
+		print_command_not_found_err(cmd, 0);
 	if (!ft_strncmp(cmd->token[0], "./", 2)
-		|| !ft_strncmp(cmd->token[0], "/", 1))
+		|| !ft_strncmp(cmd->token[0], "/", 1)
+		|| !ft_strncmp(cmd->token[0], "../", 3))
 		return (single_path(cmd));
 	else
-		return (cycle_path(cmd, path));
+		return (cycle_path(cmd));
 }
 
 int	ft_not_built_in(t_cmd *cmd)

@@ -176,7 +176,6 @@ int main()
 ### 해야할 것
 
 - 자식에서 종료코드를 부모에게 넘기는거. not_built_in에서
-- strerr 공부
 
 1. 에러 고치고
 
@@ -208,3 +207,15 @@ int main()
 - not_built_in에서 에러 발생시 에러 처리 뭐뭐 했는지..
 - pipe에서 list가 잘 못된 값을 본다...
 - echo hi > a.txt > b.txt < c.txt ; env
+- 세미콜론 여러개 넣었을 때 ls만 문제가 되는 듯 하기에 생각해보기.
+
+
+
+#### 마지막 고칠거
+
+- Exit code 130: ctrl-c로 종료된거.
+- 절대경로로 명령 실행 후 exit code 확인.
+- 파이프가 안먹네....
+- Unset PATH하고 ls 확인.
+- 
+

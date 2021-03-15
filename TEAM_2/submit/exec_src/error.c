@@ -9,8 +9,10 @@ int	print_no_such_file_err(char *filename)
 
 int	print_command_not_found_err(t_cmd *cmd, int index)
 {
+	ft_putstr_fd("shipshell: ", 2);
 	ft_putstr_fd(cmd->token[index], 2);
 	ft_putstr_fd(": command not found\n", 2);
+	exit(127);
 	return (0);
 }
 
