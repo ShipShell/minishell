@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int	is_built_in(t_cmd *cmd)
+int		is_built_in(t_cmd *cmd)
 {
 	if (ft_redir(cmd) == -1)
 		return (-1);
@@ -39,7 +39,7 @@ int	is_built_in(t_cmd *cmd)
 	return (1);
 }
 
-int	exec_command(t_cmd *cmd)
+int		exec_command(t_cmd *cmd)
 {
 	int		result;
 
@@ -50,7 +50,7 @@ int	exec_command(t_cmd *cmd)
 		return (ft_not_built_in(cmd));
 }
 
-int	exec_pipe_command(t_cmd *cmd)
+int		exec_pipe_command(t_cmd *cmd)
 {
 	int		result;
 
@@ -61,7 +61,7 @@ int	exec_pipe_command(t_cmd *cmd)
 		return (exec_not_built_in(cmd));
 }
 
-int	count_pipe(t_list *cmd_list)
+int		count_pipe(t_list *cmd_list)
 {
 	int	result;
 
@@ -72,4 +72,10 @@ int	count_pipe(t_list *cmd_list)
 		cmd_list = cmd_list->next;
 	}
 	return (result);
+}
+
+void	free_fd_pid(int *fd, pid_t *pid)
+{
+	free(fd);
+	free(pid);
 }

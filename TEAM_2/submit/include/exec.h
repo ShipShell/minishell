@@ -36,6 +36,7 @@ int		is_built_in(t_cmd *cmd);
 int		exec_command(t_cmd *cmd);
 int		exec_pipe_command(t_cmd *cmd);
 int		count_pipe(t_list *cmd_list);
+void	free_fd_pid(int *fd, pid_t *pid);
 /*
 ** built_in_command
 */
