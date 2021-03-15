@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 10:58:48 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/15 14:51:10 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ static void		save_redir_list(char *token, t_list **redir_list, int *check)
 		if (*check == REDIR_OUT)
 		{
 			redir->redir_type = REDIR_OUT;
-			redir->filename = token;
+			redir->filename = ft_strdup(token);
 		}
 		else if (*check == REDIR_DOUBLE)
 		{
 			redir->redir_type = REDIR_DOUBLE;
-			redir->filename = token;
+			redir->filename = ft_strdup(token);
 		}
 		else if (*check == REDIR_IN)
 		{
 			redir->redir_type = REDIR_IN;
-			redir->filename = token;
+			redir->filename = ft_strdup(token);
 		}
 		ft_lstadd_back(redir_list, ft_lstnew(redir));
 		*check = 0;
