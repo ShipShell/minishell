@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:41:34 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 15:42:10 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 15:10:41 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	init_quoting(t_quoting *quoting)
 
 void	change_quoting(t_quoting *quoting, char c)
 {
+	if (c == SINGLE_QUOTE || c == DOUBLE_QUOTE)
+		change_quotes_status(quoting, c);
 	if (c == BACKSLASH)
 		change_escape_status(quoting);
-	else if (c == SINGLE_QUOTE || c == DOUBLE_QUOTE)
-		change_quotes_status(quoting, c);
 	else if (quoting->escape == ON)
 		quoting->escape = OFF;
 }

@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 12:34:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/16 12:54:05 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 15:40:43 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,9 @@ char				*substitute_token(char *token);
 int					push_char_to_buffer(char **buffer, char *token,
 										t_quoting *quoting);
 void				push_exit_code_to_buffer(char **buffer);
-int					check_substitute_action(t_quoting *quoting, char c);
+int					check_substitute_action(t_quoting *quoting, char *c);
+int					double_quote_action(t_quoting *quoting);
+int					backslash_action(t_quoting *quoting, char *c);
 int					substitute_special_char(char **buffer, char *token);
 int					substitute_env_variable(char **buffer, char *token);
 void				push_value_to_buffer(char *value, char **buffer);
