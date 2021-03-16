@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:36 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:37 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:56:00 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,19 @@ static int	add_env(char **env_key_value)
 
 static int	is_err_char(char *str)
 {
-	char	c;
+	int		i;
 
-	c = str[0];
-	if (c == '=' || (c >= '0' && c <= '9') || c == '^' ||
-		c == '!' || c == '@' || c == '$' || c == '%' ||
-		c == '*')
+	i = 0;
+	if (str[i++] == '=' || (str[i] >= '0' && str[i] <= '9') || str[i] == '\0')
+		return (!print_export_not_valid_identifier(str));
+	while (str[++i])
 	{
-		ft_putstr_fd("shipshell: export: ", 2);
-		print_not_a_valid_identifier(str);
-		return (1);
+		if (str[i] == '=')
+			return (0);
+		if (str[i] == '^' || str[i] == '!' || str[i] == '@' ||
+			str[i] == '$' || str[i] == '%' || str[i] == '*')
+			return (!print_export_not_valid_identifier(str));
 	}
-	g_exit_code = 1;
 	return (0);
 }
 

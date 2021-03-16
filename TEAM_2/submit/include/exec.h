@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 15:04:59 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 16:44:51 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:44:56 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		print_no_such_file_err(char *filename);
 int		print_strerror(char *str);
 int		print_not_a_valid_identifier(char *str);
 int		cycle_list(t_list *cmd_list);
+int		print_export_not_valid_identifier(char *str);
 
 /*
 ** exec

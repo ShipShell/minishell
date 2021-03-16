@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 19:04:22 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:44:28 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,13 @@ int	print_strerror(char *str)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
+	return (0);
+}
+
+int	print_export_not_valid_identifier(char *str)
+{
+	ft_putstr_fd("shipshell: export: ", 2);
+	print_not_a_valid_identifier(str);
+	g_exit_code = 1;
 	return (0);
 }
