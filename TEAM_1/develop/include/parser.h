@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 12:34:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/16 12:37:27 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 12:54:05 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void				check_cmd_list_redirection(void);
 void				add_redir(t_cmd *cmd, int i, int in_count, int out_count);
 void				add_out_redir(t_cmd *cmd, int i, t_bool isdouble);
 void				add_in_redir(t_cmd *cmd, int i, t_bool isdouble);
+void				pull_token(t_cmd *cmd, int i);
 
 /*
 ** substitute.c
@@ -109,6 +110,7 @@ int					push_char_to_buffer(char **buffer, char *token,
 void				push_exit_code_to_buffer(char **buffer);
 int					check_substitute_action(t_quoting *quoting, char c);
 int					substitute_special_char(char **buffer, char *token);
+int					substitute_env_variable(char **buffer, char *token);
 void				push_value_to_buffer(char *value, char **buffer);
 char				*find_value_match_with(char *key);
 t_bool				is_pipe_or_semicolon(char *token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:42:30 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 15:11:18 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/12 11:20:46 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,24 @@ void	wait_parent(int fds[], pid_t pid[], int cnt)
 		g_exit_code = WEXITSTATUS(status);
 }
 
-t_cmd	*piping(t_cmd *cmd)
+t_cmd	*exec_pipe(t_cmd *cmd)
 {
 	int		fds[count_pipes(cmd) * 2];
 	int		cnt_pip;
 	int		i;
 	pid_t	pid[count_pipes(cmd) + 1];
 
-	cnt_pip = count_pipes(cmd);
-	make_pipes(fds, cnt_pip);
+	make_pipes(cmd, fds, &cnt_pip);
 	i = -1;
-	while (++i < cnt_pip + 1)
+	while (cmd && ++i < cnt_pip + 1)
 	{
-		substitute_command(cmd);
-		substitute_redir(cmd);
 		if ((pid[i] = fork()) == -1)
 			ft_error();
 		g_child = 1;
 		if (pid[i] == 0)
 		{
 			dup_fds(fds, i, cnt_pip);
-			if (is_built_in(cmd->command[0]) == 1)
-				exit(exec_builtin(cmd));
-			exec_not_builtin(cmd);
+			exec_default_pipe(cmd);
 		}
 		cmd = cmd->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:26 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 15:03:55 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 12:56:36 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		is_built_in(char *command)
 		ft_strcmp(command, "unset") == 0 ||
 		ft_strcmp(command, "env") == 0 ||
 		ft_strcmp(command, "exit") == 0)
-		return (1);
+		return (TRUE);
 	else
-		return (0);
+		return (FALSE);
 }
 
 int		exec_builtin(t_cmd *cmd)
@@ -77,25 +77,18 @@ void	exec_command(void)
 	cmd = g_cmd;
 	while (cmd)
 	{
-		// test_make_cmd_str_to_tokens();
+		test_make_cmd_str_to_tokens();
 		substitute_command(cmd);
-		// test_make_cmd_str_to_tokens();
 		substitute_redir(cmd);
-		//test_make_cmd_str_to_tokens();
-		if (is_empty_cmd(cmd))
+		test_make_cmd_str_to_tokens();
+		// test_make_cmd_str_to_tokens();
+		if (cmd->ispipe == TRUE)
 		{
-			syntax_error();
-			return ;
-		}
-		else if (cmd->ispipe == 1)
-		{
-			cmd = piping(cmd);
+			change_is_pipe(cmd);
+			cmd = exec_pipe(cmd);
 			continue;
 		}
-		if (is_built_in(cmd->command[0]) == 1)
-			g_exit_code = exec_builtin(cmd);
-		else
-			not_builtin_fork(cmd);
+		exec_default(cmd);
 		cmd = cmd->next;
 	}
 }

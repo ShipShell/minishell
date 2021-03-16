@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:38:37 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 15:01:29 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/12 10:57:43 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,34 @@
 
 int		num_arg_error(t_cmd *cmd, int err_num)
 {
-	ft_putstr("minishell: ");
-	ft_putstr(cmd->command[0]);
-	ft_putstr(": ");
-	ft_putstr(cmd->command[1]);
-	ft_putstr(": numeric argument required\n");
+	ft_putstr_fd("shipshell: ", 2);
+	ft_putstr_fd(cmd->command[0], 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(cmd->command[1], 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 	return (err_num);
 }
 
 int		too_many_arg_error(t_cmd *cmd, int err_num)
 {
-	ft_putstr("minishell: ");
-	ft_putstr(cmd->command[0]);
-	ft_putstr(": too many arguments\n");
+	ft_putstr_fd("shipshell: ", 2);
+	ft_putstr_fd(cmd->command[0], 2);
+	ft_putstr_fd(": too many arguments\n", 2);
 	return (err_num);
 }
 
 int		open_error(char *file)
 {
-	ft_putstr("minishell: ");
-	ft_putstr(file);
-	ft_putstr(": No such file or directory\n");
+	ft_putstr_fd("shipshell: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	return (-1);
 }
 
 int		no_home_error(t_cmd *cmd, int err_num)
 {
-	ft_putstr("minishell: ");
-	ft_putstr(cmd->command[0]);
-	ft_putstr(": HOME not set\n");
+	ft_putstr_fd("shipshell: ", 2);
+	ft_putstr_fd(cmd->command[0], 2);
+	ft_putstr_fd(": HOME not set\n", 2);
 	return (err_num);
 }
