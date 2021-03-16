@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:30:00 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/10 12:47:59 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 13:04:58 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,7 @@ void		add_back_new_cmd(t_cmd **cmds, t_cmd *new_cmd)
 	cur->next = new_cmd;
 }
 
-void	lst_del_one(void * target)
-{
-	free(target);
-}
-
-void	delete_redir_in_cmd(t_redir *redir)
-{
-	if (redir == NULL)
-		return ;
-	ft_lstclear(&redir->file, lst_del_one);
-	free(redir);
-}
-
-void	delete_data_in_cmd(void *data)
+void		delete_data_in_cmd(void *data)
 {
 	t_cmd	*cmd;
 	int		i;
@@ -75,17 +62,7 @@ void	delete_data_in_cmd(void *data)
 	}
 }
 
-void	delete_one_cmd(t_cmd *cmd, void (*del)(void*))
-{
-	if (cmd == NULL)
-		return ;
-	if (del)
-		del(cmd);
-	free(cmd);
-	cmd = NULL;
-}
-
-void	delete_cmd_list(t_cmd **lst, void (*del)(void*))
+void		delete_cmd_list(t_cmd **lst, void (*del)(void*))
 {
 	t_cmd	*temp;
 
@@ -99,46 +76,12 @@ void	delete_cmd_list(t_cmd **lst, void (*del)(void*))
 	}
 }
 
-t_env		*new_env(char *key, char *value)
+void		delete_one_cmd(t_cmd *cmd, void (*del)(void*))
 {
-	t_env	*new;
-
-	if (!(new = (t_env *)malloc(sizeof(t_env) * 1)))
-		return (NULL);
-	new->key = ft_strdup(key);
-	if (value)
-		new->val = ft_strdup(value);
-	else
-		new->val = NULL;
-	new->next = NULL;
-	return (new);
-}
-
-void		add_back_new_env(t_env **envs, t_env *new_env)
-{
-	t_env	*cur;
-
-	if (*envs == NULL)
-	{
-		*envs = new_env;
+	if (cmd == NULL)
 		return ;
-	}
-	cur = *envs;
-	while (cur->next)
-		cur = cur->next;
-	cur->next = new_env;
-}
-
-t_redir		*init_redir(void)
-{
-	t_redir	*redir;
-
-	redir = malloc(sizeof(t_redir));
-	if (redir == NULL)
-		exit (1);
-	redir->fd = 0;
-	redir->tmp_std = 0;
-	redir->is_double = FALSE;
-	redir->file = NULL;
-	return (redir);
+	if (del)
+		del(cmd);
+	free(cmd);
+	cmd = NULL;
 }

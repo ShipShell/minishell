@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:11:23 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/12 12:00:39 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/16 12:57:00 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # include "get_next_line.h"
 # include "libftprintf.h"
 # include "utils.h"
-# include "tester.h"
 # include "parser.h"
 # include "error.h"
 # include "exec.h"
 # include "prompt.h"
+# include "tester.h"
 
 # define BUFFER_MAX 4096
 # define PATH_MAX 1024

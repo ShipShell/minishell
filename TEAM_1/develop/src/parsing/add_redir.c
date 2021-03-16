@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:48:34 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/11 15:48:43 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 12:53:39 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,16 @@ void	add_in_redir(t_cmd *cmd, int i, t_bool isdouble)
 	ft_lstadd_back(&cmd->redir_in->file, new);
 	cmd->redir_in->is_double = isdouble;
 	free(cmd->command[i]);
+	cmd->command[i] = NULL;
+}
+
+void	pull_token(t_cmd *cmd, int i)
+{
+	int		last;
+
+	last = 0;
+	while (cmd->command[last])
+		++last;
+	cmd->command[last] = cmd->command[i];
 	cmd->command[i] = NULL;
 }
