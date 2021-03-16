@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:22 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/16 14:19:25 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_env(t_cmd *cmd)
 	i = 0;
 	if (cmd->token[++i])
 	{
-		ft_putstr_fd("shipshell: ", 2);
+		ft_putstr_fd("env: ", 2);
 		print_no_such_file_err(cmd->token[1]);
 		g_exit_code = 127;
 		return (-1);

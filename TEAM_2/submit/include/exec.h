@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 15:04:59 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 16:44:51 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/16 15:08:18 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		exec_command(t_cmd *cmd);
 int		exec_pipe_command(t_cmd *cmd);
 int		count_pipe(t_list *cmd_list);
 void	free_fd_pid(int *fd, pid_t *pid);
+
 /*
 ** built_in_command
 */
@@ -66,6 +67,7 @@ t_env	*is_same_env(char *str);
 int		ft_cd(t_cmd *cmd);
 int		call_no_home_err(void);
 int		put_env_pwd(char *current_dir, t_list *pwd_lst);
+char	*return_oldpwd();
 
 /*
 ** not_built_in

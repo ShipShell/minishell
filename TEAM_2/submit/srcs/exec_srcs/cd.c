@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:11 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:13 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/16 15:09:59 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,17 @@ int	check_arg(t_cmd *cmd)
 	char	buff[MAX_BUFF];
 	int		temp;
 
-	temp = chdir(cmd->token[1]);
+	if (cmd->token[1][0] == '\0')
+		temp = chdir("./");
+	else if (!ft_strcmp(cmd->token[1], "-"))
+		temp = chdir(return_oldpwd());
+	else
+		temp = chdir(cmd->token[1]);
 	if (temp == -1)
 	{
-		g_exit_code = 1;
 		ft_putstr_fd("shipshell: cd: ", 1);
 		print_no_such_file_err(cmd->token[1]);
+		g_exit_code = 1;
 		return (-1);
 	}
 	change_env_pwd(getcwd(buff, MAX_BUFF));
