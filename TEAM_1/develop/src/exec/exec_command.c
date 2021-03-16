@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:26 by hson              #+#    #+#             */
-/*   Updated: 2021/03/16 12:56:36 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 13:07:31 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,8 @@ void	exec_command(void)
 	cmd = g_cmd;
 	while (cmd)
 	{
-		test_make_cmd_str_to_tokens();
 		substitute_command(cmd);
 		substitute_redir(cmd);
-		test_make_cmd_str_to_tokens();
-		// test_make_cmd_str_to_tokens();
 		if (cmd->ispipe == TRUE)
 		{
 			change_is_pipe(cmd);

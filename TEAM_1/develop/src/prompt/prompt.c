@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:09:19 by sonheewon         #+#    #+#             */
-/*   Updated: 2021/03/12 11:27:59 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/16 12:36:51 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		show_prompt_title(void)
 void	exit_with_cntl_d(void)
 {
 	printf("exit\n");
-	exit (0);
+	exit(0);
 }
 
 void	get_prompt_input(char **stdin_buffer)

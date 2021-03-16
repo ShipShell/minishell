@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:12 by hson              #+#    #+#             */
-/*   Updated: 2021/03/11 11:10:57 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 13:02:06 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print_export(void)
 	sort_env[i] = 0;
 	ft_sort_env(sort_env, size);
 	print_export_sub(sort_env);
+	free(sort_env);
 }
 
 void	put_env(char *str)
@@ -59,6 +60,7 @@ void	put_env(char *str)
 	else
 		val = 0;
 	lst_change_add_env(key, val);
+	free(key);
 }
 
 int		exec_export(t_cmd *cmd)
