@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:44:02 by hson              #+#    #+#             */
-/*   Updated: 2021/03/12 07:07:18 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/16 12:36:15 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	change_is_pipe(t_cmd *cmd)
 {
-	int		i;
+	int	i;
 
 	while (cmd)
 	{
@@ -26,13 +26,14 @@ void	change_is_pipe(t_cmd *cmd)
 			i++;
 		}
 		if (cmd->ispipe == FALSE)
-			break;
+			break ;
 		cmd = cmd->next;
 	}
 }
+
 int		count_pipes(t_cmd *cmd)
 {
-	int		cnt;
+	int	cnt;
 
 	cnt = 0;
 	while (cmd)

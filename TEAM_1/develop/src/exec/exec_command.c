@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hson <hson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:26 by hson              #+#    #+#             */
-/*   Updated: 2021/03/12 11:36:41 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2021/03/16 12:34:54 by hson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	exec_command(void)
 	{
 		substitute_command(cmd);
 		substitute_redir(cmd);
-		// test_make_cmd_str_to_tokens();
 		if (cmd->ispipe == TRUE)
 		{
 			change_is_pipe(cmd);
