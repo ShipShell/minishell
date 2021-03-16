@@ -13,6 +13,7 @@ SRC_NAME = main \
 		parsing/substitute4 \
 		tester/tester \
 		utils/utils \
+		utils/utils2 \
 		error/error \
 		error/error2 \
 		error/syntax_error \
