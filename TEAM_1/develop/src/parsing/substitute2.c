@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 16:15:27 by kilee             #+#    #+#             */
-/*   Updated: 2021/03/16 12:58:36 by kilee            ###   ########.fr       */
+/*   Updated: 2021/03/16 15:40:53 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting)
 {
 	int		action;
 
-	action = check_substitute_action(quoting, *token);
+	action = check_substitute_action(quoting, token);
 	if (action == SUB_SPECIAL)
 		return (substitute_special_char(buffer, token));
 	else if (action == SUB_LITERAL)
@@ -49,65 +49,38 @@ int		push_char_to_buffer(char **buffer, char *token, t_quoting *quoting)
 	return (1);
 }
 
-int		check_substitute_action(t_quoting *quoting, char c)
+int		check_substitute_action(t_quoting *quoting, char *c)
 {
-	if (ft_strchr("$~", c) && quoting->escape == OFF
+	if (ft_strchr("$~", *c) && quoting->escape == OFF
 		&& quoting->quotes != SINGLE_OPEN)
 		return (SUB_SPECIAL);
-	else if (c == SINGLE_QUOTE && quoting->quotes != DOUBLE_OPEN)
+	else if (*c == SINGLE_QUOTE && quoting->quotes != DOUBLE_OPEN)
 		return (SUB_SKIP);
-	else if (c == DOUBLE_QUOTE && quoting->quotes != SINGLE_OPEN)
-		return (SUB_SKIP);
-	else if (c == BACKSLASH && quoting->escape == OFF
-			&& quoting->quotes != SINGLE_OPEN)
+	else if (*c == DOUBLE_QUOTE)
+		return (double_quote_action(quoting));
+	else if (*c == BACKSLASH)
+		return (backslash_action(quoting, c));
+	else
+		return (SUB_LITERAL);
+}
+
+int		double_quote_action(t_quoting *quoting)
+{
+	if (quoting->quotes != SINGLE_OPEN && quoting->escape == OFF)
 		return (SUB_SKIP);
 	else
 		return (SUB_LITERAL);
 }
 
-int		substitute_special_char(char **buffer, char *token)
+int		backslash_action(t_quoting *quoting, char *c)
 {
-	int		len;
-	char	*value;
-
-	len = 1;
-	if (token[0] == '$')
-	{
-		if (token[len] == '?')
-		{
-			push_exit_code_to_buffer(buffer);
-			return (2);
-		}
-		len = substitute_env_variable(buffer, token);
-		if (len == 0)
-			return (1);
-	}
-	else if (token[0] == '~')
-	{
-		value = find_value_match_with("HOME");
-		push_value_to_buffer(value, buffer);
-	}
-	return (len);
-}
-
-int		substitute_env_variable(char **buffer, char *token)
-{
-	int		len;
-	char	*key;
-	char	*value;
-
-	len = 1;
-	while (ft_isalpha(token[len]) || token[len] == '_')
-		++len;
-	if (len == 1)
-	{
-		**buffer = *token;
-		++*buffer;
-		return (0);
-	}
-	key = ft_strndup(&token[1], len - 1);
-	value = find_value_match_with(key);
-	push_value_to_buffer(value, buffer);
-	free(key);
-	return (len);
+	if (quoting->quotes == SINGLE_OPEN)
+		return (SUB_LITERAL);
+	else if (quoting->quotes == DOUBLE_OPEN && quoting->escape == ON)
+		return (SUB_LITERAL);
+	else if (quoting->quotes == DOUBLE_OPEN
+			&& quoting->escape == OFF
+			&& ft_strchr("\\\"$`", *(c + 1)) == 0)
+		return (SUB_LITERAL);
+	return (SUB_SKIP);
 }
