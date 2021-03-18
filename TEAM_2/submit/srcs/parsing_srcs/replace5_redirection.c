@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:04:40 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 19:15:53 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:54:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void		save_redir_list(char *token, t_list **redir_list, int *check)
 {
 	t_redir		*redir;
 
-	redir = (t_redir *)malloc(sizeof(t_redir));
 	if (*token == '>' || *token == '<')
-		free(redir);
+		return ;
 	else
 	{
+		redir = (t_redir *)malloc(sizeof(t_redir));
 		if (*check == REDIR_OUT)
 		{
 			redir->redir_type = REDIR_OUT;
@@ -49,11 +49,6 @@ static void		save_redir_list(char *token, t_list **redir_list, int *check)
 		ft_lstadd_back(redir_list, ft_lstnew(redir));
 		*check = 0;
 	}
-}
-
-static void		save_tmp_token(char *token, t_list **tmp_token)
-{
-	ft_lstadd_back(tmp_token, ft_lstnew(ft_strdup(token)));
 }
 
 static char		**list_to_double_pointer(t_list *token_list)
@@ -83,26 +78,26 @@ static char		**list_to_double_pointer(t_list *token_list)
 
 void			handle_redirection(char **token, t_cmd *cmd)
 {
-	t_list		*redir;
+	t_list		*redir_list;
 	t_list		*tmp_token;
 	int			i;
 	int			redir_check;
 
 	i = 0;
 	redir_check = 0;
-	redir = NULL;
+	redir_list = NULL;
 	tmp_token = NULL;
 	while (token[i])
 	{
 		check_redir(token[i], &redir_check);
 		if (redir_check == 0)
-			save_tmp_token(token[i], &tmp_token);
+			ft_lstadd_back(&tmp_token, ft_lstnew(ft_strdup(token[i])));
 		else
-			save_redir_list(token[i], &redir, &redir_check);
+			save_redir_list(token[i], &redir_list, &redir_check);
 		++i;
 	}
 	free_used_double_pointer(cmd->token);
 	cmd->token = list_to_double_pointer(tmp_token);
 	free_used_str_list(tmp_token);
-	cmd->redir = redir;
+	cmd->redir = redir_list;
 }

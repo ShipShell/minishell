@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:17:02 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 17:10:52 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:08:14 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		wait_cmd(void)
 	char	*stdin_buf;
 	t_list	*tokenized_single_cmd_list;
 	char	*tmp;
-	int		len;
 
 	tmp = 0;
 	show_prompt();

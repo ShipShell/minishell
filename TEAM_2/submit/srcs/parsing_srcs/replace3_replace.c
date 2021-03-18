@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:55:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 16:00:22 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:54:16 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,23 @@ static char	*replace_tmp_with_exit_code(char *tmp)
 	return (tmp);
 }
 
+static char	*not_replace_dollar(char *tmp)
+{
+	free(tmp);
+	tmp = ft_strdup("$");
+	return (tmp);
+}
+
 static char	*replace_dollar(char *str, int len)
 {
-	int			i;
 	char		*tmp;
 	char		*key;
 	t_list		*env;
 
 	env = g_env;
-	i = 0;
 	tmp = ft_strndup(str + 1, len - 1);
+	if (ft_isalpha(tmp[1]) == 0 || tmp[1] != '_')
+		return (not_replace_dollar(tmp));
 	if (tmp[0] == '?')
 		return (replace_tmp_with_exit_code(tmp));
 	while (env)
@@ -60,9 +67,14 @@ static char	*replace_wave(char *str)
 		while (env)
 		{
 			if (ft_strncmp("HOME", ((t_env *)(env->content))->key, 4) == 0)
+			{
 				tmp = ft_strdup(((t_env *)(env->content))->value);
+				break ;
+			}
 			env = env->next;
 		}
+		if (env == NULL)
+			tmp = ft_strdup("");
 	}
 	else
 		tmp = ft_strdup("~");

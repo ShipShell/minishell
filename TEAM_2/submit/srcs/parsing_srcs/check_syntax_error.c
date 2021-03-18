@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:48:47 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 19:50:51 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:08:01 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int		count_metacharacter(char c, t_quoting quoting, int count)
 		return (-1 * count);
 }
 
-static int		too_many_metacharacter(char c, int count)
+static int		too_many_metacharacter(int count)
 {
 	if (count <= 186)
 		return (0);
@@ -85,7 +85,7 @@ int				check_syntax_error(char *str)
 	{
 		change_quoting(str[i], &quoting);
 		count += count_metacharacter(str[i], quoting, count);
-		if (too_many_metacharacter(str[i], count) != 0)
+		if (too_many_metacharacter(count) != 0)
 			return (return_with_many_syntax_error(str[i]));
 	}
 	if (quoting.quotes != CLOSED || (count != 0 && (count % 178) != 0))

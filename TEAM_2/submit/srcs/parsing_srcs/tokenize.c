@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:35:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 13:41:21 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:22:36 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,6 @@ static int		check_flag(t_cmd *tokenized)
 	}
 	else
 		return (0);
-}
-
-static char		*tester(int i)
-{
-	if (i == 178)
-		return ("SEMICOLON");
-	else if (i == 180)
-		return ("PIPE");
-	else if (i == 0)
-		return ("NULL");
-	else
-		return ("WTF");
 }
 
 static t_cmd	*tokenize_single_cmd(char *str)

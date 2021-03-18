@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 08:22:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/15 17:11:21 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:53:58 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	free_used_double_pointer(char **str)
 
 	i = -1;
 	while (str[++i])
+	{
 		free(str[i]);
+		str[i] = NULL;
+	}
 	free(str);
+	str = NULL;
 }
 
 void	free_used_str_list(t_list *tmp_token)
@@ -42,9 +46,13 @@ void	free_redir_list(t_list *redir)
 	while (redir)
 	{
 		free(((t_redir *)redir->content)->filename);
+		((t_redir *)redir->content)->filename = NULL;
+		free((t_redir *)redir->content);
+		redir->content = NULL;
 		removing_nodes = redir;
 		redir = redir->next;
 		free(removing_nodes);
+		removing_nodes = NULL;
 	}
 }
 
@@ -56,10 +64,6 @@ void	free_tokenized_single_cmd_list(t_list *cmd_list)
 	{
 		free_used_double_pointer(((t_cmd *)cmd_list->content)->token);
 		free_redir_list(((t_cmd *)cmd_list->content)->redir);
-		if (((t_cmd *)cmd_list->content)->re_in != NULL)
-			free(((t_cmd *)cmd_list->content)->re_in);
-		if (((t_cmd *)cmd_list->content)->re_out != NULL)
-			free(((t_cmd *)cmd_list->content)->re_out);
 		removing_nodes = cmd_list;
 		free(cmd_list->content);
 		cmd_list = cmd_list->next;
