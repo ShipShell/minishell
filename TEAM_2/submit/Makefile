@@ -6,13 +6,13 @@
 #    By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/15 17:26:49 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/03/15 20:06:21 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/03/18 15:28:25 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-CFLAG = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 INCLUDE = -I./include -I./libdir
 LIBDIR = ./libdir
 LIBFT = libft.a

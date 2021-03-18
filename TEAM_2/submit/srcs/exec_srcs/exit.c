@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:28 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:29 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 18:36:47 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	put_too_many_err(void)
 int	ft_exit(t_cmd *cmd)
 {
 	if (!cmd->token[1])
-	{
-		g_exit_code = 0;
-		exit(0);
-	}
+		exit(g_exit_code);
 	else if (cmd->token[1][0] < '0' || cmd->token[1][0] > '9')
 		return (put_not_number_err(cmd));
 	else if (cmd->token[2])

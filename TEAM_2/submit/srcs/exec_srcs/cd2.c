@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:14 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/16 15:09:37 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/18 15:53:19 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		put_env_pwd(char *current_dir, t_list *pwd_lst)
 	return (1);
 }
 
-char	*return_oldpwd()
+char	*return_oldpwd(void)
 {
 	t_list	*env_list;
 

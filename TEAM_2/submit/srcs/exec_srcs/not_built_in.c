@@ -6,7 +6,7 @@
 /*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:41 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/18 15:32:10 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/18 18:06:52 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ int	single_path(t_cmd *cmd)
 
 int	exec_not_built_in(t_cmd *cmd)
 {
-	char	**path;
-
 	ft_redir(cmd);
-	if (path == 0)
-		print_command_not_found_err(cmd, 0);
 	if (!ft_strncmp(cmd->token[0], "./", 2)
 		|| !ft_strncmp(cmd->token[0], "/", 1)
 		|| !ft_strncmp(cmd->token[0], "../", 3))
