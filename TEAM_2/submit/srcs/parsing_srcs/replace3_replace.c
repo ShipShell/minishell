@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:55:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/18 15:54:16 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 20:31:23 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static char	*replace_dollar(char *str, int len)
 
 	env = g_env;
 	tmp = ft_strndup(str + 1, len - 1);
-	if (ft_isalpha(tmp[1]) == 0 || tmp[1] != '_')
-		return (not_replace_dollar(tmp));
 	if (tmp[0] == '?')
 		return (replace_tmp_with_exit_code(tmp));
+	else if (ft_strlen(tmp) == 0)
+		return (not_replace_dollar(tmp));
 	while (env)
 	{
 		key = ((t_env *)(env->content))->key;
-		if (ft_strncmp(tmp, key, ft_strlen(key)) == 0)
+		if (ft_strlen(tmp) != 0 && ft_strncmp(tmp, key, ft_strlen(tmp)) == 0)
 		{
 			free(tmp);
 			tmp = ft_strdup(((t_env *)(env->content))->value);
