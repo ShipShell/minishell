@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:53 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:56 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:46:40 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	del_env(t_list *before, t_list *env_list)
 		free(((t_env *)env_list->content)->key);
 		free(((t_env *)env_list->content)->value);
 		free(env_list->content);
+		g_env = env_list->next;
+		free(env_list);
 	}
 	else
 	{
@@ -27,6 +29,7 @@ int	del_env(t_list *before, t_list *env_list)
 		free(((t_env *)env_list->content)->key);
 		free(((t_env *)env_list->content)->value);
 		free(env_list->content);
+		free(env_list);
 	}
 	return (0);
 }
