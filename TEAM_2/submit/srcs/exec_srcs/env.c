@@ -6,7 +6,7 @@
 /*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/16 14:19:25 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/18 20:46:47 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	ft_env(t_cmd *cmd)
 		g_exit_code = 127;
 		return (-1);
 	}
+	else
+		g_exit_code = 0;
 	print_env(g_env);
 	return (1);
 }

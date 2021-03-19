@@ -6,7 +6,7 @@
 /*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:36 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/16 13:56:00 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/19 13:14:29 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,16 @@ static int	is_err_char(char *str)
 	int		i;
 
 	i = 0;
-	if (str[i++] == '=' || (str[i] >= '0' && str[i] <= '9') || str[i] == '\0')
+	if (str[i] == '=' || (str[i] >= '0' && str[i] <= '9') || str[i] == '\0')
 		return (!print_export_not_valid_identifier(str));
-	while (str[++i])
+	while (str[i])
 	{
 		if (str[i] == '=')
 			return (0);
 		if (str[i] == '^' || str[i] == '!' || str[i] == '@' ||
 			str[i] == '$' || str[i] == '%' || str[i] == '*')
 			return (!print_export_not_valid_identifier(str));
+		i++; 
 	}
 	return (0);
 }
