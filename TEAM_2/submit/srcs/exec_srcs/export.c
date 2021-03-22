@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:34 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:35 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 20:50:07 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ static int		export_no_arg(void)
 		env_list = env_list->next;
 	}
 	free(sorted_env);
+	g_exit_code = 0;
 	return (1);
 }
 

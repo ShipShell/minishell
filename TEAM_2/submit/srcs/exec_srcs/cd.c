@@ -6,7 +6,7 @@
 /*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:11 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/16 15:09:59 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/18 20:43:37 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	check_arg(t_cmd *cmd)
 		g_exit_code = 1;
 		return (-1);
 	}
+	else
+		g_exit_code = 0;
 	change_env_pwd(getcwd(buff, MAX_BUFF));
 	return (1);
 }

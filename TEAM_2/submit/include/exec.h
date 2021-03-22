@@ -6,7 +6,7 @@
 /*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 15:04:59 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/16 15:08:18 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/03/18 18:40:53 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		print_no_such_file_err(char *filename);
 int		print_strerror(char *str);
 int		print_not_a_valid_identifier(char *str);
 int		cycle_list(t_list *cmd_list);
+int		print_export_not_valid_identifier(char *str);
 
 /*
 ** exec

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mijeong <mijeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:31:18 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:19 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/18 20:46:18 by mijeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ int	ft_echo(t_cmd *cmd)
 	if (check_option(cmd, &i))
 		option = 1;
 	put_arg_to_std(cmd, option, i);
+	g_exit_code = 0;
 	return (1);
 }
