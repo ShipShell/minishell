@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:41:26 by hson              #+#    #+#             */
-/*   Updated: 2021/03/16 13:07:31 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/20 14:26:24 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	not_builtin_fork(t_cmd *cmd)
 		wait(&status);
 		g_child = FALSE;
 		if (WIFEXITED(status))
-			g_exit_code = WEXITSTATUS(status);
+			g_exit_code = WEXITSTATUS(status); 
 	}
 }
 

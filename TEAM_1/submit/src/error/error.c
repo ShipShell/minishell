@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mijeong <mijeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:38:07 by hson              #+#    #+#             */
-/*   Updated: 2021/04/20 14:19:08 by mijeong          ###   ########.fr       */
+/*   Updated: 2021/04/20 14:34:01 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,4 @@ void	ft_error(void)
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 	exit(EXIT_FAILURE);
-}
-
-int	print_export_not_valid_identifier(char *str)
-{
-	ft_putstr_fd("shipshell: export: ", 2);
-	print_not_a_valid_identifier(str);
-	g_exit_code = 1;
-	return (0);
 }
